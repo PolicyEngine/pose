@@ -10,8 +10,9 @@ import {
   HelpCircle,
   ClipboardList,
   Target,
-  Printer,
+  Download,
 } from 'lucide-react'
+import pptxgen from 'pptxgenjs'
 
 // Types
 interface SlideProps {
@@ -369,8 +370,119 @@ export function Slides() {
     }
   }, [])
 
-  const handlePrint = useCallback(() => {
-    window.print()
+  const handleExportPPT = useCallback(async () => {
+    const pptx = new pptxgen()
+    pptx.layout = 'LAYOUT_16x9'
+    pptx.title = 'PolicyEngine POSE Presentation'
+    pptx.author = 'PolicyEngine'
+
+    // Colors
+    const teal = '319795'
+    const purple = '7C3AED'
+    const blue = '2563EB'
+    const orange = 'EA580C'
+    const green = '16A34A'
+
+    // Slide 1: Team
+    const slide1 = pptx.addSlide()
+    slide1.addText('PolicyEngine POSE Team', {
+      x: 0.5,
+      y: 0.5,
+      w: '90%',
+      fontSize: 36,
+      bold: true,
+      color: '1F2937',
+    })
+
+    const teamData = [
+      { name: 'Max Ghenis', role: 'CEO', bio: 'Founded UBI Center, MIT M.S. Development Economics, former Google' },
+      { name: 'Pavel Makarchuk', role: 'Chief of Staff', bio: 'Operations and strategy lead' },
+      { name: 'Daniel Feenberg', role: 'Advisor', bio: 'Former IT Director at NBER, created TAXSIM, Princeton Ph.D.' },
+    ]
+
+    teamData.forEach((member, i) => {
+      const xPos = 0.5 + i * 3.3
+      slide1.addText(member.name, { x: xPos, y: 2.0, w: 3, fontSize: 18, bold: true, color: '1F2937', align: 'center' })
+      slide1.addText(member.role, { x: xPos, y: 2.5, w: 3, fontSize: 14, color: teal, align: 'center' })
+      slide1.addText(member.bio, { x: xPos, y: 3.0, w: 3, fontSize: 10, color: '6B7280', align: 'center' })
+    })
+
+    // Slide 2: Thesis
+    const slide2 = pptx.addSlide()
+    slide2.addText('Thesis', { x: 0.5, y: 0.5, w: '90%', fontSize: 36, bold: true, color: '1F2937' })
+    slide2.addText(
+      'We believe that policy researchers, journalists, and advocates will use PolicyEngine\'s open-source microsimulation tools to analyze tax and benefit policy impacts because it democratizes access to rigorous economic modeling previously available only to government agencies and elite institutions.',
+      { x: 0.5, y: 1.5, w: 9, h: 2, fontSize: 18, color: '374151', valign: 'middle' }
+    )
+
+    const thesisBoxes = [
+      { label: 'Target stakeholders', value: 'Researchers, journalists, advocates', color: teal },
+      { label: 'Product/service', value: 'Open-source microsimulation tools', color: purple },
+      { label: 'Goal', value: 'Analyze policy impacts', color: blue },
+      { label: 'Value proposition', value: 'Democratized economic modeling', color: orange },
+    ]
+    thesisBoxes.forEach((box, i) => {
+      const xPos = 0.5 + i * 2.4
+      slide2.addShape('rect', { x: xPos, y: 4, w: 2.2, h: 1, fill: { color: box.color, transparency: 90 }, line: { color: box.color } })
+      slide2.addText(box.label, { x: xPos, y: 4.1, w: 2.2, fontSize: 10, bold: true, color: box.color, align: 'center' })
+      slide2.addText(box.value, { x: xPos, y: 4.4, w: 2.2, fontSize: 9, color: box.color, align: 'center' })
+    })
+
+    // Slide 3: Assumptions
+    const slide3 = pptx.addSlide()
+    slide3.addText('Assumptions', { x: 0.5, y: 0.5, w: '90%', fontSize: 36, bold: true, color: '1F2937' })
+
+    const assumptions = [
+      { segment: 'Users', assumption: 'Policy researchers want accessible tools that don\'t require programming expertise to run sophisticated microsimulations', color: teal },
+      { segment: 'Supporters', assumption: 'Funders value transparency and reproducibility enough to fund open-source policy tools over proprietary alternatives', color: purple },
+      { segment: 'Contributors', assumption: 'The open-source model can attract and retain technical talent who want policy impact without requiring competitive salaries', color: blue },
+    ]
+    assumptions.forEach((item, i) => {
+      const yPos = 1.5 + i * 1.4
+      slide3.addShape('rect', { x: 0.5, y: yPos, w: 9, h: 1.2, fill: { color: item.color, transparency: 90 }, line: { color: item.color } })
+      slide3.addText(item.segment, { x: 0.7, y: yPos + 0.1, w: 2, fontSize: 14, bold: true, color: item.color })
+      slide3.addText(item.assumption, { x: 0.7, y: yPos + 0.5, w: 8.5, fontSize: 11, color: item.color })
+    })
+
+    // Slide 4: Interview Log
+    const slide4 = pptx.addSlide()
+    slide4.addText('Interview log', { x: 0.5, y: 0.5, w: '90%', fontSize: 36, bold: true, color: '1F2937' })
+    slide4.addText('View full interview tracker', { x: 0.5, y: 2, w: 9, fontSize: 24, bold: true, color: '1F2937', align: 'center' })
+    slide4.addText(
+      'Track all ecosystem discovery interviews, progress toward 100 interviews, and segment coverage.\n\nNavigate to the Interviews tab to access the full interview tracker with search, filtering, and analytics.',
+      { x: 1, y: 2.8, w: 8, fontSize: 14, color: '6B7280', align: 'center' }
+    )
+
+    // Slide 5: Goals and Charter
+    const slide5 = pptx.addSlide()
+    slide5.addText('Team goals and charter', { x: 0.5, y: 0.5, w: '90%', fontSize: 36, bold: true, color: '1F2937' })
+
+    slide5.addText('Goals', { x: 0.5, y: 1.2, w: 4, fontSize: 18, bold: true, color: '1F2937' })
+    const goals = [
+      'Complete 100 ecosystem discovery interviews across all 6 stakeholder segments',
+      'Identify 3+ sustainable funding models beyond traditional grants',
+      'Establish partnerships with 5+ policy think tanks and media organizations',
+      'Develop community governance structure with clear decision rights',
+    ]
+    goals.forEach((goal, i) => {
+      slide5.addShape('rect', { x: 0.5, y: 1.7 + i * 0.7, w: 4.5, h: 0.6, fill: { color: green, transparency: 90 }, line: { color: green } })
+      slide5.addText(`${i + 1}. ${goal}`, { x: 0.6, y: 1.8 + i * 0.7, w: 4.3, fontSize: 9, color: green })
+    })
+
+    slide5.addText('Working agreements', { x: 5.2, y: 1.2, w: 4, fontSize: 18, bold: true, color: '1F2937' })
+    const agreements = [
+      'Weekly team sync (Mondays)',
+      '24-hour response time on Slack',
+      'Share interview notes within 24 hours',
+      'Consensus on strategic decisions, CEO decides operational matters',
+    ]
+    agreements.forEach((agreement, i) => {
+      slide5.addShape('rect', { x: 5.2, y: 1.7 + i * 0.7, w: 4.5, h: 0.6, fill: { color: teal, transparency: 90 }, line: { color: teal } })
+      slide5.addText(`• ${agreement}`, { x: 5.3, y: 1.8 + i * 0.7, w: 4.3, fontSize: 9, color: teal })
+    })
+
+    // Generate and download
+    await pptx.writeFile({ fileName: 'PolicyEngine_POSE_Presentation.pptx' })
   }, [])
 
   // Keyboard navigation
@@ -386,15 +498,14 @@ export function Slides() {
         setIsFullscreen(false)
       } else if (e.key === 'f' || e.key === 'F') {
         toggleFullscreen()
-      } else if ((e.key === 'p' || e.key === 'P') && (e.ctrlKey || e.metaKey)) {
-        e.preventDefault()
-        handlePrint()
+      } else if (e.key === 'd' || e.key === 'D') {
+        handleExportPPT()
       }
     }
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [nextSlide, prevSlide, isFullscreen, toggleFullscreen, handlePrint])
+  }, [nextSlide, prevSlide, isFullscreen, toggleFullscreen, handleExportPPT])
 
   // Listen for fullscreen changes
   useEffect(() => {
@@ -499,11 +610,11 @@ export function Slides() {
               </div>
 
               <button
-                onClick={handlePrint}
+                onClick={handleExportPPT}
                 className={`p-2 rounded-lg text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors`}
-                title="Print / Export (Ctrl+P)"
+                title="Download PPT (D)"
               >
-                <Printer className={isFullscreen ? 'w-6 h-6' : 'w-5 h-5'} />
+                <Download className={isFullscreen ? 'w-6 h-6' : 'w-5 h-5'} />
               </button>
 
               <button
@@ -525,7 +636,7 @@ export function Slides() {
       {/* Keyboard hints */}
       {!isFullscreen && (
         <p className="mt-3 text-center text-xs text-gray-400">
-          Use arrow keys to navigate, F for fullscreen, Ctrl+P to print
+          Use arrow keys to navigate, F for fullscreen, D to download PPT
         </p>
       )}
     </div>
