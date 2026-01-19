@@ -12,6 +12,7 @@ import {
   ChevronDown,
   ChevronRight,
   Filter,
+  ExternalLink,
 } from 'lucide-react'
 import { useAssignments } from '../hooks/useAssignments'
 import type { Assignment, AssignmentCategory } from '../types/database'
@@ -119,13 +120,27 @@ function AssignmentCard({ assignment, dueStatus, onToggle }: AssignmentCardProps
         {/* Content */}
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2">
-            <h3
-              className={`font-medium ${
-                isCompleted ? 'text-gray-400 line-through' : 'text-gray-900'
-              }`}
-            >
-              {assignment.title}
-            </h3>
+            <div className="flex items-center gap-2">
+              <h3
+                className={`font-medium ${
+                  isCompleted ? 'text-gray-400 line-through' : 'text-gray-900'
+                }`}
+              >
+                {assignment.title}
+              </h3>
+              {assignment.source_url && (
+                <a
+                  href={assignment.source_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="flex-shrink-0 text-gray-400 hover:text-teal-600 transition-colors"
+                  title="View source"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              )}
+            </div>
             {getDueLabel()}
           </div>
 

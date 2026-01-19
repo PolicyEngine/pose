@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Plus, RefreshCw, Calendar, Users, Target, ExternalLink, BookOpen, ClipboardList, ListChecks } from 'lucide-react'
+import { Plus, RefreshCw, Calendar, Users, Target, ExternalLink, BookOpen, ClipboardList, ListChecks, Presentation } from 'lucide-react'
 import { useInterviews } from './hooks/useInterviews'
 import { ProgressRing } from './components/ProgressRing'
 import { MilestoneTracker } from './components/MilestoneTracker'
@@ -9,10 +9,11 @@ import { InterviewTable } from './components/InterviewTable'
 import { AddInterviewModal } from './components/AddInterviewModal'
 import { Materials } from './components/Materials'
 import { Assignments } from './components/Assignments'
+import { Slides } from './components/Slides'
 import type { Interview } from './types/database'
 import { isSupabaseConfigured } from './lib/supabase'
 
-type Tab = 'interviews' | 'assignments' | 'materials'
+type Tab = 'interviews' | 'assignments' | 'materials' | 'slides'
 
 function App() {
   const {
@@ -148,6 +149,17 @@ function App() {
               <BookOpen className="w-4 h-4" />
               Materials
             </button>
+            <button
+              onClick={() => setActiveTab('slides')}
+              className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
+                activeTab === 'slides'
+                  ? 'border-teal-500 text-teal-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              }`}
+            >
+              <Presentation className="w-4 h-4" />
+              Slides
+            </button>
           </div>
         </div>
       </header>
@@ -275,7 +287,7 @@ function App() {
             >
               <Assignments />
             </motion.div>
-          ) : (
+          ) : activeTab === 'materials' ? (
             <motion.div
               key="materials"
               initial={{ opacity: 0, y: 10 }}
@@ -284,6 +296,16 @@ function App() {
               transition={{ duration: 0.2 }}
             >
               <Materials />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="slides"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+            >
+              <Slides />
             </motion.div>
           )}
         </AnimatePresence>

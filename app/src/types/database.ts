@@ -72,6 +72,7 @@ export interface Assignment {
   due_date: string
   status: AssignmentStatus
   category: AssignmentCategory
+  source_url?: string
 }
 
 // Pre-populated POSE program assignments
@@ -84,6 +85,7 @@ export const POSE_ASSIGNMENTS: Assignment[] = [
     due_date: '2026-01-06',
     status: 'pending',
     category: 'prep',
+    source_url: 'https://venturewell.novoed.com/#!/courses/i-corps_pose_winter_2026/lecture_pages/3858784',
   },
 
   // Kickoff week (Jan 20-23, 2026)
@@ -94,6 +96,7 @@ export const POSE_ASSIGNMENTS: Assignment[] = [
     due_date: '2026-01-20',
     status: 'pending',
     category: 'presentation',
+    source_url: 'https://venturewell.novoed.com/#!/courses/i-corps_pose_winter_2026/lecture_pages/3858791',
   },
   {
     id: 'kickoff-1b',
@@ -102,6 +105,7 @@ export const POSE_ASSIGNMENTS: Assignment[] = [
     due_date: '2026-01-20',
     status: 'pending',
     category: 'presentation',
+    source_url: 'https://venturewell.novoed.com/#!/courses/i-corps_pose_winter_2026/lecture_pages/3858791',
   },
   {
     id: 'kickoff-2',
@@ -110,6 +114,7 @@ export const POSE_ASSIGNMENTS: Assignment[] = [
     due_date: '2026-01-21',
     status: 'pending',
     category: 'prep',
+    source_url: 'https://venturewell.novoed.com/#!/courses/i-corps_pose_winter_2026/lecture_pages/3858794',
   },
   {
     id: 'kickoff-3',
@@ -118,6 +123,7 @@ export const POSE_ASSIGNMENTS: Assignment[] = [
     due_date: '2026-01-22',
     status: 'pending',
     category: 'presentation',
+    source_url: 'https://venturewell.novoed.com/#!/courses/i-corps_pose_winter_2026/lecture_pages/3858795',
   },
   {
     id: 'kickoff-4',
@@ -126,6 +132,7 @@ export const POSE_ASSIGNMENTS: Assignment[] = [
     due_date: '2026-01-23',
     status: 'pending',
     category: 'presentation',
+    source_url: 'https://venturewell.novoed.com/#!/courses/i-corps_pose_winter_2026/lecture_pages/3858796',
   },
   {
     id: 'kickoff-interviews',
@@ -134,6 +141,7 @@ export const POSE_ASSIGNMENTS: Assignment[] = [
     due_date: '2026-01-23',
     status: 'pending',
     category: 'interview_milestone',
+    source_url: 'https://venturewell.novoed.com/#!/courses/i-corps_pose_winter_2026/lecture_pages/3858796',
   },
 
   // Weekly sessions
@@ -144,6 +152,7 @@ export const POSE_ASSIGNMENTS: Assignment[] = [
     due_date: '2026-01-28',
     status: 'pending',
     category: 'presentation',
+    source_url: 'https://venturewell.novoed.com/#!/courses/i-corps_pose_winter_2026/lecture_pages/3858800',
   },
   {
     id: 'weekly-1-interviews',
@@ -152,6 +161,7 @@ export const POSE_ASSIGNMENTS: Assignment[] = [
     due_date: '2026-01-28',
     status: 'pending',
     category: 'interview_milestone',
+    source_url: 'https://venturewell.novoed.com/#!/courses/i-corps_pose_winter_2026/lecture_pages/3858800',
   },
   {
     id: 'weekly-2-slides',
@@ -160,6 +170,7 @@ export const POSE_ASSIGNMENTS: Assignment[] = [
     due_date: '2026-02-04',
     status: 'pending',
     category: 'presentation',
+    source_url: 'https://venturewell.novoed.com/#!/courses/i-corps_pose_winter_2026/lecture_pages/3858803',
   },
   {
     id: 'weekly-2-interviews',
@@ -168,6 +179,7 @@ export const POSE_ASSIGNMENTS: Assignment[] = [
     due_date: '2026-02-04',
     status: 'pending',
     category: 'interview_milestone',
+    source_url: 'https://venturewell.novoed.com/#!/courses/i-corps_pose_winter_2026/lecture_pages/3858803',
   },
   {
     id: 'weekly-3-slides',
@@ -176,6 +188,7 @@ export const POSE_ASSIGNMENTS: Assignment[] = [
     due_date: '2026-02-11',
     status: 'pending',
     category: 'presentation',
+    source_url: 'https://venturewell.novoed.com/#!/courses/i-corps_pose_winter_2026/lecture_pages/3858806',
   },
   {
     id: 'weekly-3-interviews',
@@ -184,6 +197,7 @@ export const POSE_ASSIGNMENTS: Assignment[] = [
     due_date: '2026-02-11',
     status: 'pending',
     category: 'interview_milestone',
+    source_url: 'https://venturewell.novoed.com/#!/courses/i-corps_pose_winter_2026/lecture_pages/3858806',
   },
   {
     id: 'weekly-4-slides',
@@ -192,6 +206,7 @@ export const POSE_ASSIGNMENTS: Assignment[] = [
     due_date: '2026-02-18',
     status: 'pending',
     category: 'presentation',
+    source_url: 'https://venturewell.novoed.com/#!/courses/i-corps_pose_winter_2026/lecture_pages/3858809',
   },
   {
     id: 'weekly-4-interviews',
@@ -200,6 +215,7 @@ export const POSE_ASSIGNMENTS: Assignment[] = [
     due_date: '2026-02-18',
     status: 'pending',
     category: 'interview_milestone',
+    source_url: 'https://venturewell.novoed.com/#!/courses/i-corps_pose_winter_2026/lecture_pages/3858809',
   },
   {
     id: 'weekly-5-slides',
@@ -208,6 +224,7 @@ export const POSE_ASSIGNMENTS: Assignment[] = [
     due_date: '2026-02-25',
     status: 'pending',
     category: 'presentation',
+    source_url: 'https://venturewell.novoed.com/#!/courses/i-corps_pose_winter_2026/lecture_pages/3858815',
   },
   {
     id: 'weekly-5-interviews',
@@ -216,6 +233,7 @@ export const POSE_ASSIGNMENTS: Assignment[] = [
     due_date: '2026-02-25',
     status: 'pending',
     category: 'interview_milestone',
+    source_url: 'https://venturewell.novoed.com/#!/courses/i-corps_pose_winter_2026/lecture_pages/3858815',
   },
 
   // Finale (Mar 4-5, 2026)
@@ -226,6 +244,7 @@ export const POSE_ASSIGNMENTS: Assignment[] = [
     due_date: '2026-03-04',
     status: 'pending',
     category: 'prep',
+    source_url: 'https://venturewell.novoed.com/#!/courses/i-corps_pose_winter_2026/lecture_pages/3858818',
   },
   {
     id: 'finale-presentation',
@@ -234,6 +253,7 @@ export const POSE_ASSIGNMENTS: Assignment[] = [
     due_date: '2026-03-05',
     status: 'pending',
     category: 'presentation',
+    source_url: 'https://venturewell.novoed.com/#!/courses/i-corps_pose_winter_2026/lecture_pages/3858820',
   },
   {
     id: 'finale-interviews',
@@ -242,5 +262,6 @@ export const POSE_ASSIGNMENTS: Assignment[] = [
     due_date: '2026-03-05',
     status: 'pending',
     category: 'interview_milestone',
+    source_url: 'https://venturewell.novoed.com/#!/courses/i-corps_pose_winter_2026/lecture_pages/3858820',
   },
 ]
