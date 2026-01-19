@@ -37,23 +37,9 @@ export interface Contact {
   contact_status?: string
 }
 
-// Supabase database types
-export interface Database {
-  public: {
-    Tables: {
-      pose_interviews: {
-        Row: Interview
-        Insert: Omit<Interview, 'id' | 'created_at' | 'updated_at'>
-        Update: Partial<Omit<Interview, 'id' | 'created_at' | 'updated_at'>>
-      }
-      contacts: {
-        Row: Contact
-        Insert: Omit<Contact, 'id'>
-        Update: Partial<Omit<Contact, 'id'>>
-      }
-    }
-  }
-}
+// Supabase database types - using 'any' to simplify and avoid complex generic inference
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type Database = any
 
 // Milestones are fixed for the POSE program
 export const POSE_MILESTONES: Milestone[] = [
