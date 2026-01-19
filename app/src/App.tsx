@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Plus, RefreshCw, Calendar, Users, Target, ExternalLink, BookOpen, ClipboardList, ListChecks, Presentation } from 'lucide-react'
+import { Plus, RefreshCw, Calendar, Users, Target, ExternalLink, BookOpen, ClipboardList, ListChecks, Presentation, Mail } from 'lucide-react'
 import { useInterviews } from './hooks/useInterviews'
 import { ProgressRing } from './components/ProgressRing'
 import { MilestoneTracker } from './components/MilestoneTracker'
@@ -10,10 +10,11 @@ import { AddInterviewModal } from './components/AddInterviewModal'
 import { Materials } from './components/Materials'
 import { Assignments } from './components/Assignments'
 import { Slides } from './components/Slides'
+import { Outreach } from './components/Outreach'
 import type { Interview } from './types/database'
 import { isSupabaseConfigured } from './lib/supabase'
 
-type Tab = 'interviews' | 'assignments' | 'materials' | 'slides'
+type Tab = 'interviews' | 'assignments' | 'materials' | 'slides' | 'outreach'
 
 function App() {
   const {
@@ -160,6 +161,17 @@ function App() {
               <Presentation className="w-4 h-4" />
               Slides
             </button>
+            <button
+              onClick={() => setActiveTab('outreach')}
+              className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
+                activeTab === 'outreach'
+                  ? 'border-teal-500 text-teal-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              }`}
+            >
+              <Mail className="w-4 h-4" />
+              Outreach
+            </button>
           </div>
         </div>
       </header>
@@ -297,7 +309,7 @@ function App() {
             >
               <Materials />
             </motion.div>
-          ) : (
+          ) : activeTab === 'slides' ? (
             <motion.div
               key="slides"
               initial={{ opacity: 0, y: 10 }}
@@ -306,6 +318,16 @@ function App() {
               transition={{ duration: 0.2 }}
             >
               <Slides />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="outreach"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+            >
+              <Outreach />
             </motion.div>
           )}
         </AnimatePresence>
