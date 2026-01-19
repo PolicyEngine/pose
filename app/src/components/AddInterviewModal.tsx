@@ -202,7 +202,7 @@ export function AddInterviewModal({ isOpen, onClose, onSave, editInterview }: Ad
                       <option value="scheduled">Scheduled</option>
                       <option value="completed">Completed</option>
                       <option value="cancelled">Cancelled</option>
-                      <option value="no_show">No Show</option>
+                      <option value="no_show">No show</option>
                     </select>
                   </div>
                 </div>

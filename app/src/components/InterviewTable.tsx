@@ -26,7 +26,7 @@ const statusConfig = {
   completed: { icon: CheckCircle, color: 'text-green-600', bg: 'bg-green-50', label: 'Completed' },
   scheduled: { icon: Clock, color: 'text-blue-600', bg: 'bg-blue-50', label: 'Scheduled' },
   cancelled: { icon: XCircle, color: 'text-gray-500', bg: 'bg-gray-50', label: 'Cancelled' },
-  no_show: { icon: AlertCircle, color: 'text-red-500', bg: 'bg-red-50', label: 'No Show' },
+  no_show: { icon: AlertCircle, color: 'text-red-500', bg: 'bg-red-50', label: 'No show' },
 }
 
 export function InterviewTable({ interviews, onEdit, onDelete, onStatusChange }: InterviewTableProps) {
