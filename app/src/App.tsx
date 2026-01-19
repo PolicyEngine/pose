@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Plus, RefreshCw, Calendar, Users, Target, ExternalLink, BookOpen, ClipboardList } from 'lucide-react'
+import { Plus, RefreshCw, Calendar, Users, Target, ExternalLink, BookOpen, ClipboardList, ListChecks } from 'lucide-react'
 import { useInterviews } from './hooks/useInterviews'
 import { ProgressRing } from './components/ProgressRing'
 import { MilestoneTracker } from './components/MilestoneTracker'
@@ -8,10 +8,11 @@ import { SegmentChart } from './components/SegmentChart'
 import { InterviewTable } from './components/InterviewTable'
 import { AddInterviewModal } from './components/AddInterviewModal'
 import { Materials } from './components/Materials'
+import { Assignments } from './components/Assignments'
 import type { Interview } from './types/database'
 import { isSupabaseConfigured } from './lib/supabase'
 
-type Tab = 'interviews' | 'materials'
+type Tab = 'interviews' | 'assignments' | 'materials'
 
 function App() {
   const {
@@ -124,6 +125,17 @@ function App() {
               }`}>
                 {completedCount}/100
               </span>
+            </button>
+            <button
+              onClick={() => setActiveTab('assignments')}
+              className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
+                activeTab === 'assignments'
+                  ? 'border-teal-500 text-teal-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              }`}
+            >
+              <ListChecks className="w-4 h-4" />
+              Assignments
             </button>
             <button
               onClick={() => setActiveTab('materials')}
@@ -252,6 +264,16 @@ function App() {
                   onStatusChange={handleStatusChange}
                 />
               </div>
+            </motion.div>
+          ) : activeTab === 'assignments' ? (
+            <motion.div
+              key="assignments"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+            >
+              <Assignments />
             </motion.div>
           ) : (
             <motion.div
