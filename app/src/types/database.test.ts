@@ -47,8 +47,8 @@ describe('POSE_MILESTONES', () => {
     expect(POSE_MILESTONES).toHaveLength(7)
   })
 
-  it('starts at 10 and ends at 100', () => {
-    expect(POSE_MILESTONES[0].target_count).toBe(10)
+  it('starts at 15 and ends at 100', () => {
+    expect(POSE_MILESTONES[0].target_count).toBe(15)
     expect(POSE_MILESTONES[POSE_MILESTONES.length - 1].target_count).toBe(100)
   })
 

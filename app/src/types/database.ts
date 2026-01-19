@@ -43,7 +43,7 @@ export type Database = any
 
 // Milestones are fixed for the POSE program
 export const POSE_MILESTONES: Milestone[] = [
-  { id: '1', name: 'Kickoff Week', target_count: 10, deadline: '2026-01-23', description: 'End of 4-day kickoff' },
+  { id: '1', name: 'Kickoff Week', target_count: 15, deadline: '2026-01-23', description: 'End of 4-day kickoff' },
   { id: '2', name: 'Weekly Session 1', target_count: 25, deadline: '2026-01-28', description: 'First weekly check-in' },
   { id: '3', name: 'Weekly Session 2', target_count: 40, deadline: '2026-02-04', description: 'Sustainability focus' },
   { id: '4', name: 'Weekly Session 3', target_count: 55, deadline: '2026-02-11', description: 'Partnerships focus' },
@@ -121,8 +121,8 @@ export const POSE_ASSIGNMENTS: Assignment[] = [
   },
   {
     id: 'kickoff-interviews',
-    title: 'Complete 10 interviews',
-    description: 'Kickoff week interview target',
+    title: 'Complete 15 interviews',
+    description: 'Kickoff week interview target (schedule at least 15)',
     due_date: '2026-01-23',
     status: 'pending',
     category: 'interview_milestone',
