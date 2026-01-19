@@ -88,17 +88,25 @@ export const POSE_ASSIGNMENTS: Assignment[] = [
 
   // Kickoff week (Jan 20-23, 2026)
   {
-    id: 'kickoff-1',
-    title: 'Team intro video + initial ecosystem canvas',
-    description: 'Day 1: Record team introduction video and complete initial ecosystem canvas',
+    id: 'kickoff-1a',
+    title: 'Day 1: Upload presentation slides',
+    description: 'Slide deck with TEAM, THESIS, ASSUMPTIONS, INTERVIEW LOG slides (PPT format)',
+    due_date: '2026-01-20',
+    status: 'pending',
+    category: 'presentation',
+  },
+  {
+    id: 'kickoff-1b',
+    title: 'Day 1: Office hours slides',
+    description: 'Slides for office hours: TEAM, THESIS, TEAM GOALS AND CHARTER',
     due_date: '2026-01-20',
     status: 'pending',
     category: 'presentation',
   },
   {
     id: 'kickoff-2',
-    title: 'Interview prep',
-    description: 'Day 2: Prepare interview questions and outreach strategy',
+    title: 'Day 2: Interview prep',
+    description: 'Prepare interview questions and outreach strategy',
     due_date: '2026-01-21',
     status: 'pending',
     category: 'prep',
