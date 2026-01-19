@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { X } from 'lucide-react'
 import type { Interview, Segment } from '../types/database'
 import { SEGMENTS } from '../types/database'
+import { InterviewGuidance } from './InterviewGuidance'
 
 interface AddInterviewModalProps {
   isOpen: boolean
@@ -161,6 +162,9 @@ export function AddInterviewModal({ isOpen, onClose, onSave, editInterview }: Ad
                     </select>
                   </div>
                 </div>
+
+                {/* Interview Guidance */}
+                <InterviewGuidance segment={formData.segment} collapsed={!!editInterview} />
 
                 {/* Dates & Status */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
