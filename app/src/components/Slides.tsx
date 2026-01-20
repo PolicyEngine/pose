@@ -182,17 +182,17 @@ function ThesisSlide({ isFullscreen }: SlideProps) {
 function AssumptionsSlide({ isFullscreen }: SlideProps) {
   const goalsAndAssumptions = [
     {
-      goal: 'Grow from ~500 to 5,000 regular policy analyst users',
+      goal: 'Grow adoption among policy analysts',
       assumption: 'Policy researchers will adopt open-source tools if they\'re accessible without programming expertise',
       color: 'teal',
     },
     {
-      goal: 'Diversify funding from $500K to $2M annually across 10+ sources',
+      goal: 'Achieve sustainable, diversified funding',
       assumption: 'Funders value transparency and reproducibility enough to fund open-source over proprietary alternatives',
       color: 'purple',
     },
     {
-      goal: 'Grow from ~20 to 100 active code contributors',
+      goal: 'Build active contributor community',
       assumption: 'Developers will contribute for policy impact without requiring competitive compensation',
       color: 'blue',
     },
@@ -457,9 +457,9 @@ export function Slides() {
     slide3.addText('Assumptions', { x: 0.5, y: 0.5, w: '90%', fontSize: 36, bold: true, color: '1F2937' })
 
     const goalsAndAssumptions = [
-      { goal: 'Grow from ~500 to 5,000 regular policy analyst users', assumption: 'Policy researchers will adopt open-source tools if they\'re accessible without programming expertise', color: teal },
-      { goal: 'Diversify funding from $500K to $2M annually across 10+ sources', assumption: 'Funders value transparency and reproducibility enough to fund open-source over proprietary alternatives', color: purple },
-      { goal: 'Grow from ~20 to 100 active code contributors', assumption: 'Developers will contribute for policy impact without requiring competitive compensation', color: blue },
+      { goal: 'Grow adoption among policy analysts', assumption: 'Policy researchers will adopt open-source tools if they\'re accessible without programming expertise', color: teal },
+      { goal: 'Achieve sustainable, diversified funding', assumption: 'Funders value transparency and reproducibility enough to fund open-source over proprietary alternatives', color: purple },
+      { goal: 'Build active contributor community', assumption: 'Developers will contribute for policy impact without requiring competitive compensation', color: blue },
     ]
     goalsAndAssumptions.forEach((item, i) => {
       const yPos = 1.5 + i * 1.4
