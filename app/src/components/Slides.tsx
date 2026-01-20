@@ -111,7 +111,7 @@ function ThesisSlide({ isFullscreen }: SlideProps) {
           <p className="text-gray-700">
             <span className="font-semibold">FOR</span>{' '}
             <span className="text-teal-600 font-semibold bg-teal-50 px-2 py-1 rounded">
-              economists, policy researchers, think tanks, journalists, advocates, and individuals seeking benefit access
+              economists, policy researchers, think tanks, journalists, advocates, and developers building benefit access tools
             </span>
           </p>
           <p className="text-gray-700">
@@ -440,7 +440,7 @@ export function Slides() {
     slide2.addText('4373 PolicyEngine | OSE Thesis', { x: 0.5, y: 0.3, w: '90%', fontSize: 28, bold: true, color: '1F2937' })
 
     const thesisLines = [
-      { prefix: 'FOR', text: 'economists, policy researchers, think tanks, journalists, advocates, and individuals seeking benefit access', color: teal },
+      { prefix: 'FOR', text: 'economists, policy researchers, think tanks, journalists, advocates, and developers building benefit access tools', color: teal },
       { prefix: 'WHO NEED TO', text: 'understand taxes and benefits for households or analyze policy impacts on populations', color: purple },
       { prefix: 'THE STATUS QUO', text: 'proprietary microsimulation tools', color: 'DC2626', suffix: 'FAILS DUE TO high cost, limited accessibility, and restrictions in government/secure environments, CAUSING policy decisions without rigorous distributional analysis.' },
       { prefix: 'WE WILL ESTABLISH A MANAGING ORGANIZATION FOR', text: 'open-source fiscal policy simulation', color: blue },
