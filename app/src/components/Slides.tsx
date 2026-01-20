@@ -97,54 +97,82 @@ function TeamSlide({ isFullscreen }: SlideProps) {
 function ThesisSlide({ isFullscreen }: SlideProps) {
   return (
     <div className={`flex flex-col h-full ${isFullscreen ? 'p-12' : 'p-8'}`}>
-      <div className="flex items-center gap-3 mb-8">
+      <div className="flex items-center gap-3 mb-6">
         <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
           <Lightbulb className="w-6 h-6 text-purple-600" />
         </div>
         <h1 className={`font-bold text-gray-900 ${isFullscreen ? 'text-4xl' : 'text-2xl'}`}>
-          Thesis
+          4373 PolicyEngine | OSE Thesis
         </h1>
       </div>
 
       <div className="flex-1 flex items-center justify-center">
-        <div className={`max-w-4xl ${isFullscreen ? 'text-2xl' : 'text-lg'} leading-relaxed`}>
+        <div className={`max-w-4xl ${isFullscreen ? 'text-xl' : 'text-base'} leading-relaxed space-y-3`}>
           <p className="text-gray-700">
-            We believe that{' '}
+            <span className="font-semibold">FOR</span>{' '}
             <span className="text-teal-600 font-semibold bg-teal-50 px-2 py-1 rounded">
-              policy researchers, journalists, and advocates
-            </span>{' '}
-            will{' '}
+              policy researchers, think tanks, journalists, and advocates
+            </span>
+          </p>
+          <p className="text-gray-700">
+            <span className="font-semibold">WHO NEED TO</span>{' '}
             <span className="text-purple-600 font-semibold bg-purple-50 px-2 py-1 rounded">
-              use PolicyEngine's open-source microsimulation tools
+              analyze how tax and benefit policy changes affect households and populations
+            </span>,
+          </p>
+          <p className="text-gray-700">
+            <span className="font-semibold">THE STATUS QUO</span>{' '}
+            <span className="text-red-600 font-semibold bg-red-50 px-2 py-1 rounded">
+              proprietary microsimulation tools
             </span>{' '}
-            to{' '}
-            <span className="text-blue-600 font-semibold bg-blue-50 px-2 py-1 rounded">
-              analyze tax and benefit policy impacts
-            </span>{' '}
-            because{' '}
-            <span className="text-orange-600 font-semibold bg-orange-50 px-2 py-1 rounded">
-              it democratizes access to rigorous economic modeling previously available only to government agencies and elite institutions
+            <span className="font-semibold">FAILS DUE TO</span>{' '}
+            <span className="text-red-600 font-semibold bg-red-50 px-2 py-1 rounded">
+              high cost and limited accessibility
+            </span>, <span className="font-semibold">CAUSING</span>{' '}
+            <span className="text-red-600 font-semibold bg-red-50 px-2 py-1 rounded">
+              policy decisions without rigorous distributional analysis
             </span>.
           </p>
-        </div>
-      </div>
-
-      <div className={`mt-8 grid grid-cols-4 gap-4 ${isFullscreen ? 'text-sm' : 'text-xs'}`}>
-        <div className="bg-teal-50 border border-teal-200 rounded-lg p-3">
-          <p className="font-semibold text-teal-700 mb-1">Target stakeholders</p>
-          <p className="text-teal-600">Researchers, journalists, advocates</p>
-        </div>
-        <div className="bg-purple-50 border border-purple-200 rounded-lg p-3">
-          <p className="font-semibold text-purple-700 mb-1">Product/service</p>
-          <p className="text-purple-600">Open-source microsimulation tools</p>
-        </div>
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-          <p className="font-semibold text-blue-700 mb-1">Goal</p>
-          <p className="text-blue-600">Analyze policy impacts</p>
-        </div>
-        <div className="bg-orange-50 border border-orange-200 rounded-lg p-3">
-          <p className="font-semibold text-orange-700 mb-1">Value proposition</p>
-          <p className="text-orange-600">Democratized economic modeling</p>
+          <p className="text-gray-700">
+            <span className="font-semibold">WE WILL ESTABLISH A MANAGING ORGANIZATION FOR</span>{' '}
+            <span className="text-blue-600 font-semibold bg-blue-50 px-2 py-1 rounded">
+              open-source fiscal policy simulation
+            </span>
+          </p>
+          <p className="text-gray-700">
+            <span className="font-semibold">TO DELIVER</span>{' '}
+            <span className="text-blue-600 font-semibold bg-blue-50 px-2 py-1 rounded">
+              PolicyEngine models, web apps, and APIs
+            </span>{' '}
+            <span className="font-semibold">WITH</span>{' '}
+            <span className="text-blue-600 font-semibold bg-blue-50 px-2 py-1 rounded">
+              MIT license and transparent governance
+            </span>.
+          </p>
+          <p className="text-gray-700">
+            <span className="font-semibold">WE WILL GROW THE COMMUNITY THROUGH</span>{' '}
+            <span className="text-green-600 font-semibold bg-green-50 px-2 py-1 rounded">
+              documentation and partnerships with universities and think tanks
+            </span>,
+          </p>
+          <p className="text-gray-700">
+            <span className="font-semibold">WE WILL ACHIEVE</span>{' '}
+            <span className="text-green-600 font-semibold bg-green-50 px-2 py-1 rounded">
+              democratized access to sophisticated policy analysis
+            </span>,
+          </p>
+          <p className="text-gray-700">
+            <span className="font-semibold">MEASURE SUCCESS BY</span>{' '}
+            <span className="text-orange-600 font-semibold bg-orange-50 px-2 py-1 rounded">
+              users, policy reports citing PolicyEngine, contributors, and funding
+            </span>,
+          </p>
+          <p className="text-gray-700">
+            <span className="font-semibold">AND SUSTAIN THE ECOSYSTEM VIA</span>{' '}
+            <span className="text-orange-600 font-semibold bg-orange-50 px-2 py-1 rounded">
+              diversified foundation grants, government funding, and SaaS offerings
+            </span>.
+          </p>
         </div>
       </div>
     </div>
@@ -407,25 +435,29 @@ export function Slides() {
       slide1.addText(member.bio, { x: xPos, y: 3.0, w: 3, fontSize: 10, color: '6B7280', align: 'center' })
     })
 
-    // Slide 2: Thesis
+    // Slide 2: Thesis (OSE AdLib format)
     const slide2 = pptx.addSlide()
-    slide2.addText('Thesis', { x: 0.5, y: 0.5, w: '90%', fontSize: 36, bold: true, color: '1F2937' })
-    slide2.addText(
-      'We believe that policy researchers, journalists, and advocates will use PolicyEngine\'s open-source microsimulation tools to analyze tax and benefit policy impacts because it democratizes access to rigorous economic modeling previously available only to government agencies and elite institutions.',
-      { x: 0.5, y: 1.5, w: 9, h: 2, fontSize: 18, color: '374151', valign: 'middle' }
-    )
+    slide2.addText('4373 PolicyEngine | OSE Thesis', { x: 0.5, y: 0.3, w: '90%', fontSize: 28, bold: true, color: '1F2937' })
 
-    const thesisBoxes = [
-      { label: 'Target stakeholders', value: 'Researchers, journalists, advocates', color: teal },
-      { label: 'Product/service', value: 'Open-source microsimulation tools', color: purple },
-      { label: 'Goal', value: 'Analyze policy impacts', color: blue },
-      { label: 'Value proposition', value: 'Democratized economic modeling', color: orange },
+    const thesisLines = [
+      { prefix: 'FOR', text: 'policy researchers, think tanks, journalists, and advocates', color: teal },
+      { prefix: 'WHO NEED TO', text: 'analyze how tax and benefit policy changes affect households and populations', color: purple },
+      { prefix: 'THE STATUS QUO', text: 'proprietary microsimulation tools', color: 'DC2626', suffix: 'FAILS DUE TO high cost and limited accessibility, CAUSING policy decisions without rigorous distributional analysis.' },
+      { prefix: 'WE WILL ESTABLISH A MANAGING ORGANIZATION FOR', text: 'open-source fiscal policy simulation', color: blue },
+      { prefix: 'TO DELIVER', text: 'PolicyEngine models, web apps, and APIs', color: blue, suffix: 'WITH MIT license and transparent governance.' },
+      { prefix: 'WE WILL GROW THE COMMUNITY THROUGH', text: 'documentation and partnerships with universities and think tanks', color: green },
+      { prefix: 'WE WILL ACHIEVE', text: 'democratized access to sophisticated policy analysis', color: green },
+      { prefix: 'MEASURE SUCCESS BY', text: 'users, policy reports citing PolicyEngine, contributors, and funding', color: orange },
+      { prefix: 'AND SUSTAIN THE ECOSYSTEM VIA', text: 'diversified foundation grants, government funding, and SaaS offerings', color: orange },
     ]
-    thesisBoxes.forEach((box, i) => {
-      const xPos = 0.5 + i * 2.4
-      slide2.addShape('rect', { x: xPos, y: 4, w: 2.2, h: 1, fill: { color: box.color, transparency: 90 }, line: { color: box.color } })
-      slide2.addText(box.label, { x: xPos, y: 4.1, w: 2.2, fontSize: 10, bold: true, color: box.color, align: 'center' })
-      slide2.addText(box.value, { x: xPos, y: 4.4, w: 2.2, fontSize: 9, color: box.color, align: 'center' })
+
+    thesisLines.forEach((line, i) => {
+      const yPos = 0.9 + i * 0.5
+      slide2.addText([
+        { text: line.prefix + ' ', options: { bold: true, color: '374151' } },
+        { text: line.text, options: { color: line.color } },
+        ...(line.suffix ? [{ text: ' ' + line.suffix, options: { color: '374151' } }] : []),
+      ], { x: 0.5, y: yPos, w: 9, fontSize: 12 })
     })
 
     // Slide 3: Assumptions
@@ -481,8 +513,10 @@ export function Slides() {
       slide5.addText(`• ${agreement}`, { x: 5.3, y: 1.8 + i * 0.7, w: 4.3, fontSize: 9, color: teal })
     })
 
-    // Generate and download
-    await pptx.writeFile({ fileName: 'PolicyEngine_POSE_Presentation.pptx' })
+    // Generate and download with date-based naming
+    const today = new Date()
+    const dateStr = `${String(today.getMonth() + 1).padStart(2, '0')}${String(today.getDate()).padStart(2, '0')}${today.getFullYear()}`
+    await pptx.writeFile({ fileName: `4373_PolicyEngine_${dateStr}.pptx` })
   }, [])
 
   // Keyboard navigation
