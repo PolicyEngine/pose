@@ -111,13 +111,13 @@ function ThesisSlide({ isFullscreen }: SlideProps) {
           <p className="text-gray-700">
             <span className="font-semibold">FOR</span>{' '}
             <span className="text-teal-600 font-semibold bg-teal-50 px-2 py-1 rounded">
-              policy researchers, think tanks, journalists, and advocates
+              economists, policy researchers, think tanks, journalists, advocates, and individuals seeking benefit access
             </span>
           </p>
           <p className="text-gray-700">
             <span className="font-semibold">WHO NEED TO</span>{' '}
             <span className="text-purple-600 font-semibold bg-purple-50 px-2 py-1 rounded">
-              analyze how tax and benefit policy changes affect households and populations
+              understand taxes and benefits for households or analyze policy impacts on populations
             </span>,
           </p>
           <p className="text-gray-700">
@@ -127,7 +127,7 @@ function ThesisSlide({ isFullscreen }: SlideProps) {
             </span>{' '}
             <span className="font-semibold">FAILS DUE TO</span>{' '}
             <span className="text-red-600 font-semibold bg-red-50 px-2 py-1 rounded">
-              high cost and limited accessibility
+              high cost, limited accessibility, and restrictions in government/secure environments
             </span>, <span className="font-semibold">CAUSING</span>{' '}
             <span className="text-red-600 font-semibold bg-red-50 px-2 py-1 rounded">
               policy decisions without rigorous distributional analysis
@@ -146,7 +146,7 @@ function ThesisSlide({ isFullscreen }: SlideProps) {
             </span>{' '}
             <span className="font-semibold">WITH</span>{' '}
             <span className="text-blue-600 font-semibold bg-blue-50 px-2 py-1 rounded">
-              MIT license and transparent governance
+              AGPL license and transparent governance
             </span>.
           </p>
           <p className="text-gray-700">
@@ -440,11 +440,11 @@ export function Slides() {
     slide2.addText('4373 PolicyEngine | OSE Thesis', { x: 0.5, y: 0.3, w: '90%', fontSize: 28, bold: true, color: '1F2937' })
 
     const thesisLines = [
-      { prefix: 'FOR', text: 'policy researchers, think tanks, journalists, and advocates', color: teal },
-      { prefix: 'WHO NEED TO', text: 'analyze how tax and benefit policy changes affect households and populations', color: purple },
-      { prefix: 'THE STATUS QUO', text: 'proprietary microsimulation tools', color: 'DC2626', suffix: 'FAILS DUE TO high cost and limited accessibility, CAUSING policy decisions without rigorous distributional analysis.' },
+      { prefix: 'FOR', text: 'economists, policy researchers, think tanks, journalists, advocates, and individuals seeking benefit access', color: teal },
+      { prefix: 'WHO NEED TO', text: 'understand taxes and benefits for households or analyze policy impacts on populations', color: purple },
+      { prefix: 'THE STATUS QUO', text: 'proprietary microsimulation tools', color: 'DC2626', suffix: 'FAILS DUE TO high cost, limited accessibility, and restrictions in government/secure environments, CAUSING policy decisions without rigorous distributional analysis.' },
       { prefix: 'WE WILL ESTABLISH A MANAGING ORGANIZATION FOR', text: 'open-source fiscal policy simulation', color: blue },
-      { prefix: 'TO DELIVER', text: 'PolicyEngine models, web apps, and APIs', color: blue, suffix: 'WITH MIT license and transparent governance.' },
+      { prefix: 'TO DELIVER', text: 'PolicyEngine models, web apps, and APIs', color: blue, suffix: 'WITH AGPL license and transparent governance.' },
       { prefix: 'WE WILL GROW THE COMMUNITY THROUGH', text: 'documentation and partnerships with universities and think tanks', color: green },
       { prefix: 'WE WILL ACHIEVE', text: 'democratized access to sophisticated policy analysis', color: green },
       { prefix: 'MEASURE SUCCESS BY', text: 'users, policy reports citing PolicyEngine, contributors, and funding', color: orange },
