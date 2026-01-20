@@ -80,7 +80,7 @@ describe('Outreach', () => {
   it('includes scheduling link in generated emails', () => {
     render(<Outreach />)
 
-    expect(screen.getByText(/cal\.com\/policyengine\/pose-interview/)).toBeInTheDocument()
+    expect(screen.getByText(/cal\.com\/max-ghenis-policyengine\/pose-ecosystem-interview/)).toBeInTheDocument()
   })
 
   it('shows outreach tips', () => {

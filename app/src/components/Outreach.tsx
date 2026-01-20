@@ -27,7 +27,7 @@ We're part of an NSF program focused on building sustainable open-source policy 
 
 Would you have 30 minutes for a conversation? We're genuinely trying to build tools that serve your needs.
 
-Schedule a time: https://cal.com/policyengine/pose-interview
+Schedule a time: https://cal.com/max-ghenis-policyengine/pose-ecosystem-interview
 
 Or just reply and we'll find a time that works.
 
@@ -47,7 +47,7 @@ Given {{context}}, I'd love to hear your perspective on:
 
 Would you have 30-45 minutes to chat? Your insights would be incredibly valuable.
 
-Schedule a time: https://cal.com/policyengine/pose-interview
+Schedule a time: https://cal.com/max-ghenis-policyengine/pose-ecosystem-interview
 
 Best,
 {{sender}}`,
@@ -65,7 +65,7 @@ We're exploring how to build a sustainable contributor community for PolicyEngin
 
 Would you have 30 minutes to chat? Your experience would be really valuable.
 
-Schedule a time: https://cal.com/policyengine/pose-interview
+Schedule a time: https://cal.com/max-ghenis-policyengine/pose-ecosystem-interview
 
 Best,
 {{sender}}`,
@@ -85,7 +85,7 @@ This isn't a sales pitch - genuinely trying to learn from different approaches.
 
 Would you have 30 minutes to chat?
 
-Schedule a time: https://cal.com/policyengine/pose-interview
+Schedule a time: https://cal.com/max-ghenis-policyengine/pose-ecosystem-interview
 
 Best,
 {{sender}}`,
@@ -102,7 +102,7 @@ We're exploring partnerships with organizations who could benefit from embedded 
 
 Would you have 30 minutes to explore potential collaboration? I'd love to understand your needs and share what we're building.
 
-Schedule a time: https://cal.com/policyengine/pose-interview
+Schedule a time: https://cal.com/max-ghenis-policyengine/pose-ecosystem-interview
 
 Best,
 {{sender}}`,
@@ -120,7 +120,7 @@ We're exploring integrations and partnerships that could benefit both our users.
 
 Would you have 30 minutes to explore this?
 
-Schedule a time: https://cal.com/policyengine/pose-interview
+Schedule a time: https://cal.com/max-ghenis-policyengine/pose-ecosystem-interview
 
 Best,
 {{sender}}`,
