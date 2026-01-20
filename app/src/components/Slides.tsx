@@ -164,7 +164,7 @@ function ThesisSlide({ isFullscreen }: SlideProps) {
           <p className="text-gray-700">
             <span className="font-semibold">MEASURE SUCCESS BY</span>{' '}
             <span className="text-orange-600 font-semibold bg-orange-50 px-2 py-1 rounded">
-              users, policy reports citing PolicyEngine, contributors, and funding
+              citations, applications built on PolicyEngine, their users, contributors, and funding
             </span>,
           </p>
           <p className="text-gray-700">
@@ -447,7 +447,7 @@ export function Slides() {
       { prefix: 'TO DELIVER', text: 'PolicyEngine models, web apps, and APIs', color: blue, suffix: 'WITH AGPL license and transparent governance.' },
       { prefix: 'WE WILL GROW THE COMMUNITY THROUGH', text: 'documentation and partnerships with universities and think tanks', color: green },
       { prefix: 'WE WILL ACHIEVE', text: 'democratized access to sophisticated policy analysis', color: green },
-      { prefix: 'MEASURE SUCCESS BY', text: 'users, policy reports citing PolicyEngine, contributors, and funding', color: orange },
+      { prefix: 'MEASURE SUCCESS BY', text: 'citations, applications built on PolicyEngine, their users, contributors, and funding', color: orange },
       { prefix: 'AND SUSTAIN THE ECOSYSTEM VIA', text: 'diversified foundation grants, government funding, and SaaS offerings', color: orange },
     ]
 
