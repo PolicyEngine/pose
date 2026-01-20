@@ -180,31 +180,28 @@ function ThesisSlide({ isFullscreen }: SlideProps) {
 }
 
 function AssumptionsSlide({ isFullscreen }: SlideProps) {
-  const assumptions = [
+  const goalsAndAssumptions = [
     {
-      segment: 'Users',
-      icon: '👥',
-      assumption: 'Policy researchers want accessible tools that don\'t require programming expertise to run sophisticated microsimulations',
+      goal: 'Grow adoption among policy analysts',
+      assumption: 'Policy researchers will adopt open-source tools if they\'re accessible without programming expertise',
       color: 'teal',
     },
     {
-      segment: 'Supporters',
-      icon: '💰',
-      assumption: 'Funders (foundations, governments) value transparency and reproducibility enough to fund open-source policy tools over proprietary alternatives',
+      goal: 'Achieve sustainable funding',
+      assumption: 'Funders value transparency and reproducibility enough to fund open-source over proprietary alternatives',
       color: 'purple',
     },
     {
-      segment: 'Contributors',
-      icon: '👨‍💻',
-      assumption: 'The open-source model can attract and retain technical talent who want policy impact without requiring competitive salaries',
+      goal: 'Build active contributor community',
+      assumption: 'Developers will contribute for policy impact without requiring competitive compensation',
       color: 'blue',
     },
   ]
 
-  const colorClasses: Record<string, { bg: string; border: string; text: string; iconBg: string }> = {
-    teal: { bg: 'bg-teal-50', border: 'border-teal-200', text: 'text-teal-700', iconBg: 'bg-teal-100' },
-    purple: { bg: 'bg-purple-50', border: 'border-purple-200', text: 'text-purple-700', iconBg: 'bg-purple-100' },
-    blue: { bg: 'bg-blue-50', border: 'border-blue-200', text: 'text-blue-700', iconBg: 'bg-blue-100' },
+  const colorClasses: Record<string, { bg: string; border: string; text: string; goalText: string }> = {
+    teal: { bg: 'bg-teal-50', border: 'border-teal-200', text: 'text-teal-700', goalText: 'text-teal-800' },
+    purple: { bg: 'bg-purple-50', border: 'border-purple-200', text: 'text-purple-700', goalText: 'text-purple-800' },
+    blue: { bg: 'bg-blue-50', border: 'border-blue-200', text: 'text-blue-700', goalText: 'text-blue-800' },
   }
 
   return (
@@ -219,27 +216,22 @@ function AssumptionsSlide({ isFullscreen }: SlideProps) {
       </div>
 
       <div className="flex-1 flex flex-col justify-center gap-6">
-        {assumptions.map((item, index) => {
+        {goalsAndAssumptions.map((item, index) => {
           const colors = colorClasses[item.color]
           return (
             <motion.div
-              key={item.segment}
+              key={item.goal}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1 }}
-              className={`${colors.bg} ${colors.border} border rounded-xl ${isFullscreen ? 'p-6' : 'p-4'} flex items-center gap-4`}
+              className={`${colors.bg} ${colors.border} border rounded-xl ${isFullscreen ? 'p-6' : 'p-4'}`}
             >
-              <div className={`${colors.iconBg} rounded-lg flex items-center justify-center ${isFullscreen ? 'w-16 h-16 text-3xl' : 'w-12 h-12 text-xl'}`}>
-                {item.icon}
-              </div>
-              <div>
-                <h3 className={`font-semibold ${colors.text} ${isFullscreen ? 'text-xl' : 'text-base'}`}>
-                  {item.segment}
-                </h3>
-                <p className={`${colors.text} opacity-80 ${isFullscreen ? 'text-lg' : 'text-sm'}`}>
-                  {item.assumption}
-                </p>
-              </div>
+              <p className={`font-semibold ${colors.goalText} ${isFullscreen ? 'text-lg' : 'text-sm'} mb-1`}>
+                <span className="text-gray-500 font-normal">Goal:</span> {item.goal}
+              </p>
+              <p className={`${colors.text} ${isFullscreen ? 'text-lg' : 'text-sm'}`}>
+                <span className="text-gray-500 font-normal">Assumption:</span> {item.assumption}
+              </p>
             </motion.div>
           )
         })}
@@ -464,16 +456,16 @@ export function Slides() {
     const slide3 = pptx.addSlide()
     slide3.addText('Assumptions', { x: 0.5, y: 0.5, w: '90%', fontSize: 36, bold: true, color: '1F2937' })
 
-    const assumptions = [
-      { segment: 'Users', assumption: 'Policy researchers want accessible tools that don\'t require programming expertise to run sophisticated microsimulations', color: teal },
-      { segment: 'Supporters', assumption: 'Funders value transparency and reproducibility enough to fund open-source policy tools over proprietary alternatives', color: purple },
-      { segment: 'Contributors', assumption: 'The open-source model can attract and retain technical talent who want policy impact without requiring competitive salaries', color: blue },
+    const goalsAndAssumptions = [
+      { goal: 'Grow adoption among policy analysts', assumption: 'Policy researchers will adopt open-source tools if they\'re accessible without programming expertise', color: teal },
+      { goal: 'Achieve sustainable funding', assumption: 'Funders value transparency and reproducibility enough to fund open-source over proprietary alternatives', color: purple },
+      { goal: 'Build active contributor community', assumption: 'Developers will contribute for policy impact without requiring competitive compensation', color: blue },
     ]
-    assumptions.forEach((item, i) => {
+    goalsAndAssumptions.forEach((item, i) => {
       const yPos = 1.5 + i * 1.4
       slide3.addShape('rect', { x: 0.5, y: yPos, w: 9, h: 1.2, fill: { color: item.color, transparency: 90 }, line: { color: item.color } })
-      slide3.addText(item.segment, { x: 0.7, y: yPos + 0.1, w: 2, fontSize: 14, bold: true, color: item.color })
-      slide3.addText(item.assumption, { x: 0.7, y: yPos + 0.5, w: 8.5, fontSize: 11, color: item.color })
+      slide3.addText([{ text: 'Goal: ', options: { color: '6B7280' } }, { text: item.goal, options: { bold: true, color: item.color } }], { x: 0.7, y: yPos + 0.15, w: 8.5, fontSize: 12 })
+      slide3.addText([{ text: 'Assumption: ', options: { color: '6B7280' } }, { text: item.assumption, options: { color: item.color } }], { x: 0.7, y: yPos + 0.6, w: 8.5, fontSize: 11 })
     })
 
     // Slide 4: Interview Log
