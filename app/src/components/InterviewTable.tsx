@@ -79,8 +79,8 @@ export function InterviewTable({ interviews, onEdit, onDelete, onStatusChange }:
   }
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-      <div className="overflow-x-auto">
+    <div className="bg-white rounded-xl border border-gray-200">
+      <div className="overflow-visible">
         <table className="w-full">
           <thead>
             <tr className="border-b border-gray-200 bg-gray-50">
@@ -131,25 +131,24 @@ export function InterviewTable({ interviews, onEdit, onDelete, onStatusChange }:
                 const isMenuOpen = menuOpenId === interview.id
 
                 return (
+                  <>
                   <motion.tr
                     key={interview.id}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className={`border-b border-gray-100 hover:bg-gray-50 transition-colors ${
+                    onClick={() => setExpandedId(isExpanded ? null : interview.id)}
+                    className={`border-b border-gray-100 hover:bg-gray-50 transition-colors cursor-pointer ${
                       isExpanded ? 'bg-gray-50' : ''
                     }`}
                   >
                     <td className="px-4 py-3">
-                      <button
-                        onClick={() => setExpandedId(isExpanded ? null : interview.id)}
-                        className="text-left"
-                      >
+                      <div className="text-left">
                         <span className="font-medium text-gray-900">{interview.name}</span>
                         {interview.role && (
                           <span className="block text-sm text-gray-500">{interview.role}</span>
                         )}
-                      </button>
+                      </div>
                     </td>
                     <td className="px-4 py-3 text-gray-600">{interview.organization}</td>
                     <td className="px-4 py-3">
@@ -183,7 +182,10 @@ export function InterviewTable({ interviews, onEdit, onDelete, onStatusChange }:
                     <td className="px-4 py-3">
                       <div className="relative">
                         <button
-                          onClick={() => setMenuOpenId(isMenuOpen ? null : interview.id)}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setMenuOpenId(isMenuOpen ? null : interview.id)
+                          }}
                           className="p-1 rounded hover:bg-gray-100"
                         >
                           <MoreHorizontal className="w-5 h-5 text-gray-400" />
@@ -234,6 +236,52 @@ export function InterviewTable({ interviews, onEdit, onDelete, onStatusChange }:
                       </div>
                     </td>
                   </motion.tr>
+                  {isExpanded && (
+                    <motion.tr
+                      key={`${interview.id}-details`}
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="bg-gray-50 border-b border-gray-200"
+                    >
+                      <td colSpan={6} className="px-6 py-4">
+                        <div className="space-y-4">
+                          {interview.notes && (
+                            <div>
+                              <h4 className="text-sm font-semibold text-gray-700 mb-2">Notes</h4>
+                              <div className="text-sm text-gray-600 whitespace-pre-wrap bg-white rounded-lg p-4 border border-gray-200 max-h-64 overflow-y-auto">
+                                {interview.notes}
+                              </div>
+                            </div>
+                          )}
+                          {interview.key_insights && interview.key_insights.length > 0 && (
+                            <div>
+                              <h4 className="text-sm font-semibold text-gray-700 mb-2">Key Insights</h4>
+                              <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
+                                {interview.key_insights.map((insight, i) => (
+                                  <li key={i}>{insight}</li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+                          {interview.referrals && interview.referrals.length > 0 && (
+                            <div>
+                              <h4 className="text-sm font-semibold text-gray-700 mb-2">Referrals</h4>
+                              <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
+                                {interview.referrals.map((referral, i) => (
+                                  <li key={i}>{referral}</li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+                          {!interview.notes && (!interview.key_insights || interview.key_insights.length === 0) && (!interview.referrals || interview.referrals.length === 0) && (
+                            <p className="text-sm text-gray-500 italic">No details recorded yet.</p>
+                          )}
+                        </div>
+                      </td>
+                    </motion.tr>
+                  )}
+                  </>
                 )
               })}
             </AnimatePresence>
