@@ -68,7 +68,7 @@ export function useInterviews() {
       try {
         const { data, error: insertError } = await supabase
           .from('pose_interviews')
-          .insert(interview)
+          .insert(newInterview)
           .select()
           .single()
 
