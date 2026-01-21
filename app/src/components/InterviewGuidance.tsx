@@ -25,6 +25,7 @@ interface GuidanceContent {
   questions: string[]
   tips: string[]
   topics: string[]
+  ecosystem: string[]
 }
 
 // Segment-specific guidance content for PolicyEngine POSE interviews
@@ -55,6 +56,16 @@ const GUIDANCE_BY_SEGMENT: Record<Segment, GuidanceContent> = {
       "Organizational context and stakeholder needs",
       "Alternative tools considered or previously used",
     ],
+    ecosystem: [
+      "What datasets do you use most for tax/benefit analysis? (CPS, ACS, SCF, admin data?)",
+      "What programming languages do you code in? What's standard at your org?",
+      "Where do you get policy parameters? (IRS docs, CCH, manually?)",
+      "How do you validate your calculations against official sources?",
+      "What tools do you use alongside your analysis? (Excel, Jupyter, etc.)",
+      "How do you share results with colleagues and stakeholders?",
+      "What conferences or journals matter in your field?",
+      "What research would you do if the tools were better?",
+    ],
   },
   supporter: {
     icon: Heart,
@@ -81,6 +92,13 @@ const GUIDANCE_BY_SEGMENT: Record<Segment, GuidanceContent> = {
       "Policy reform priorities they care about",
       "Other organizations in their portfolio",
       "Long-term vision for evidence-based policy",
+    ],
+    ecosystem: [
+      "What other policy tech organizations do you fund or follow?",
+      "How do grantees typically report impact to you?",
+      "What data or evidence would help you make funding decisions?",
+      "How do you track the policy analysis ecosystem landscape?",
+      "What tools do your other grantees use for similar work?",
     ],
   },
   contributor: {
@@ -109,6 +127,15 @@ const GUIDANCE_BY_SEGMENT: Record<Segment, GuidanceContent> = {
       "Interest in governance and decision-making",
       "Career stage and professional context",
     ],
+    ecosystem: [
+      "What other open-source projects do you contribute to?",
+      "What development tools and IDEs do you prefer?",
+      "How do you stay current with policy/economics knowledge?",
+      "What testing and validation approaches do you use?",
+      "Where do you look for policy parameter data when contributing?",
+      "What documentation formats work best for you?",
+      "How do you prefer to communicate with other contributors?",
+    ],
   },
   competitor: {
     icon: Swords,
@@ -135,6 +162,14 @@ const GUIDANCE_BY_SEGMENT: Record<Segment, GuidanceContent> = {
       "Business model and sustainability strategy",
       "Potential collaboration opportunities",
       "Shared challenges in the policy tech space",
+    ],
+    ecosystem: [
+      "What data sources do you use for microsimulation?",
+      "What programming languages/frameworks does your tool use?",
+      "How do you handle parameter updates when policy changes?",
+      "What validation approaches do you use?",
+      "How do your users typically access your tool? (API, web, desktop?)",
+      "What's your tech stack for the frontend/backend?",
     ],
   },
   distributor: {
@@ -163,6 +198,14 @@ const GUIDANCE_BY_SEGMENT: Record<Segment, GuidanceContent> = {
       "Support and SLA expectations",
       "Roadmap alignment and feature priorities",
     ],
+    ecosystem: [
+      "What's your tech stack? (frontend, backend, hosting)",
+      "How do you call PolicyEngine? (API, Python package, iframe?)",
+      "What data do you pass to PolicyEngine? Where does it come from?",
+      "How do you handle PolicyEngine version updates?",
+      "What monitoring/logging do you use for the integration?",
+      "What other third-party services do you integrate with?",
+    ],
   },
   partner: {
     icon: Handshake,
@@ -189,6 +232,14 @@ const GUIDANCE_BY_SEGMENT: Record<Segment, GuidanceContent> = {
       "Joint go-to-market opportunities",
       "Technical roadmap alignment",
       "Partnership governance and communication",
+    ],
+    ecosystem: [
+      "What data do you provide to PolicyEngine? What do you receive?",
+      "What format/protocol do you use for data exchange? (API, files, etc.)",
+      "How do you coordinate releases and breaking changes?",
+      "What's your organization's tech stack?",
+      "How do you handle authentication/authorization for the integration?",
+      "What other partnerships do you have that work similarly?",
     ],
   },
 }

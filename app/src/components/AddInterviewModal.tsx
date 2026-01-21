@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X } from 'lucide-react'
-import type { Interview, Segment } from '../types/database'
-import { SEGMENTS } from '../types/database'
+import type { Interview, Segment, PoseHypothesis } from '../types/database'
+import { SEGMENTS, POSE_HYPOTHESES } from '../types/database'
 import { InterviewGuidance } from './InterviewGuidance'
 
 interface AddInterviewModalProps {
@@ -22,6 +22,11 @@ const initialFormData = {
   status: 'scheduled' as Interview['status'],
   notes: '',
   key_insights: [] as string[],
+  // POSE interview log fields
+  hypotheses_tested: [] as PoseHypothesis[],
+  experiments: '',
+  results: '',
+  actions: '',
 }
 
 export function AddInterviewModal({ isOpen, onClose, onSave, editInterview }: AddInterviewModalProps) {
@@ -40,6 +45,10 @@ export function AddInterviewModal({ isOpen, onClose, onSave, editInterview }: Ad
         status: editInterview.status,
         notes: editInterview.notes || '',
         key_insights: editInterview.key_insights || [],
+        hypotheses_tested: editInterview.hypotheses_tested || [],
+        experiments: editInterview.experiments || '',
+        results: editInterview.results || '',
+        actions: editInterview.actions || '',
       })
     } else {
       setFormData(initialFormData)
@@ -204,6 +213,88 @@ export function AddInterviewModal({ isOpen, onClose, onSave, editInterview }: Ad
                       <option value="cancelled">Cancelled</option>
                       <option value="no_show">No show</option>
                     </select>
+                  </div>
+                </div>
+
+                {/* POSE Interview Log Section */}
+                <div className="border-t border-gray-200 pt-5 mt-2">
+                  <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                    <span className="w-2 h-2 bg-teal-500 rounded-full"></span>
+                    POSE interview log
+                  </h3>
+
+                  {/* Hypotheses Tested */}
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Hypotheses tested
+                    </label>
+                    <div className="space-y-2">
+                      {POSE_HYPOTHESES.map((hypothesis, index) => (
+                        <label key={index} className="flex items-start gap-2 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={formData.hypotheses_tested.includes(hypothesis)}
+                            onChange={e => {
+                              if (e.target.checked) {
+                                setFormData(prev => ({
+                                  ...prev,
+                                  hypotheses_tested: [...prev.hypotheses_tested, hypothesis]
+                                }))
+                              } else {
+                                setFormData(prev => ({
+                                  ...prev,
+                                  hypotheses_tested: prev.hypotheses_tested.filter(h => h !== hypothesis)
+                                }))
+                              }
+                            }}
+                            className="mt-1 h-4 w-4 text-teal-600 border-gray-300 rounded focus:ring-teal-500"
+                          />
+                          <span className="text-sm text-gray-600">{hypothesis}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Experiments */}
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Experiments <span className="text-gray-400 font-normal">(what we asked)</span>
+                    </label>
+                    <textarea
+                      value={formData.experiments}
+                      onChange={e => setFormData(prev => ({ ...prev, experiments: e.target.value }))}
+                      rows={3}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                      placeholder="Key questions we asked to test the hypotheses..."
+                    />
+                  </div>
+
+                  {/* Results */}
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Results <span className="text-gray-400 font-normal">(what we learned)</span>
+                    </label>
+                    <textarea
+                      value={formData.results}
+                      onChange={e => setFormData(prev => ({ ...prev, results: e.target.value }))}
+                      rows={3}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                      placeholder="Key findings and evidence for/against hypotheses..."
+                    />
+                  </div>
+
+                  {/* Actions */}
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Action/Iterate <span className="text-gray-400 font-normal">(what we'll do next)</span>
+                    </label>
+                    <textarea
+                      value={formData.actions}
+                      onChange={e => setFormData(prev => ({ ...prev, actions: e.target.value }))}
+                      rows={2}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                      placeholder="Follow-up interviews, pivot decisions, next steps..."
+                    />
                   </div>
                 </div>
 

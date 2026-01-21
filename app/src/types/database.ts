@@ -2,6 +2,15 @@ export type Segment = 'user' | 'supporter' | 'contributor' | 'competitor' | 'dis
 
 export type InterviewStatus = 'scheduled' | 'completed' | 'cancelled' | 'no_show'
 
+// POSE program assumptions to test
+export const POSE_HYPOTHESES = [
+  'Policy researchers will adopt open-source tools if they are accessible without programming expertise',
+  'Funders value transparency and reproducibility enough to fund open-source over proprietary alternatives',
+  'Developers will contribute for policy impact without requiring competitive compensation',
+] as const
+
+export type PoseHypothesis = typeof POSE_HYPOTHESES[number]
+
 export interface Interview {
   id: string
   contact_id?: string
@@ -15,6 +24,11 @@ export interface Interview {
   notes?: string
   key_insights?: string[]
   referrals?: string[]
+  // POSE interview log fields
+  hypotheses_tested?: PoseHypothesis[]
+  experiments?: string  // What questions we asked
+  results?: string      // What we learned
+  actions?: string      // What we'll do next
   created_at: string
   updated_at: string
 }
