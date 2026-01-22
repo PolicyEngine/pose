@@ -1,0 +1,8 @@
+Name,Title,Job in Community,Value Proposition,Steady State #,Interviews
+Policymaker / Staffer,"Legislative Director, Committee Staff","Inform policy decisions, vet proposals","Quick what-if analysis, constituent answers, evidence for positions",500,5
+Policy advocate,"Executive Director, Comms Director","Shape narrative, amplify PE analysis, cite in media","Credible backing for advocacy, reach",200,10
+Data/tool partner,"CTO, Product Lead","Integrate, share data, co-develop","Extend their capabilities, aligned mission",20,5
+Funder,"Program Officer, Philanthropist","Fund development, shape priorities, connect grantees","Impact per dollar, transparency, leverage",50,10
+Non-user (potential),Analyst using alternatives,Not using yet - understand barriers,Understanding why not (cost? trust? awareness?),500,10
+Competitor,CEO/CTO of rival tools,Compete for same users/funding,"Ecosystem mapping, potential collaboration",10,3
+Misuser,Bad-faith analyst,Cherry-pick or misrepresent results,Risk to monitor - understand how to prevent,Few,2

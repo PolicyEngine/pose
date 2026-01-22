@@ -1,0 +1,8 @@
+Name,Title,Job in Community,Value Proposition,Steady State #,Interviews
+PolicyEngine analyst/dev,"Analyst, Engineer",Build core models and model proper usage through research,It's their job!,10,10
+Academic researcher,"Professor, PhD student","Apply tools to answer empirical questions, improve/fund model","Publications, grants, teach with real tools",200,10
+Government economist,"Budget Analyst, Policy Economist","Validate against official estimates, inform scoring","Transparent methodology they can defend, faster analysis",100,10
+Think tank analyst,"Policy Analyst, Fellow, Research Director","Produce policy reports, model reform proposals","Credible methodology, faster turnaround, differentiated research",200,15
+Open source contributor,"Software Engineer, Data Scientist","Contribute code, fix bugs, add parameters","Portfolio, policy impact without policy career, learning",50,5
+Data journalist,"Reporter, Data Editor","Fact-check claims, build interactives","Quick credible analysis, embeddable tools",50,5
+Benefit platform builder,"Product Manager, Engineer",Integrate eligibility calculations into screeners,"Don't build own rules engine, auto-updates with policy",30,5

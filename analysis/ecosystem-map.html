@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PolicyEngine Ecosystem Map | POSE Winter 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0a1628 0%, #1a2744 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2rem;
+            color: #319795;
+            margin-bottom: 5px;
+        }
+        .header .subtitle {
+            color: #8892b0;
+            font-size: 0.95rem;
+        }
+        .ecosystem-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            min-height: 700px;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 0.8rem;
+        }
+        .legend h3 {
+            color: #319795;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .legend-line {
+            width: 30px;
+            height: 2px;
+            margin-right: 8px;
+        }
+        svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .node {
+            cursor: pointer;
+            transition: transform 0.2s, filter 0.2s;
+        }
+        .node:hover {
+            filter: brightness(1.2);
+        }
+        .node-label {
+            font-size: 11px;
+            fill: #fff;
+            text-anchor: middle;
+            pointer-events: none;
+        }
+        .count-badge {
+            font-size: 9px;
+            fill: #fff;
+            text-anchor: middle;
+        }
+        .relationship {
+            stroke-width: 2;
+            fill: none;
+            opacity: 0.6;
+        }
+        .relationship:hover {
+            opacity: 1;
+            stroke-width: 3;
+        }
+        .stats-panel {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 0.8rem;
+            width: 200px;
+        }
+        .stats-panel h3 {
+            color: #319795;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+        .stat-label {
+            color: #8892b0;
+        }
+        .stat-value {
+            color: #64ffda;
+            font-weight: 600;
+        }
+        .tooltip {
+            position: absolute;
+            background: rgba(26, 39, 68, 0.95);
+            border: 1px solid #319795;
+            border-radius: 8px;
+            padding: 12px 15px;
+            font-size: 0.85rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            max-width: 300px;
+            z-index: 100;
+        }
+        .tooltip.visible {
+            opacity: 1;
+        }
+        .tooltip h4 {
+            color: #319795;
+            margin-bottom: 5px;
+        }
+        .tooltip p {
+            color: #8892b0;
+            margin-bottom: 3px;
+            line-height: 1.4;
+        }
+        .tooltip .value-prop {
+            color: #64ffda;
+            font-style: italic;
+        }
+        .section-label {
+            font-size: 14px;
+            font-weight: 600;
+            fill: #8892b0;
+            text-anchor: middle;
+        }
+        .ring-label {
+            font-size: 10px;
+            fill: #5a6785;
+            text-anchor: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>PolicyEngine ecosystem map</h1>
+        <p class="subtitle">NSF POSE Winter 2026 | Tax-benefit microsimulation platform</p>
+    </div>
+
+    <div class="legend">
+        <h3>Entities</h3>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #319795;"></div>
+            <span>Core (PolicyEngine)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #4FD1C5;"></div>
+            <span>Community members</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #805AD5;"></div>
+            <span>Stakeholders</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #E53E3E;"></div>
+            <span>Risks / non-users</span>
+        </div>
+        <h3 style="margin-top: 15px;">Relationships</h3>
+        <div class="legend-item">
+            <div class="legend-line" style="background: #48BB78;"></div>
+            <span>Funding</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-line" style="background: #4299E1;"></div>
+            <span>Code / data</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-line" style="background: #ECC94B;"></div>
+            <span>Analysis / insights</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-line" style="background: #ED8936;"></div>
+            <span>Integration / embed</span>
+        </div>
+    </div>
+
+    <div class="stats-panel">
+        <h3>Interview targets</h3>
+        <div class="stat-row">
+            <span class="stat-label">Community members</span>
+            <span class="stat-value">60</span>
+        </div>
+        <div class="stat-row">
+            <span class="stat-label">Stakeholders</span>
+            <span class="stat-value">45</span>
+        </div>
+        <div class="stat-row">
+            <span class="stat-label">Total target</span>
+            <span class="stat-value">100+</span>
+        </div>
+        <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">
+            <div class="stat-row">
+                <span class="stat-label">Completed</span>
+                <span class="stat-value">0</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="ecosystem-container">
+        <svg viewBox="0 0 900 700" width="900" height="700">
+            <defs>
+                <!-- Arrowheads -->
+                <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <path d="M0,0 L0,6 L9,3 z" fill="#48BB78"/>
+                </marker>
+                <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <path d="M0,0 L0,6 L9,3 z" fill="#4299E1"/>
+                </marker>
+                <marker id="arrowYellow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <path d="M0,0 L0,6 L9,3 z" fill="#ECC94B"/>
+                </marker>
+                <marker id="arrowOrange" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <path d="M0,0 L0,6 L9,3 z" fill="#ED8936"/>
+                </marker>
+
+                <!-- Gradients -->
+                <radialGradient id="coreGradient" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#4FD1C5"/>
+                    <stop offset="100%" stop-color="#319795"/>
+                </radialGradient>
+            </defs>
+
+            <!-- Background rings -->
+            <circle cx="450" cy="350" r="280" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="60"/>
+            <circle cx="450" cy="350" r="200" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="50"/>
+            <circle cx="450" cy="350" r="100" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="30"/>
+
+            <!-- Ring labels -->
+            <text x="450" y="55" class="ring-label">STAKEHOLDERS</text>
+            <text x="450" y="125" class="ring-label">COMMUNITY MEMBERS</text>
+
+            <!-- RELATIONSHIPS (drawn first, behind nodes) -->
+
+            <!-- Funders to Core (Funding) -->
+            <path class="relationship" d="M 255 200 Q 350 250 400 320" stroke="#48BB78" marker-end="url(#arrowGreen)"
+                  data-from="funder" data-to="core" data-type="funding"/>
+
+            <!-- Policy advocate to Core (Ideas/Amplification) -->
+            <path class="relationship" d="M 700 180 Q 600 250 500 320" stroke="#ECC94B" marker-end="url(#arrowYellow)"
+                  data-from="advocate" data-to="core" data-type="amplification"/>
+
+            <!-- Data/tool partner to Core (Data/Code) -->
+            <path class="relationship" d="M 750 350 Q 650 350 530 350" stroke="#4299E1" marker-end="url(#arrowBlue)"
+                  data-from="partner" data-to="core" data-type="data"/>
+            <path class="relationship" d="M 530 350 Q 650 350 750 350" stroke="#4299E1" marker-end="url(#arrowBlue)"
+                  data-from="core" data-to="partner" data-type="data"/>
+
+            <!-- Academic researcher from Core (Analysis) -->
+            <path class="relationship" d="M 500 380 Q 550 420 590 450" stroke="#ECC94B" marker-end="url(#arrowYellow)"
+                  data-from="core" data-to="academic" data-type="analysis"/>
+
+            <!-- Think tank from Core (Analysis) -->
+            <path class="relationship" d="M 480 390 Q 450 450 420 490" stroke="#ECC94B" marker-end="url(#arrowYellow)"
+                  data-from="core" data-to="thinktank" data-type="analysis"/>
+
+            <!-- Government economist from Core (Analysis) -->
+            <path class="relationship" d="M 420 380 Q 350 420 300 450" stroke="#ECC94B" marker-end="url(#arrowYellow)"
+                  data-from="core" data-to="govt" data-type="analysis"/>
+
+            <!-- OSS contributors to Core (Code) -->
+            <path class="relationship" d="M 340 220 Q 380 270 420 320" stroke="#4299E1" marker-end="url(#arrowBlue)"
+                  data-from="contributor" data-to="core" data-type="code"/>
+
+            <!-- Benefit platform from Core (API/Integration) -->
+            <path class="relationship" d="M 500 350 Q 600 420 680 480" stroke="#ED8936" marker-end="url(#arrowOrange)"
+                  data-from="core" data-to="platform" data-type="integration"/>
+
+            <!-- Data journalist from Core (Analysis) -->
+            <path class="relationship" d="M 400 350 Q 300 380 220 400" stroke="#ECC94B" marker-end="url(#arrowYellow)"
+                  data-from="core" data-to="journalist" data-type="analysis"/>
+
+            <!-- Policymaker from Core (Analysis) -->
+            <path class="relationship" d="M 450 310 Q 450 200 450 120" stroke="#ECC94B" marker-end="url(#arrowYellow)"
+                  data-from="core" data-to="policymaker" data-type="analysis"/>
+
+            <!-- CORE: PolicyEngine -->
+            <g class="node" data-id="core">
+                <circle cx="450" cy="350" r="55" fill="url(#coreGradient)"/>
+                <text x="450" y="345" class="node-label" style="font-size: 13px; font-weight: 600;">PolicyEngine</text>
+                <text x="450" y="362" class="node-label" style="font-size: 9px; fill: rgba(255,255,255,0.7);">Digital Artifact</text>
+            </g>
+
+            <!-- COMMUNITY MEMBERS (Inner ring) -->
+
+            <!-- PolicyEngine analyst/dev -->
+            <g class="node" data-id="analyst"
+               data-title="PolicyEngine analyst/dev"
+               data-desc="Analyst, Engineer"
+               data-job="Build core models and model proper usage through research"
+               data-value="It's their job!"
+               data-size="10"
+               data-interviews="10">
+                <circle cx="450" cy="220" r="32" fill="#319795"/>
+                <text x="450" y="217" class="node-label">PE Analyst/</text>
+                <text x="450" y="230" class="node-label">Developer</text>
+                <circle cx="470" cy="195" r="12" fill="#1a2744" stroke="#64ffda"/>
+                <text x="470" y="199" class="count-badge">10</text>
+            </g>
+
+            <!-- Academic researcher -->
+            <g class="node" data-id="academic"
+               data-title="Academic researcher"
+               data-desc="Professor, PhD student"
+               data-job="Apply tools to answer empirical questions, improve/fund model"
+               data-value="Publications, grants, teach with real tools"
+               data-size="200"
+               data-interviews="10">
+                <circle cx="590" cy="470" r="32" fill="#4FD1C5"/>
+                <text x="590" y="467" class="node-label">Academic</text>
+                <text x="590" y="480" class="node-label">Researcher</text>
+                <circle cx="610" cy="445" r="12" fill="#1a2744" stroke="#64ffda"/>
+                <text x="610" y="449" class="count-badge">10</text>
+            </g>
+
+            <!-- Government economist -->
+            <g class="node" data-id="govt"
+               data-title="Government economist"
+               data-desc="Budget Analyst, Policy Economist"
+               data-job="Validate against official estimates, inform scoring"
+               data-value="Transparent methodology they can defend, faster analysis"
+               data-size="100"
+               data-interviews="10">
+                <circle cx="300" cy="470" r="32" fill="#4FD1C5"/>
+                <text x="300" y="467" class="node-label">Government</text>
+                <text x="300" y="480" class="node-label">Economist</text>
+                <circle cx="320" cy="445" r="12" fill="#1a2744" stroke="#64ffda"/>
+                <text x="320" y="449" class="count-badge">10</text>
+            </g>
+
+            <!-- Think tank analyst -->
+            <g class="node" data-id="thinktank"
+               data-title="Think tank analyst"
+               data-desc="Policy Analyst, Fellow, Research Director"
+               data-job="Produce policy reports, model reform proposals"
+               data-value="Credible methodology, faster turnaround, differentiated research"
+               data-size="200"
+               data-interviews="15">
+                <circle cx="420" cy="510" r="35" fill="#4FD1C5"/>
+                <text x="420" y="507" class="node-label">Think Tank</text>
+                <text x="420" y="520" class="node-label">Analyst</text>
+                <circle cx="445" cy="482" r="12" fill="#1a2744" stroke="#64ffda"/>
+                <text x="445" y="486" class="count-badge">15</text>
+            </g>
+
+            <!-- Open source contributor -->
+            <g class="node" data-id="contributor"
+               data-title="Open source contributor"
+               data-desc="Software Engineer, Data Scientist"
+               data-job="Contribute code, fix bugs, add parameters"
+               data-value="Portfolio, policy impact without policy career, learning"
+               data-size="50"
+               data-interviews="5">
+                <circle cx="340" cy="230" r="28" fill="#4FD1C5"/>
+                <text x="340" y="227" class="node-label">OSS</text>
+                <text x="340" y="240" class="node-label">Contributor</text>
+                <circle cx="358" cy="208" r="12" fill="#1a2744" stroke="#64ffda"/>
+                <text x="358" y="212" class="count-badge">5</text>
+            </g>
+
+            <!-- Data journalist -->
+            <g class="node" data-id="journalist"
+               data-title="Data journalist"
+               data-desc="Reporter, Data Editor"
+               data-job="Fact-check claims, build interactives"
+               data-value="Quick credible analysis, embeddable tools"
+               data-size="50"
+               data-interviews="5">
+                <circle cx="220" cy="400" r="28" fill="#4FD1C5"/>
+                <text x="220" y="397" class="node-label">Data</text>
+                <text x="220" y="410" class="node-label">Journalist</text>
+                <circle cx="240" cy="378" r="12" fill="#1a2744" stroke="#64ffda"/>
+                <text x="240" y="382" class="count-badge">5</text>
+            </g>
+
+            <!-- Benefit platform builder -->
+            <g class="node" data-id="platform"
+               data-title="Benefit platform builder"
+               data-desc="Product Manager, Engineer"
+               data-job="Integrate eligibility calculations into screeners"
+               data-value="Don't build own rules engine, auto-updates with policy"
+               data-size="30"
+               data-interviews="5">
+                <circle cx="680" cy="480" r="28" fill="#4FD1C5"/>
+                <text x="680" y="477" class="node-label">Benefit</text>
+                <text x="680" y="490" class="node-label">Platform</text>
+                <circle cx="700" cy="458" r="12" fill="#1a2744" stroke="#64ffda"/>
+                <text x="700" y="462" class="count-badge">5</text>
+            </g>
+
+            <!-- STAKEHOLDERS (Outer ring) -->
+
+            <!-- Policymaker / Staffer -->
+            <g class="node" data-id="policymaker"
+               data-title="Policymaker / Staffer"
+               data-desc="Legislative Director, Committee Staff"
+               data-job="Inform policy decisions, vet proposals"
+               data-value="Quick what-if analysis, constituent answers, evidence for positions"
+               data-size="500"
+               data-interviews="5">
+                <circle cx="450" cy="100" r="35" fill="#805AD5"/>
+                <text x="450" y="97" class="node-label">Policymaker/</text>
+                <text x="450" y="110" class="node-label">Staffer</text>
+                <circle cx="475" cy="72" r="12" fill="#1a2744" stroke="#64ffda"/>
+                <text x="475" y="76" class="count-badge">5</text>
+            </g>
+
+            <!-- Policy advocate -->
+            <g class="node" data-id="advocate"
+               data-title="Policy advocate"
+               data-desc="Executive Director, Comms Director"
+               data-job="Shape narrative, amplify PE analysis, cite in media"
+               data-value="Credible backing for advocacy, reach"
+               data-size="200"
+               data-interviews="10">
+                <circle cx="680" cy="160" r="32" fill="#805AD5"/>
+                <text x="680" y="157" class="node-label">Policy</text>
+                <text x="680" y="170" class="node-label">Advocate</text>
+                <circle cx="702" cy="135" r="12" fill="#1a2744" stroke="#64ffda"/>
+                <text x="702" y="139" class="count-badge">10</text>
+            </g>
+
+            <!-- Data/tool partner -->
+            <g class="node" data-id="partner"
+               data-title="Data/tool partner"
+               data-desc="CTO, Product Lead"
+               data-job="Integrate, share data, co-develop"
+               data-value="Extend their capabilities, aligned mission"
+               data-size="20"
+               data-interviews="5">
+                <circle cx="780" cy="350" r="30" fill="#805AD5"/>
+                <text x="780" y="347" class="node-label">Data/Tool</text>
+                <text x="780" y="360" class="node-label">Partner</text>
+                <circle cx="800" cy="327" r="12" fill="#1a2744" stroke="#64ffda"/>
+                <text x="800" y="331" class="count-badge">5</text>
+            </g>
+
+            <!-- Funder -->
+            <g class="node" data-id="funder"
+               data-title="Funder"
+               data-desc="Program Officer, Philanthropist"
+               data-job="Fund development, shape priorities, connect grantees"
+               data-value="Impact per dollar, transparency, leverage"
+               data-size="50"
+               data-interviews="10">
+                <circle cx="230" cy="180" r="35" fill="#805AD5"/>
+                <text x="230" y="180" class="node-label">Funder</text>
+                <circle cx="255" cy="152" r="12" fill="#1a2744" stroke="#64ffda"/>
+                <text x="255" y="156" class="count-badge">10</text>
+            </g>
+
+            <!-- Non-user (potential) -->
+            <g class="node" data-id="nonuser"
+               data-title="Non-user (potential)"
+               data-desc="Analyst using alternatives"
+               data-job="Not using yet - understand barriers"
+               data-value="Understanding why not (cost? trust? awareness?)"
+               data-size="500"
+               data-interviews="10">
+                <circle cx="130" cy="300" r="30" fill="#E53E3E"/>
+                <text x="130" y="297" class="node-label">Non-user</text>
+                <text x="130" y="310" class="node-label">(Potential)</text>
+                <circle cx="150" cy="277" r="12" fill="#1a2744" stroke="#64ffda"/>
+                <text x="150" y="281" class="count-badge">10</text>
+            </g>
+
+            <!-- Competitor -->
+            <g class="node" data-id="competitor"
+               data-title="Competitor"
+               data-desc="CEO/CTO of rival tools"
+               data-job="Compete for same users/funding"
+               data-value="Ecosystem mapping, potential collaboration"
+               data-size="10"
+               data-interviews="3">
+                <circle cx="780" cy="500" r="28" fill="#E53E3E"/>
+                <text x="780" y="500" class="node-label">Competitor</text>
+                <circle cx="798" cy="478" r="12" fill="#1a2744" stroke="#64ffda"/>
+                <text x="798" y="482" class="count-badge">3</text>
+            </g>
+
+            <!-- Misuser -->
+            <g class="node" data-id="misuser"
+               data-title="Misuser"
+               data-desc="Bad-faith analyst"
+               data-job="Cherry-pick or misrepresent results"
+               data-value="Risk to monitor - understand how to prevent"
+               data-size="Few"
+               data-interviews="2">
+                <circle cx="100" cy="500" r="25" fill="#E53E3E"/>
+                <text x="100" y="500" class="node-label">Misuser</text>
+                <circle cx="117" cy="480" r="12" fill="#1a2744" stroke="#64ffda"/>
+                <text x="117" y="484" class="count-badge">2</text>
+            </g>
+
+            <!-- Section labels -->
+            <text x="170" y="610" class="section-label" style="fill: #E53E3E;">RISKS</text>
+            <text x="450" y="610" class="section-label" style="fill: #4FD1C5;">USERS</text>
+            <text x="730" y="610" class="section-label" style="fill: #805AD5;">SUPPORTERS</text>
+
+        </svg>
+    </div>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+        const tooltip = document.getElementById('tooltip');
+        const nodes = document.querySelectorAll('.node');
+
+        nodes.forEach(node => {
+            node.addEventListener('mouseenter', (e) => {
+                const data = node.dataset;
+                if (data.title) {
+                    tooltip.innerHTML = `
+                        <h4>${data.title}</h4>
+                        <p><strong>Role:</strong> ${data.desc || 'N/A'}</p>
+                        <p><strong>Job in community:</strong> ${data.job || 'N/A'}</p>
+                        <p class="value-prop"><strong>Value prop:</strong> ${data.value || 'N/A'}</p>
+                        <p><strong>Steady state #:</strong> ${data.size || 'N/A'}</p>
+                        <p><strong>Interview target:</strong> ${data.interviews || '0'}</p>
+                    `;
+                    tooltip.classList.add('visible');
+                }
+            });
+
+            node.addEventListener('mousemove', (e) => {
+                tooltip.style.left = (e.pageX + 15) + 'px';
+                tooltip.style.top = (e.pageY + 15) + 'px';
+            });
+
+            node.addEventListener('mouseleave', () => {
+                tooltip.classList.remove('visible');
+            });
+        });
+    </script>
+</body>
+</html>
