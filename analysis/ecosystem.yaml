@@ -1,0 +1,417 @@
+# PolicyEngine / Cosilico Ecosystem Map
+# For multi-perspective analysis by subagents
+
+meta:
+  project: PolicyEngine POSE
+  version: 2026-01
+  description: Open source policy simulation ecosystem
+
+core_artifacts:
+  models:
+    - name: policyengine-us
+      type: country_model
+      description: US federal + state tax/benefit microsimulation
+    - name: policyengine-uk
+      type: country_model
+      description: UK tax-benefit microsimulation
+    - name: policyengine-core
+      type: framework
+      description: Core simulation engine (OpenFisca fork)
+
+  data:
+    - name: policyengine-us-data
+      type: microdata
+      description: Enhanced CPS microdata for US simulations
+    - name: policyengine-uk-data
+      type: microdata
+      description: UK Family Resources Survey enhanced data
+    - name: microplex
+      type: synthetic_data
+      description: AI-generated synthetic population, daily updates
+
+  apps:
+    - name: policyengine.org
+      type: web_app
+      description: Main user interface for policy simulation
+    - name: custom_interactives
+      type: dashboards
+      description: Policy-specific calculators and dashboards
+    - name: REST_API
+      type: api
+      description: Programmatic access to calculations
+
+  infrastructure:
+    - name: RAC (Rules as Code)
+      type: dsl
+      description: Domain-specific language encoding statutes as code
+    - name: AUTORAC
+      type: ai_tool
+      description: AI-assisted encoding of legislation
+
+# ============ CURRENT SEGMENTS (proven) ============
+
+segments:
+  # --- VALIDATION / GOVERNMENT ---
+  government_economists:
+    category: validation
+    titles: [Budget Analyst, Policy Economist]
+    orgs: [CBO, JCT, Treasury, SSA]
+    job_to_be_done: Validate models against official estimates, inform scoring
+    value_prop: Transparent methodology they can defend, faster analysis
+    steady_state_count: 100
+    interview_target: 10
+    relationship_to_pe:
+      gives: [validation, methodology_feedback]
+      receives: [analysis_tools, documentation]
+
+  # --- FUNDERS ---
+  policy_foundations:
+    category: funding
+    titles: [Program Officer, Philanthropist]
+    orgs: [Arnold Ventures, Pritzker]
+    job_to_be_done: Fund evidence-based policy infrastructure
+    value_prop: Higher-quality policy research output
+    steady_state_count: 50
+    interview_target: 10
+    relationship_to_pe:
+      gives: [grants]
+      receives: [research, policy_analysis]
+
+  research_clients:
+    category: funding
+    titles: [Policy Analyst, Research Director]
+    orgs: [CRFB, Niskanen Center]
+    job_to_be_done: Get custom analysis and tools built
+    value_prop: Expert modeling without building internal capacity
+    steady_state_count: 30
+    interview_target: 5
+    relationship_to_pe:
+      gives: [consulting_fees]
+      receives: [custom_analysis, tools]
+
+  government_grants:
+    category: funding
+    titles: [Program Manager]
+    orgs: [NSF POSE]
+    job_to_be_done: Fund research infrastructure
+    value_prop: Public good, open source ecosystem
+    steady_state_count: 10
+    interview_target: 5
+    relationship_to_pe:
+      gives: [grant_funding]
+      receives: [open_source_infrastructure]
+
+  # --- USERS / RESEARCH ---
+  academic_researchers:
+    category: users
+    titles: [Professor, PhD Student, Postdoc]
+    orgs: [Economics depts, Public Policy schools]
+    job_to_be_done: Publish research, get grants, teach
+    value_prop: Publications, grants, teach with real tools
+    steady_state_count: 200
+    interview_target: 10
+    relationship_to_pe:
+      gives: [ideas, validation, citations]
+      receives: [analysis_tools, documentation, data]
+
+  think_tank_analysts:
+    category: users
+    titles: [Policy Analyst, Fellow, Research Director]
+    orgs: [CRFB, Niskanen, Urban Institute, AEI, Brookings]
+    job_to_be_done: Produce policy reports, score reform proposals
+    value_prop: Credible methodology, faster turnaround
+    steady_state_count: 200
+    interview_target: 15
+    relationship_to_pe:
+      gives: [feedback, ideas, use_cases]
+      receives: [analysis_tools, reports]
+
+  data_journalists:
+    category: users
+    titles: [Reporter, Data Editor]
+    orgs: [NYT, WaPo, ProPublica]
+    job_to_be_done: Fact-check claims, build interactives
+    value_prop: Quick credible analysis, embeddable tools
+    steady_state_count: 50
+    interview_target: 5
+    relationship_to_pe:
+      gives: [visibility, feedback]
+      receives: [embeds, data, analysis]
+
+  policy_advocates:
+    category: users
+    titles: [Executive Director, Comms Director]
+    orgs: [CBPP, advocacy orgs]
+    job_to_be_done: Shape narrative, cite credible analysis
+    value_prop: Credible backing for advocacy, media reach
+    steady_state_count: 200
+    interview_target: 10
+    relationship_to_pe:
+      gives: [amplification, feedback]
+      receives: [analysis, talking_points]
+
+  policymakers:
+    category: influence
+    titles: [Legislative Director, Committee Staff]
+    orgs: [Congress, state legislatures]
+    job_to_be_done: Inform policy decisions, answer constituent questions
+    value_prop: Quick what-if analysis, evidence for positions
+    steady_state_count: 500
+    interview_target: 5
+    relationship_to_pe:
+      gives: [legitimacy, use_cases]
+      receives: [analysis, constituent_tools]
+
+  # --- INTEGRATORS ---
+  benefit_platform_builders:
+    category: integrators
+    titles: [Product Manager, Engineer]
+    orgs: [Benefits screeners, fintech apps]
+    job_to_be_done: Embed eligibility calculations in products
+    value_prop: No need to build rules engine, auto-updates
+    steady_state_count: 30
+    interview_target: 5
+    relationship_to_pe:
+      gives: [api_revenue, feedback]
+      receives: [api_access, documentation]
+
+  # --- CONTRIBUTORS ---
+  oss_contributors:
+    category: contributors
+    titles: [Software Engineer, Data Scientist]
+    orgs: [External volunteers]
+    job_to_be_done: Contribute code, fix bugs, add parameters
+    value_prop: Portfolio, policy impact, learning
+    steady_state_count: 50
+    interview_target: 5
+    relationship_to_pe:
+      gives: [code, bug_fixes, parameters]
+      receives: [mentorship, recognition]
+
+  pe_team:
+    category: core
+    titles: [Analyst, Engineer]
+    orgs: [PolicyEngine]
+    job_to_be_done: Build core models, demonstrate usage
+    value_prop: It's their job!
+    steady_state_count: 10
+    interview_target: 10
+    relationship_to_pe:
+      gives: [development, research]
+      receives: [salary, mission]
+
+  data_partners:
+    category: partners
+    titles: [CTO, Product Lead]
+    orgs: [Census, IRS, data providers]
+    job_to_be_done: Share data, co-develop tools
+    value_prop: Extended capabilities, aligned mission
+    steady_state_count: 20
+    interview_target: 5
+    relationship_to_pe:
+      gives: [data, integration]
+      receives: [tools, research]
+
+  # --- RISKS ---
+  non_users:
+    category: barriers
+    titles: [Analyst using alternatives]
+    orgs: [TRIM3, Tax-Calculator, proprietary tools]
+    job_to_be_done: Understand why they don't use PE
+    value_prop: Understanding barriers (cost? trust? awareness?)
+    steady_state_count: 500
+    interview_target: 10
+    relationship_to_pe:
+      gives: [competitive_intel]
+      receives: [nothing_yet]
+
+  competitors:
+    category: barriers
+    titles: [CEO, CTO of rival tools]
+    orgs: [Chainbridge, Corticon, REMI, Tax Foundation]
+    job_to_be_done: Compete for same users/funding
+    value_prop: Ecosystem mapping, potential collaboration
+    steady_state_count: 10
+    interview_target: 3
+    relationship_to_pe:
+      gives: [competitive_pressure]
+      receives: [open_source_competition]
+
+  misusers:
+    category: risks
+    titles: [Bad-faith analyst]
+    orgs: [Various]
+    job_to_be_done: Cherry-pick or misrepresent results
+    value_prop: Risk to monitor
+    steady_state_count: few
+    interview_target: 0
+    relationship_to_pe:
+      gives: [reputational_risk]
+      receives: [free_tools]
+
+# ============ SPECULATIVE SEGMENTS (Cosilico/RAC expansion) ============
+
+speculative_segments:
+  # --- GOVERNMENT RULES AS CODE ---
+  state_revenue_departments:
+    category: government_rac
+    titles: [IT Director, Tax Administrator]
+    orgs: [State tax agencies, revenue depts]
+    job_to_be_done: Implement tax rules accurately, track law changes
+    value_prop: Auditable, AI-maintained rules vs proprietary vendors
+    market_size: "$1B+ in state IT contracts"
+    incumbents: [Chainbridge/PolicyLinks, Corticon, custom builds]
+    cosilico_advantage: Open source, temporal versioning, statute-linked
+
+  benefits_agencies:
+    category: government_rac
+    titles: [Program Director, Systems Manager]
+    orgs: [SNAP, TANF, Medicaid administrators]
+    job_to_be_done: Calculate eligibility accurately, reduce errors
+    value_prop: Compliant calculations, rapid rule updates
+    market_size: "$500M+ in eligibility system contracts"
+    incumbents: [Deloitte, Accenture, custom builds]
+    cosilico_advantage: Open source, tested against statute
+
+  # --- TAX SOFTWARE ---
+  tax_software_vendors:
+    category: commercial_api
+    titles: [Product Manager, Engineer]
+    orgs: [TurboTax/Intuit, H&R Block, TaxAct]
+    job_to_be_done: Calculate accurate taxes, deploy law changes fast
+    value_prop: Certified-correct calculations, reduced liability
+    market_size: "$90B+ tax software market"
+    incumbents: [Internal engines, Thomson Reuters]
+    cosilico_advantage: API at $0.02/household, audit trail
+
+  # --- FINANCIAL SERVICES ---
+  personal_financial_planners:
+    category: commercial_api
+    titles: [CFP, Wealth Manager, Robo-advisor PM]
+    orgs: [Betterment, Wealthfront, RIA firms]
+    job_to_be_done: Provide tax-aware financial advice
+    value_prop: Precise tax calcs most planning tools lack
+    market_size: "$5B+ wealth tech market"
+    incumbents: [eMoney, MoneyGuidePro, RightCapital]
+    cosilico_advantage: Real federal+state tax, policy uncertainty
+
+  banks_and_lenders:
+    category: commercial_api
+    titles: [Chief Data Officer, Underwriting Lead]
+    orgs: [Banks, mortgage lenders, fintechs]
+    job_to_be_done: Predict income, assess financial profiles
+    value_prop: ML-enhanced imputation from partial data
+    market_size: "$100B+ consumer lending"
+    incumbents: [Experian, Equifax, internal models]
+    cosilico_advantage: Microplex imputation, county calibration
+
+  insurance_actuaries:
+    category: commercial_api
+    titles: [Actuary, Compliance Officer]
+    orgs: [Health insurers, ACA marketplace]
+    job_to_be_done: Calculate ACA subsidies, model tax impacts
+    value_prop: Statute-compliant subsidy calculations
+    market_size: "$50B+ health insurance admin"
+    incumbents: [Internal models, consulting firms]
+    cosilico_advantage: ACA rules encoded with citations
+
+  # --- DATA / MARKETING ---
+  marketing_data_platforms:
+    category: data_enrichment
+    titles: [Data Science Lead, Audience PM]
+    orgs: [Marketing platforms, data brokers]
+    job_to_be_done: Enrich customer profiles, build segments
+    value_prop: Microplex provides 200+ attributes from minimal input
+    market_size: "$2.4B+ data enrichment market"
+    incumbents: [Experian, LiveRamp, Acxiom]
+    cosilico_advantage: Free microplex + /impute API
+
+  # --- AI / LLM ---
+  ai_labs:
+    category: ai_infrastructure
+    titles: [Research Scientist, Product Lead]
+    orgs: [Anthropic, OpenAI, Google DeepMind]
+    job_to_be_done: Build policy-aware AI that doesn't hallucinate
+    value_prop: Verifiable ground truth for policy reasoning
+    market_size: Strategic/priceless
+    incumbents: [None - novel capability]
+    cosilico_advantage: RLVR signals, statute-grounded answers
+
+  ai_agent_builders:
+    category: ai_infrastructure
+    titles: [Engineer, Product Manager]
+    orgs: [Enterprise AI vendors, chatbot companies]
+    job_to_be_done: Give agents reliable tax/benefits tools
+    value_prop: Function calling with legal citations
+    market_size: "$10B+ enterprise AI"
+    incumbents: [Internal tools, hallucination]
+    cosilico_advantage: /calculate + /rules APIs
+
+# ============ RELATIONSHIPS ============
+
+relationship_types:
+  funding:
+    color: "#22C55E"
+    examples: [grants, consulting_fees, api_revenue]
+
+  ideas_feedback:
+    color: "#0EA5E9"
+    examples: [methodology_feedback, use_cases, bug_reports]
+
+  technical:
+    color: "#EF4444"
+    examples: [code, PRs, api_integration]
+
+  data_analysis:
+    color: "#8B5CF6"
+    examples: [research, reports, validation, data_sharing]
+
+  influence:
+    color: "#6B7280"
+    style: dashed
+    examples: [legitimacy, amplification, citations]
+
+# ============ KEY ASSUMPTIONS TO TEST ============
+
+assumptions:
+  - id: think_tank_oss
+    statement: Think tanks want transparent open-source methodology
+    alternative: They prefer proprietary models with brand-name credibility
+    test_via: interviews
+
+  - id: benefit_api_adoption
+    statement: Benefit platforms will integrate via API
+    alternative: They prefer to build/maintain own rules engines
+    test_via: interviews, pilot projects
+
+  - id: academic_validation
+    statement: Academic adoption requires validation against official sources
+    question: What level of validation needed before researchers cite PE?
+    test_via: interviews
+
+  - id: gov_engagement
+    statement: Government economists will engage with open-source tools
+    question: Are budget offices willing/allowed to use OSS?
+    test_via: interviews
+
+  - id: oss_contributors
+    statement: Engineers motivated by policy impact will contribute without pay
+    test_via: contributor tracking
+
+  - id: rac_adoption
+    statement: Government agencies will adopt rules-as-code
+    alternative: Too much procurement/regulatory overhead
+    test_via: pilots, interviews
+
+  - id: financial_services_api
+    statement: Financial services will pay for tax calculation APIs
+    alternative: Cheaper to build internally
+    test_via: enterprise sales
+
+# ============ INTERVIEW TOTALS ============
+
+totals:
+  community_members: 60
+  other_stakeholders: 43
+  speculative_segments: 20  # estimate
+  total_target: 100+
