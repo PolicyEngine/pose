@@ -1,0 +1,303 @@
+# Cosilico ecosystem map
+# Public Benefit Corp — "Run the infrastructure"
+# For multi-perspective analysis by subagents
+
+meta:
+  project: Cosilico (POSE split)
+  version: 2026-02
+  description: Production infrastructure company — society, in silico
+  tagline: "Computational models of society from the individual up"
+  entity_type: Public Benefit Corp
+  parent_grant: NSF POSE Award #4373
+
+traction:
+  simulations_run: "1M+"
+  state_tax_systems: "50+"
+  benefit_programs: "100+"
+  oss_contributors: "50+"
+  lighthouse_customers:
+    - UK Government (budget scoring)
+    - US Congress (distributional analysis)
+    - Think tanks (UBI, child allowances, tax reform)
+
+competitive_landscape:
+  direct_competitors:
+    - name: Column Tax
+      raised: "$26.8M"
+      focus: "Filing, not calculation. Chime, NerdWallet customers."
+    - name: Symmetry
+      focus: "Payroll tax only. 64M+ employees/year."
+    - name: Benefit Kitchen
+      focus: "18 programs in 7 states. Healthcare/nonprofit focus."
+    - name: Avalara
+      focus: "Sales tax only. Acquired for $8.4B."
+    - name: IMPLAN
+      focus: "I-O multipliers. Acquired $100M+ (2024). No household-level rules."
+  key_gap: >
+    No one combines income tax + benefits + prediction + simulation in a single API.
+  gpt4_tax_accuracy: "67% (SARA benchmark) — deterministic tools will always beat LLMs on statutory precision"
+
+pricing_tiers:
+  open_source: "Free (Apache 2.0)"
+  api_usage: "$0.001-0.01/call"
+  data_enrichment: "$0.10-1.00/record"
+  enterprise: "$100K-1M+/year (99.9% SLA, dedicated support)"
+  competitive_notes:
+    rules_api: "$0.02/household — 5x cheaper than TaxJar"
+    imputation: "$0.10/1K records — 500-1000x cheaper than Experian at scale"
+    microsimulation: "$0.50/1K records — no commercial competitor"
+    microplex: "Free (R2) — open source, open access"
+
+core_artifacts:
+  cosilico_rules:
+    description: Deterministic calculations — statute to code
+    products:
+      - name: Rules API
+        type: api
+        description: Tax/benefit calculations from statute
+      - name: Verifier API
+        type: api
+        description: Binary reward signal for AI RLVR
+      - name: Eligibility engines
+        type: system
+        description: Benefits administration calculation layer
+
+  cosilico_simulate:
+    description: Statistical modeling — population-scale inference
+    products:
+      - name: Microsim API
+        type: api
+        description: Population-scale policy modeling
+      - name: Imputation
+        type: service
+        description: Predict missing household attributes
+      - name: Microplex
+        type: dataset
+        description: Synthetic population for simulation, daily updates
+
+# ============ SEGMENTS ============
+
+segments:
+
+  # --- GOVERNMENT (left side) ---
+
+  state_revenue_departments:
+    category: government
+    titles: [IT Director, Tax Administrator]
+    orgs: [State tax agencies, revenue departments]
+    job_to_be_done: Implement tax rules accurately, track law changes
+    value_prop: Auditable, AI-maintained rules vs proprietary vendors
+    market_size: "$1B+ in state IT contracts"
+    incumbents: [Chainbridge/PolicyLinks, Corticon, custom builds]
+    product_line: cosilico_rules
+    relationship_to_cosilico:
+      gives: [revenue]
+      receives: [auditable_rules, temporal_versioning, statute_links]
+
+  benefits_agencies:
+    category: government
+    titles: [Program Director, Systems Manager]
+    orgs: [SNAP, TANF, Medicaid administrators]
+    job_to_be_done: Calculate eligibility accurately, reduce errors
+    value_prop: Compliant calculations, rapid rule updates
+    market_size: "$500M+ in eligibility system contracts"
+    incumbents: [Deloitte, Accenture, custom builds]
+    product_line: cosilico_rules
+    relationship_to_cosilico:
+      gives: [revenue]
+      receives: [compliant_calculations, rapid_rule_updates]
+
+  # --- COMMERCIAL / FINANCIAL (right side) ---
+
+  tax_software_vendors:
+    category: commercial
+    titles: [Product Manager, Engineer]
+    orgs: [TurboTax/Intuit, H&R Block, TaxAct]
+    job_to_be_done: Calculate accurate taxes, deploy law changes fast
+    value_prop: Certified-correct calculations, reduced liability
+    market_size: "$90B+ tax software market"
+    incumbents: [Internal engines, Thomson Reuters]
+    product_line: cosilico_rules
+    pricing: "$0.02/household"
+    relationship_to_cosilico:
+      gives: [api_revenue]
+      receives: [certified_calculations, audit_trail]
+
+  financial_planners:
+    category: commercial
+    titles: [CFP, Wealth Manager, Robo-advisor PM]
+    orgs: [Betterment, Wealthfront, RIA firms]
+    job_to_be_done: Provide tax-aware financial advice
+    value_prop: Precise federal+state tax calculations most planning tools lack
+    market_size: "$5B+ wealth tech market"
+    incumbents: [eMoney, MoneyGuidePro, RightCapital]
+    product_line: cosilico_rules
+    relationship_to_cosilico:
+      gives: [api_revenue]
+      receives: [precise_tax_calcs, policy_uncertainty_modeling]
+
+  banks_and_lenders:
+    category: commercial
+    titles: [Chief Data Officer, Underwriting Lead]
+    orgs: [Banks, mortgage lenders, fintechs]
+    job_to_be_done: Predict income, assess financial profiles from partial data
+    value_prop: ML-enhanced imputation from partial data
+    market_size: "$100B+ consumer lending"
+    incumbents: [Experian, Equifax, internal models]
+    product_line: cosilico_simulate
+    relationship_to_cosilico:
+      gives: [api_revenue]
+      receives: [microplex_imputation, county_calibration]
+
+  insurance_actuaries:
+    category: commercial
+    titles: [Actuary, Compliance Officer]
+    orgs: [Health insurers, ACA marketplace]
+    job_to_be_done: Calculate ACA subsidies, model tax impacts
+    value_prop: Statute-compliant ACA subsidy calculations
+    market_size: "$50B+ health insurance admin"
+    incumbents: [Internal models, consulting firms]
+    product_line: cosilico_rules
+    relationship_to_cosilico:
+      gives: [api_revenue]
+      receives: [aca_rules_with_citations]
+
+  # --- AI / TECH (top) ---
+
+  ai_labs:
+    category: ai_tech
+    titles: [Research Scientist, Product Lead]
+    orgs: [Anthropic, OpenAI, Google DeepMind]
+    job_to_be_done: Build policy-aware AI that doesn't hallucinate
+    value_prop: Verifiable ground truth for policy reasoning (RLVR signals)
+    market_size: "Strategic / priceless"
+    incumbents: [None — novel capability]
+    product_line: cosilico_rules
+    relationship_to_cosilico:
+      gives: [compute_partnerships, revenue]
+      receives: [verifier_api, policy_grounded_ai]
+
+  ai_agent_builders:
+    category: ai_tech
+    titles: [Engineer, Product Manager]
+    orgs: [Enterprise AI vendors, chatbot companies]
+    job_to_be_done: Give agents reliable tax/benefits tools
+    value_prop: Function calling with legal citations
+    market_size: "$10B+ enterprise AI"
+    incumbents: [Internal tools, hallucination]
+    product_line: cosilico_rules
+    relationship_to_cosilico:
+      gives: [api_revenue]
+      receives: [calculate_api, rules_api, legal_citations]
+
+  # --- DATA (bottom) ---
+
+  marketing_data_platforms:
+    category: data
+    titles: [Data Science Lead, Audience PM]
+    orgs: [LiveRamp, Acxiom, marketing platforms]
+    job_to_be_done: Enrich customer profiles, build audience segments
+    value_prop: Microplex provides 200+ attributes from minimal input
+    market_size: "$2.4B+ data enrichment market"
+    incumbents: [Experian, LiveRamp, Acxiom]
+    product_line: cosilico_simulate
+    relationship_to_cosilico:
+      gives: [api_revenue]
+      receives: [microplex_enrichment, imputation]
+
+  benefit_platform_builders:
+    category: data
+    titles: [Product Manager, Engineer]
+    orgs: [Benefits screeners, fintech apps]
+    job_to_be_done: Embed eligibility calculations in products
+    value_prop: No need to build own rules engine, auto-updates with policy
+    product_line: cosilico_rules
+    relationship_to_cosilico:
+      gives: [api_revenue, feedback]
+      receives: [eligibility_api, auto_updates]
+
+  economic_impact_analysts:
+    category: commercial
+    titles: [Economist, Impact Analyst, Economic Development Director]
+    orgs: [State agencies, consulting firms, film commissions, economic development]
+    job_to_be_done: Quantify fiscal impact of economic events (factory openings, incentive programs, relocations)
+    value_prop: Household-level fiscal impacts from actual statutes, not aggregate multipliers
+    market_size: "$50-100M+ (IMPLAN acq. $100M+, Lightcast $350M+)"
+    incumbents: [IMPLAN (Charlesbank, 12-15x rev multiple), REMI, RIMS II (BEA), Lightcast (KKR)]
+    product_line: cosilico_simulate
+    pricing: "$0.50/1K records"
+    notes: >
+      I-O multiplier models systematically overestimate by ignoring substitution effects
+      and use average effective tax rates, not actual statutory rules. No incumbent offers
+      MCP server or agent-friendly API. CHIPS Act and IRA driving demand for impact
+      quantification.
+    relationship_to_cosilico:
+      gives: [api_revenue]
+      receives: [household_level_fiscal_impacts, microsimulation, statute_based_tax_calcs]
+
+# ============ RELATIONSHIP TYPES ============
+
+relationship_types:
+  funding_revenue:
+    color: "#22C55E"
+    examples: [paid_contracts, api_revenue, compute_partnerships]
+
+  ideas_feedback:
+    color: "#0EA5E9"
+    examples: [use_cases, bug_reports, feature_requests]
+
+  technical:
+    color: "#EF4444"
+    examples: [api_integration, function_calling, eligibility_engines]
+
+  data_analysis:
+    color: "#8B5CF6"
+    examples: [microplex, imputation, synthetic_data]
+
+  influence:
+    color: "#6B7280"
+    style: dashed
+    examples: [legitimacy, procurement_signals, regulatory_endorsement]
+
+# ============ KEY ASSUMPTIONS TO TEST ============
+
+assumptions:
+  - id: gov_oss_adoption
+    statement: Government agencies will buy open-source rules infrastructure
+    alternative: Too much procurement/regulatory overhead; incumbents win on inertia
+    test_via: pilot projects, interviews with state IT directors
+
+  - id: tax_software_api_pricing
+    statement: Tax software vendors prefer API at $0.02/household vs building internally
+    alternative: Internal engines are cheaper at scale, switching cost too high
+    test_via: enterprise sales conversations, price sensitivity analysis
+
+  - id: financial_services_api
+    statement: Financial services will pay for precise tax calculation APIs
+    alternative: Approximations are "good enough" for planning tools
+    test_via: enterprise sales, pilot integrations
+
+  - id: ai_labs_verifier
+    statement: AI labs will pay for verifiable policy ground truth signals
+    alternative: Labs build own policy knowledge or don't prioritize policy accuracy
+    test_via: partnership discussions, compute-for-API trades
+
+  - id: microplex_accuracy
+    statement: Microplex synthetic data is accurate enough for commercial use
+    alternative: Synthetic data too noisy for lending/insurance decisions
+    test_via: accuracy benchmarks, customer validation, regulatory review
+
+# ============ MARKET SIZING ============
+
+market_summary:
+  total_addressable:
+    government_contracts: "$1.5B+"
+    tax_software: "$90B+"
+    financial_services: "$105B+"
+    ai_infrastructure: "$10B+"
+    data_enrichment: "$2.4B+"
+    health_insurance_admin: "$50B+"
+  notes: >
+    Markets are overlapping and these are total market sizes, not
+    serviceable addressable. Cosilico targets a small API-revenue
+    slice of each market.

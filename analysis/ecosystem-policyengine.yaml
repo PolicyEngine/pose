@@ -1,0 +1,314 @@
+# PolicyEngine ecosystem map
+# Scoped to PolicyEngine as focused research/analysis org (501(c)(3) / UK Charity)
+# Part of the PolicyEngine / Cosilico / Rules Foundation split
+
+meta:
+  project: PolicyEngine POSE
+  version: 2026-01
+  description: "Tell the story" — tech-forward, open-source research org
+  entity_type: 501(c)(3) / UK Charity
+  mission: >
+    Focused research organization. Like Urban/Mathematica but better —
+    tech-forward, open source, model-oriented. Uses best-in-class
+    infrastructure (Cosilico) and focuses entirely on research impact.
+  note: >
+    PolicyEngine USES Cosilico infrastructure (Rules API, Microsim API)
+    but its core mission is research and analysis, not infrastructure.
+
+core_artifacts:
+  models:
+    - name: policyengine-us
+      type: country_model
+      description: US federal + state tax/benefit microsimulation
+    - name: policyengine-uk
+      type: country_model
+      description: UK tax-benefit microsimulation
+    - name: policyengine-core
+      type: framework
+      description: Core simulation engine (OpenFisca fork)
+
+  data:
+    - name: policyengine-us-data
+      type: microdata
+      description: Enhanced CPS microdata for US simulations
+    - name: policyengine-uk-data
+      type: microdata
+      description: UK Family Resources Survey enhanced data
+
+  apps:
+    - name: policyengine.org
+      type: web_app
+      description: Interactive policy simulation web app
+    - name: custom_interactives
+      type: dashboards
+      description: Policy-specific calculators and dashboards
+    - name: congressional_district_dashboards
+      type: dashboards
+      description: Localized policy impacts by congressional district
+
+  api:
+    - name: REST_API
+      type: api
+      description: Programmatic access to calculations
+    - name: policyengine.py
+      type: python_package
+      description: Python client for PolicyEngine API
+
+  research:
+    - name: policy_analysis_reports
+      type: research_output
+      description: Quantitative storytelling for policymakers
+    - name: research_partnerships
+      type: partnerships
+      description: NBER, Atlanta Fed, Brookings, NIESR collaborations
+
+# ============ SEGMENTS ============
+
+segments:
+  # --- VALIDATION / GOVERNMENT ---
+  government_economists:
+    category: validation
+    titles: [Budget Analyst, Policy Economist]
+    orgs: [CBO, JCT, Treasury, SSA]
+    job_to_be_done: Validate models against official estimates, inform scoring
+    value_prop: Transparent methodology they can defend, faster analysis
+    steady_state_count: 100
+    interview_target: 10
+    relationship_to_pe:
+      gives: [validation, methodology_feedback]
+      receives: [transparent_methodology, faster_analysis]
+
+  # --- FUNDERS ---
+  policy_foundations:
+    category: funding
+    titles: [Program Officer, Philanthropist]
+    orgs: [Arnold Ventures, Pritzker]
+    job_to_be_done: Fund evidence-based policy infrastructure
+    value_prop: Higher-quality policy research output
+    steady_state_count: 50
+    interview_target: 10
+    relationship_to_pe:
+      gives: [grants]
+      receives: [higher_quality_research]
+
+  research_clients:
+    category: funding
+    titles: [Policy Analyst, Research Director]
+    orgs: [CRFB, Niskanen Center]
+    job_to_be_done: Get expert modeling without building internal capacity
+    value_prop: Expert modeling without building internal capacity
+    steady_state_count: 30
+    interview_target: 5
+    relationship_to_pe:
+      gives: [consulting_fees]
+      receives: [custom_analysis, tools]
+
+  government_grants:
+    category: funding
+    titles: [Program Manager]
+    orgs: [NSF POSE]
+    job_to_be_done: Fund open-source research infrastructure
+    value_prop: Open-source infrastructure as public good
+    steady_state_count: 10
+    interview_target: 5
+    relationship_to_pe:
+      gives: [grant_funding]
+      receives: [open_source_infrastructure]
+
+  # --- USERS / RESEARCH ---
+  academic_researchers:
+    category: users
+    titles: [Professor, PhD Student, Postdoc]
+    orgs: [Economics depts, Public Policy schools]
+    job_to_be_done: Publish research, get grants, teach
+    value_prop: Publications, grants, teaching tools
+    steady_state_count: 200
+    interview_target: 10
+    relationship_to_pe:
+      gives: [ideas, validation, citations]
+      receives: [analysis_tools, documentation, data]
+
+  think_tank_analysts:
+    category: users
+    titles: [Policy Analyst, Fellow, Research Director]
+    orgs: [CRFB, Niskanen, Urban Institute, AEI, Brookings]
+    job_to_be_done: Produce policy reports, score reform proposals
+    value_prop: Credible methodology, faster turnaround
+    steady_state_count: 200
+    interview_target: 15
+    relationship_to_pe:
+      gives: [feedback, ideas, use_cases]
+      receives: [analysis_tools, reports, methodology]
+
+  data_journalists:
+    category: users
+    titles: [Reporter, Data Editor]
+    orgs: [NYT, WaPo, ProPublica]
+    job_to_be_done: Fact-check claims, build interactives
+    value_prop: Quick credible analysis, embeddable tools
+    steady_state_count: 50
+    interview_target: 5
+    relationship_to_pe:
+      gives: [visibility, feedback]
+      receives: [embeds, data, analysis]
+
+  policy_advocates:
+    category: users
+    titles: [Executive Director, Comms Director]
+    orgs: [CBPP, advocacy orgs]
+    job_to_be_done: Shape narrative, cite credible analysis
+    value_prop: Credible backing for advocacy
+    steady_state_count: 200
+    interview_target: 10
+    relationship_to_pe:
+      gives: [amplification, feedback]
+      receives: [analysis, talking_points]
+
+  # --- INFLUENCE ---
+  policymakers:
+    category: influence
+    titles: [Legislative Director, Committee Staff]
+    orgs: [Congress, state legislatures]
+    job_to_be_done: Inform policy decisions, answer constituent questions
+    value_prop: Quick what-if analysis, constituent answers
+    steady_state_count: 500
+    interview_target: 5
+    relationship_to_pe:
+      gives: [legitimacy, use_cases]
+      receives: [analysis, constituent_tools]
+
+  # --- CONTRIBUTORS ---
+  oss_contributors:
+    category: contributors
+    titles: [Software Engineer, Data Scientist]
+    orgs: [External volunteers]
+    job_to_be_done: Contribute code, fix bugs, add parameters
+    value_prop: Portfolio, policy impact, learning
+    steady_state_count: 50
+    interview_target: 5
+    relationship_to_pe:
+      gives: [code, bug_fixes, parameters]
+      receives: [mentorship, recognition, portfolio]
+
+  # --- CORE TEAM ---
+  pe_team:
+    category: core
+    titles: [Analyst, Engineer]
+    orgs: [PolicyEngine]
+    job_to_be_done: Build core models, demonstrate usage through research
+    value_prop: "It's their job!"
+    steady_state_count: 10
+    interview_target: 10
+    relationship_to_pe:
+      gives: [development, research]
+      receives: [salary, mission]
+
+  # --- PARTNERS ---
+  data_tool_partners:
+    category: partners
+    titles: [CTO, Product Lead]
+    orgs: [Census, IRS, data providers]
+    job_to_be_done: Share data, co-develop tools
+    value_prop: Tools, research, extended capabilities
+    steady_state_count: 20
+    interview_target: 5
+    relationship_to_pe:
+      gives: [data, integration]
+      receives: [tools, research]
+
+# ============ RISKS ============
+
+risks:
+  non_users:
+    category: barriers
+    titles: [Analyst using alternatives]
+    orgs: [TRIM3, Tax-Calculator, proprietary tools]
+    job_to_be_done: Understand why they don't use PE
+    value_prop: Understanding barriers (cost? trust? awareness?)
+    steady_state_count: 500
+    interview_target: 10
+    relationship_to_pe:
+      gives: [competitive_intel]
+      receives: [nothing_yet]
+
+  competitors:
+    category: barriers
+    titles: [CEO, CTO of rival tools]
+    orgs: [Chainbridge, Corticon, REMI, Tax Foundation]
+    job_to_be_done: Compete for same users/funding
+    value_prop: Ecosystem mapping, potential collaboration
+    steady_state_count: 10
+    interview_target: 3
+    relationship_to_pe:
+      gives: [competitive_pressure]
+      receives: [open_source_competition]
+
+  misusers:
+    category: risks
+    titles: [Bad-faith analyst]
+    orgs: [Various]
+    job_to_be_done: Cherry-pick or misrepresent results
+    value_prop: Risk to monitor
+    steady_state_count: few
+    interview_target: 0
+    relationship_to_pe:
+      gives: [reputational_risk]
+      receives: [free_tools]
+
+# ============ RELATIONSHIPS ============
+
+relationship_types:
+  funding:
+    color: "#22C55E"
+    examples: [grants, consulting_fees]
+
+  ideas_feedback:
+    color: "#0EA5E9"
+    examples: [methodology_feedback, use_cases, bug_reports]
+
+  technical:
+    color: "#EF4444"
+    examples: [code, PRs, bug_fixes, parameters]
+
+  data_analysis:
+    color: "#8B5CF6"
+    examples: [research, reports, validation, data_sharing]
+
+  influence:
+    color: "#6B7280"
+    style: dashed
+    examples: [legitimacy, amplification, citations]
+
+# ============ KEY ASSUMPTIONS TO TEST ============
+
+assumptions:
+  - id: think_tank_oss
+    statement: Think tanks want transparent open-source methodology
+    alternative: They prefer proprietary models with brand-name credibility
+    test_via: interviews
+
+  - id: academic_validation
+    statement: Academic adoption requires validation against official sources
+    question: What level of validation needed before researchers cite PE?
+    test_via: interviews
+
+  - id: gov_engagement
+    statement: Government economists will engage with open-source tools
+    question: Are budget offices willing/allowed to use OSS?
+    test_via: interviews
+
+  - id: oss_contributors
+    statement: Contributors motivated by policy impact will contribute without pay
+    test_via: contributor tracking
+
+  - id: research_clients_pay
+    statement: Research clients will pay for custom analysis using PE tools
+    alternative: They prefer to build internal capacity or use established consultancies
+    test_via: sales pipeline, interviews
+
+# ============ INTERVIEW TOTALS ============
+
+totals:
+  community_members: 60
+  other_stakeholders: 43
+  total_target: 100+

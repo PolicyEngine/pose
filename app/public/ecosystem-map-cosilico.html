@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosilico Ecosystem Map | POSE Winter 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Serif:opsz,wght@8..144,300;8..144,400;8..144,500;8..144,600;8..144,700&family=Caveat:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --co-primary-50: #ECFEFF;
+            --co-primary-100: #CFFAFE;
+            --co-primary-200: #A5F3FC;
+            --co-primary-300: #67E8F9;
+            --co-primary-400: #22D3EE;
+            --co-primary-500: #06B6D4;
+            --co-primary-600: #0891B2;
+            --co-primary-700: #0E7490;
+            --co-primary-800: #155E75;
+            --co-gray-50: #F9FAFB;
+            --co-gray-100: #F2F4F7;
+            --co-gray-200: #E2E8F0;
+            --co-gray-300: #D1D5DB;
+            --co-gray-400: #9CA3AF;
+            --co-gray-500: #6B7280;
+            --co-gray-600: #4B5563;
+            --co-gray-700: #344054;
+            --co-success: #22C55E;
+            --co-blue: #0EA5E9;
+            --co-error: #EF4444;
+            --co-purple: #8B5CF6;
+            --font-display: 'Roboto Serif', Georgia, serif;
+            --font-ui: 'Inter', -apple-system, sans-serif;
+            --font-hand: 'Caveat', cursive;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--font-ui);
+            background: #FAFAFA;
+            min-height: 100vh;
+            color: var(--co-gray-700);
+            padding: 24px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 32px;
+            border-bottom: 2px solid var(--co-primary-600);
+            background: linear-gradient(135deg, var(--co-primary-50) 0%, white 100%);
+        }
+        .header h1 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            color: var(--co-gray-700);
+        }
+        .header h1 span { color: var(--co-primary-600); }
+        .header .badge {
+            background: var(--co-primary-600);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        .map-container {
+            position: relative;
+            width: 100%;
+            padding: 20px;
+        }
+        svg {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .entity-box { cursor: pointer; }
+        .category-label {
+            font-family: var(--font-ui);
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .relationship-label {
+            font-family: var(--font-hand);
+            font-size: 13px;
+        }
+        .use-case-box {
+            fill: white;
+            stroke: var(--co-gray-400);
+            stroke-width: 1.5;
+            stroke-dasharray: 4 3;
+        }
+        .use-case-text {
+            font-family: var(--font-ui);
+            font-size: 9px;
+            fill: var(--co-gray-600);
+        }
+        .count-badge {
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 700;
+        }
+        .entity-title {
+            font-family: var(--font-ui);
+            font-size: 10px;
+            font-weight: 600;
+        }
+        .entity-desc {
+            font-family: var(--font-ui);
+            font-size: 8px;
+        }
+        .note-box {
+            fill: var(--co-primary-50);
+            stroke: var(--co-primary-300);
+            stroke-width: 1;
+        }
+        .note-text {
+            font-family: var(--font-ui);
+            font-size: 9px;
+            fill: var(--co-primary-800);
+        }
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 32px;
+            background: var(--co-gray-50);
+            border-top: 1px solid var(--co-gray-200);
+            font-size: 0.875rem;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .footer-stat {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+        .footer-stat .label { color: var(--co-gray-500); }
+        .footer-stat .value {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--co-primary-700);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><span>Cosilico</span> ecosystem map</h1>
+            <span class="badge">NSF POSE · Winter 2026</span>
+        </header>
+
+        <div class="map-container">
+            <svg viewBox="0 0 1200 960" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                    <marker id="arrow-blue" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                        <path d="M0,0 L0,6 L6,3 z" fill="#0EA5E9"/>
+                    </marker>
+                    <marker id="arrow-green" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                        <path d="M0,0 L0,6 L6,3 z" fill="#22C55E"/>
+                    </marker>
+                    <marker id="arrow-red" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                        <path d="M0,0 L0,6 L6,3 z" fill="#EF4444"/>
+                    </marker>
+                    <marker id="arrow-purple" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                        <path d="M0,0 L0,6 L6,3 z" fill="#8B5CF6"/>
+                    </marker>
+                    <marker id="arrow-gray" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                        <path d="M0,0 L0,6 L6,3 z" fill="#6B7280"/>
+                    </marker>
+                    <marker id="arrow-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                        <path d="M0,0 L0,6 L6,3 z" fill="#0891B2"/>
+                    </marker>
+                </defs>
+
+                <!-- ========== LEGEND (top right) ========== -->
+                <g transform="translate(1040, 20)">
+                    <rect x="0" y="0" width="140" height="100" fill="white" stroke="#E2E8F0" rx="6"/>
+                    <text x="10" y="16" class="category-label" fill="#6B7280">Arrow types</text>
+                    <line x1="10" y1="30" x2="26" y2="30" stroke="#22C55E" stroke-width="2"/>
+                    <text x="32" y="34" font-size="9" fill="#344054">revenue</text>
+                    <line x1="10" y1="46" x2="26" y2="46" stroke="#0EA5E9" stroke-width="2"/>
+                    <text x="32" y="50" font-size="9" fill="#344054">ideas / feedback</text>
+                    <line x1="10" y1="62" x2="26" y2="62" stroke="#EF4444" stroke-width="2"/>
+                    <text x="32" y="66" font-size="9" fill="#344054">technical / API</text>
+                    <line x1="10" y1="78" x2="26" y2="78" stroke="#8B5CF6" stroke-width="2"/>
+                    <text x="32" y="82" font-size="9" fill="#344054">data / analysis</text>
+                    <line x1="10" y1="94" x2="26" y2="94" stroke="#6B7280" stroke-width="2" stroke-dasharray="3 2"/>
+                    <text x="32" y="98" font-size="9" fill="#344054">influence</text>
+                </g>
+
+                <!-- ========== CATEGORY LABELS ========== -->
+                <!-- Government (left) -->
+                <rect x="20" y="300" width="90" height="20" fill="#CFFAFE" rx="3"/>
+                <text x="65" y="314" text-anchor="middle" class="category-label" fill="#155E75">Government</text>
+
+                <!-- Commercial / Financial (right) -->
+                <rect x="920" y="200" width="120" height="20" fill="#CFFAFE" rx="3"/>
+                <text x="980" y="214" text-anchor="middle" class="category-label" fill="#155E75">Commercial / Financial</text>
+
+                <!-- AI / Tech (top) -->
+                <rect x="420" y="45" width="70" height="20" fill="#E0E7FF" rx="3"/>
+                <text x="455" y="59" text-anchor="middle" class="category-label" fill="#3730A3">AI / Tech</text>
+
+                <!-- Data / Platforms (bottom) -->
+                <rect x="400" y="790" width="110" height="20" fill="#FEF3C7" rx="3"/>
+                <text x="455" y="804" text-anchor="middle" class="category-label" fill="#92400E">Data / Platforms</text>
+
+                <!-- ========== USE CASES (dotted boxes) ========== -->
+
+                <!-- Gov use case: left -->
+                <line x1="130" y1="350" x2="145" y2="375" stroke="#9CA3AF" stroke-width="1" stroke-dasharray="3 2"/>
+                <rect x="15" y="330" width="115" height="44" class="use-case-box" rx="3"/>
+                <text x="73" y="346" text-anchor="middle" class="use-case-text">Implement tax rules accurately</text>
+                <text x="73" y="358" text-anchor="middle" class="use-case-text">Calculate eligibility</text>
+                <text x="73" y="370" text-anchor="middle" class="use-case-text" font-style="italic">(vs Chainbridge, Deloitte)</text>
+
+                <!-- Commercial use case: right -->
+                <line x1="1020" y1="380" x2="935" y2="395" stroke="#9CA3AF" stroke-width="1" stroke-dasharray="3 2"/>
+                <rect x="1020" y="360" width="120" height="44" class="use-case-box" rx="3"/>
+                <text x="1080" y="376" text-anchor="middle" class="use-case-text">Tax calcs, imputation,</text>
+                <text x="1080" y="388" text-anchor="middle" class="use-case-text">ACA subsidies</text>
+                <text x="1080" y="400" text-anchor="middle" class="use-case-text" font-style="italic">($0.02/household API)</text>
+
+                <!-- AI use case: top -->
+                <line x1="600" y1="100" x2="600" y2="130" stroke="#9CA3AF" stroke-width="1" stroke-dasharray="3 2"/>
+                <rect x="530" y="70" width="140" height="32" class="use-case-box" rx="3"/>
+                <text x="600" y="85" text-anchor="middle" class="use-case-text">RLVR signals, function calling</text>
+                <text x="600" y="97" text-anchor="middle" class="use-case-text" font-style="italic">(verifiable policy ground truth)</text>
+
+                <!-- Data use case: bottom -->
+                <line x1="600" y1="780" x2="600" y2="750" stroke="#9CA3AF" stroke-width="1" stroke-dasharray="3 2"/>
+                <rect x="530" y="815" width="140" height="32" class="use-case-box" rx="3"/>
+                <text x="600" y="830" text-anchor="middle" class="use-case-text">200+ attributes from minimal input</text>
+                <text x="600" y="842" text-anchor="middle" class="use-case-text" font-style="italic">(Microplex enrichment)</text>
+
+                <!-- ========== CORE: Cosilico (two product lines) ========== -->
+                <g transform="translate(370, 340)">
+                    <!-- Outer container -->
+                    <rect x="0" y="0" width="420" height="220" fill="white" stroke="#0891B2" stroke-width="2.5" rx="10"/>
+                    <text x="210" y="26" text-anchor="middle" font-family="var(--font-display)" font-size="18" font-weight="600" fill="#155E75">Cosilico</text>
+                    <text x="210" y="42" text-anchor="middle" font-size="8" fill="#6B7280">Public Benefit Corp — production infrastructure</text>
+
+                    <!-- Left product line: Rules -->
+                    <rect x="12" y="55" width="192" height="150" fill="#ECFEFF" stroke="#0891B2" stroke-width="1.5" rx="6"/>
+                    <text x="108" y="73" text-anchor="middle" font-family="var(--font-display)" font-size="12" font-weight="600" fill="#0E7490">Cosilico Rules</text>
+                    <text x="108" y="86" text-anchor="middle" font-size="7" fill="#6B7280" font-style="italic">Deterministic calculations</text>
+
+                    <rect x="24" y="96" width="168" height="24" fill="white" stroke="#06B6D4" stroke-width="1" rx="4"/>
+                    <text x="108" y="112" text-anchor="middle" font-size="8" font-weight="500" fill="#0E7490">Rules API</text>
+
+                    <rect x="24" y="126" width="168" height="24" fill="white" stroke="#06B6D4" stroke-width="1" rx="4"/>
+                    <text x="108" y="142" text-anchor="middle" font-size="8" font-weight="500" fill="#0E7490">Verifier API (RLVR)</text>
+
+                    <rect x="24" y="156" width="168" height="24" fill="white" stroke="#06B6D4" stroke-width="1" rx="4"/>
+                    <text x="108" y="172" text-anchor="middle" font-size="8" font-weight="500" fill="#0E7490">Eligibility engines</text>
+
+                    <!-- Right product line: Simulate -->
+                    <rect x="216" y="55" width="192" height="150" fill="#ECFEFF" stroke="#0891B2" stroke-width="1.5" rx="6"/>
+                    <text x="312" y="73" text-anchor="middle" font-family="var(--font-display)" font-size="12" font-weight="600" fill="#0E7490">Cosilico Simulate</text>
+                    <text x="312" y="86" text-anchor="middle" font-size="7" fill="#6B7280" font-style="italic">Statistical modeling</text>
+
+                    <rect x="228" y="96" width="168" height="24" fill="white" stroke="#06B6D4" stroke-width="1" rx="4"/>
+                    <text x="312" y="112" text-anchor="middle" font-size="8" font-weight="500" fill="#0E7490">Microsim API</text>
+
+                    <rect x="228" y="126" width="168" height="24" fill="white" stroke="#06B6D4" stroke-width="1" rx="4"/>
+                    <text x="312" y="142" text-anchor="middle" font-size="8" font-weight="500" fill="#0E7490">Imputation</text>
+
+                    <rect x="228" y="156" width="168" height="24" fill="white" stroke="#06B6D4" stroke-width="1" rx="4"/>
+                    <text x="312" y="172" text-anchor="middle" font-size="8" font-weight="500" fill="#0E7490">Microplex</text>
+
+                    <!-- Footer labels -->
+                    <text x="210" y="216" text-anchor="middle" font-size="7" fill="#6B7280" font-style="italic">Open source core (AGPL) · Hosted API (paid)</text>
+                </g>
+
+                <!-- ========== ENTITIES ========== -->
+
+                <!-- === AI / TECH (top) === -->
+
+                <!-- AI LABS -->
+                <g class="entity-box" transform="translate(310, 130)">
+                    <rect x="0" y="0" width="170" height="60" fill="white" stroke="#0891B2" stroke-width="1.5" rx="6"/>
+                    <rect x="135" y="-10" width="24" height="24" fill="#0891B2" rx="3"/>
+                    <text x="147" y="6" text-anchor="middle" class="count-badge" fill="white">AI</text>
+                    <text x="85" y="16" text-anchor="middle" class="entity-title" fill="#344054">AI labs</text>
+                    <text x="85" y="28" text-anchor="middle" class="entity-desc" fill="#6B7280">Research Scientist, Product Lead</text>
+                    <text x="85" y="39" text-anchor="middle" class="entity-desc" fill="#6B7280">(Anthropic, OpenAI, DeepMind)</text>
+                    <text x="85" y="52" text-anchor="middle" class="entity-desc" fill="#22C55E" font-weight="500">compute + revenue</text>
+                </g>
+
+                <!-- AI AGENT BUILDERS -->
+                <g class="entity-box" transform="translate(680, 130)">
+                    <rect x="0" y="0" width="170" height="60" fill="white" stroke="#0891B2" stroke-width="1.5" rx="6"/>
+                    <rect x="135" y="-10" width="24" height="24" fill="#0891B2" rx="3"/>
+                    <text x="147" y="6" text-anchor="middle" class="count-badge" fill="white">AI</text>
+                    <text x="85" y="16" text-anchor="middle" class="entity-title" fill="#344054">AI agent builders</text>
+                    <text x="85" y="28" text-anchor="middle" class="entity-desc" fill="#6B7280">Engineer, PM at enterprise AI</text>
+                    <text x="85" y="39" text-anchor="middle" class="entity-desc" fill="#6B7280">(Enterprise AI vendors)</text>
+                    <text x="85" y="52" text-anchor="middle" class="entity-desc" fill="#0891B2" font-weight="500">$10B+ enterprise AI mkt</text>
+                </g>
+
+                <!-- === GOVERNMENT (left) === -->
+
+                <!-- STATE REVENUE DEPARTMENTS -->
+                <g class="entity-box" transform="translate(100, 380)">
+                    <rect x="0" y="0" width="170" height="65" fill="white" stroke="#22C55E" stroke-width="1.5" rx="6"/>
+                    <rect x="135" y="-10" width="24" height="24" fill="#22C55E" rx="3"/>
+                    <text x="147" y="6" text-anchor="middle" class="count-badge" fill="white">$</text>
+                    <text x="85" y="16" text-anchor="middle" class="entity-title" fill="#344054">State revenue departments</text>
+                    <text x="85" y="28" text-anchor="middle" class="entity-desc" fill="#6B7280">IT Director, Tax Administrator</text>
+                    <text x="85" y="39" text-anchor="middle" class="entity-desc" fill="#6B7280">(State tax agencies)</text>
+                    <text x="85" y="52" text-anchor="middle" class="entity-desc" fill="#22C55E" font-weight="500">$1B+ state IT contracts</text>
+                    <text x="85" y="62" text-anchor="middle" class="entity-desc" fill="#6B7280" font-style="italic">vs Chainbridge, Corticon</text>
+                </g>
+
+                <!-- BENEFITS AGENCIES -->
+                <g class="entity-box" transform="translate(100, 480)">
+                    <rect x="0" y="0" width="170" height="65" fill="white" stroke="#22C55E" stroke-width="1.5" rx="6"/>
+                    <rect x="135" y="-10" width="24" height="24" fill="#22C55E" rx="3"/>
+                    <text x="147" y="6" text-anchor="middle" class="count-badge" fill="white">$</text>
+                    <text x="85" y="16" text-anchor="middle" class="entity-title" fill="#344054">Benefits agencies</text>
+                    <text x="85" y="28" text-anchor="middle" class="entity-desc" fill="#6B7280">Program Dir, Systems Mgr</text>
+                    <text x="85" y="39" text-anchor="middle" class="entity-desc" fill="#6B7280">(SNAP, TANF, Medicaid)</text>
+                    <text x="85" y="52" text-anchor="middle" class="entity-desc" fill="#22C55E" font-weight="500">$500M+ eligibility contracts</text>
+                    <text x="85" y="62" text-anchor="middle" class="entity-desc" fill="#6B7280" font-style="italic">vs Deloitte, Accenture</text>
+                </g>
+
+                <!-- === COMMERCIAL / FINANCIAL (right) === -->
+
+                <!-- TAX SOFTWARE VENDORS -->
+                <g class="entity-box" transform="translate(900, 240)">
+                    <rect x="0" y="0" width="170" height="60" fill="white" stroke="#22C55E" stroke-width="1.5" rx="6"/>
+                    <rect x="135" y="-10" width="24" height="24" fill="#22C55E" rx="3"/>
+                    <text x="147" y="6" text-anchor="middle" class="count-badge" fill="white">$</text>
+                    <text x="85" y="16" text-anchor="middle" class="entity-title" fill="#344054">Tax software vendors</text>
+                    <text x="85" y="28" text-anchor="middle" class="entity-desc" fill="#6B7280">PM, Engineer</text>
+                    <text x="85" y="39" text-anchor="middle" class="entity-desc" fill="#6B7280">(TurboTax, H&amp;R Block, TaxAct)</text>
+                    <text x="85" y="52" text-anchor="middle" class="entity-desc" fill="#22C55E" font-weight="500">$90B+ tax software mkt</text>
+                </g>
+
+                <!-- FINANCIAL PLANNERS -->
+                <g class="entity-box" transform="translate(900, 340)">
+                    <rect x="0" y="0" width="170" height="60" fill="white" stroke="#22C55E" stroke-width="1.5" rx="6"/>
+                    <rect x="135" y="-10" width="24" height="24" fill="#22C55E" rx="3"/>
+                    <text x="147" y="6" text-anchor="middle" class="count-badge" fill="white">$</text>
+                    <text x="85" y="16" text-anchor="middle" class="entity-title" fill="#344054">Financial planners</text>
+                    <text x="85" y="28" text-anchor="middle" class="entity-desc" fill="#6B7280">CFP, Wealth Mgr, Robo-advisor PM</text>
+                    <text x="85" y="39" text-anchor="middle" class="entity-desc" fill="#6B7280">(Betterment, Wealthfront)</text>
+                    <text x="85" y="52" text-anchor="middle" class="entity-desc" fill="#22C55E" font-weight="500">$5B+ wealth tech mkt</text>
+                </g>
+
+                <!-- BANKS / LENDERS -->
+                <g class="entity-box" transform="translate(900, 440)">
+                    <rect x="0" y="0" width="170" height="60" fill="white" stroke="#8B5CF6" stroke-width="1.5" rx="6"/>
+                    <rect x="135" y="-10" width="24" height="24" fill="#8B5CF6" rx="3"/>
+                    <text x="147" y="6" text-anchor="middle" class="count-badge" fill="white">D</text>
+                    <text x="85" y="16" text-anchor="middle" class="entity-title" fill="#344054">Banks / lenders</text>
+                    <text x="85" y="28" text-anchor="middle" class="entity-desc" fill="#6B7280">CDO, Underwriting Lead</text>
+                    <text x="85" y="39" text-anchor="middle" class="entity-desc" fill="#6B7280">(Banks, mortgage, fintechs)</text>
+                    <text x="85" y="52" text-anchor="middle" class="entity-desc" fill="#8B5CF6" font-weight="500">$100B+ consumer lending</text>
+                </g>
+
+                <!-- INSURANCE / ACTUARIES -->
+                <g class="entity-box" transform="translate(900, 540)">
+                    <rect x="0" y="0" width="170" height="60" fill="white" stroke="#22C55E" stroke-width="1.5" rx="6"/>
+                    <rect x="135" y="-10" width="24" height="24" fill="#22C55E" rx="3"/>
+                    <text x="147" y="6" text-anchor="middle" class="count-badge" fill="white">$</text>
+                    <text x="85" y="16" text-anchor="middle" class="entity-title" fill="#344054">Insurance / actuaries</text>
+                    <text x="85" y="28" text-anchor="middle" class="entity-desc" fill="#6B7280">Actuary, Compliance Officer</text>
+                    <text x="85" y="39" text-anchor="middle" class="entity-desc" fill="#6B7280">(Health insurers, ACA mktplace)</text>
+                    <text x="85" y="52" text-anchor="middle" class="entity-desc" fill="#22C55E" font-weight="500">$50B+ health ins admin</text>
+                </g>
+
+                <!-- === DATA / PLATFORMS (bottom) === -->
+
+                <!-- MARKETING / DATA PLATFORMS -->
+                <g class="entity-box" transform="translate(310, 710)">
+                    <rect x="0" y="0" width="170" height="60" fill="white" stroke="#8B5CF6" stroke-width="1.5" rx="6"/>
+                    <rect x="135" y="-10" width="24" height="24" fill="#8B5CF6" rx="3"/>
+                    <text x="147" y="6" text-anchor="middle" class="count-badge" fill="white">D</text>
+                    <text x="85" y="16" text-anchor="middle" class="entity-title" fill="#344054">Marketing / data platforms</text>
+                    <text x="85" y="28" text-anchor="middle" class="entity-desc" fill="#6B7280">Data Science Lead, Audience PM</text>
+                    <text x="85" y="39" text-anchor="middle" class="entity-desc" fill="#6B7280">(LiveRamp, Acxiom)</text>
+                    <text x="85" y="52" text-anchor="middle" class="entity-desc" fill="#8B5CF6" font-weight="500">$2.4B+ data enrichment mkt</text>
+                </g>
+
+                <!-- BENEFIT PLATFORM BUILDERS -->
+                <g class="entity-box" transform="translate(680, 710)">
+                    <rect x="0" y="0" width="170" height="60" fill="white" stroke="#EF4444" stroke-width="1.5" rx="6"/>
+                    <rect x="135" y="-10" width="24" height="24" fill="#EF4444" rx="3"/>
+                    <text x="147" y="6" text-anchor="middle" class="count-badge" fill="white">T</text>
+                    <text x="85" y="16" text-anchor="middle" class="entity-title" fill="#344054">Benefit platform builders</text>
+                    <text x="85" y="28" text-anchor="middle" class="entity-desc" fill="#6B7280">PM, Engineer at screeners</text>
+                    <text x="85" y="39" text-anchor="middle" class="entity-desc" fill="#6B7280">(Benefits screeners, fintech)</text>
+                    <text x="85" y="52" text-anchor="middle" class="entity-desc" fill="#EF4444" font-weight="500">API + feedback</text>
+                </g>
+
+                <!-- ========== RELATIONSHIP ARROWS ========== -->
+
+                <!-- AI Labs → Core (compute + revenue) -->
+                <path d="M 395 190 Q 440 260 480 340" stroke="#22C55E" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)"/>
+                <text x="420" y="260" class="relationship-label" fill="#22C55E">compute + $</text>
+
+                <!-- Core → AI Labs (Verifier API) -->
+                <path d="M 500 340 Q 460 270 420 195" stroke="#EF4444" stroke-width="1.5" fill="none" marker-end="url(#arrow-red)"/>
+                <text x="470" y="240" class="relationship-label" fill="#EF4444">Verifier API</text>
+
+                <!-- AI Agent Builders → Core (revenue) -->
+                <path d="M 765 190 Q 730 260 700 340" stroke="#22C55E" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)"/>
+                <text x="750" y="255" class="relationship-label" fill="#22C55E">API $</text>
+
+                <!-- Core → AI Agent Builders (function calling) -->
+                <path d="M 720 340 Q 750 270 780 195" stroke="#EF4444" stroke-width="1.5" fill="none" marker-end="url(#arrow-red)"/>
+                <text x="765" y="280" class="relationship-label" fill="#EF4444">citations</text>
+
+                <!-- State Revenue → Core (paid contracts) -->
+                <path d="M 270 410 Q 320 400 370 400" stroke="#22C55E" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)"/>
+                <text x="310" y="395" class="relationship-label" fill="#22C55E">paid contracts</text>
+
+                <!-- Core → State Revenue (auditable rules) -->
+                <path d="M 370 420 Q 320 425 270 430" stroke="#EF4444" stroke-width="1.5" fill="none" marker-end="url(#arrow-red)"/>
+                <text x="310" y="442" class="relationship-label" fill="#EF4444">auditable rules</text>
+
+                <!-- Benefits Agencies → Core (paid contracts) -->
+                <path d="M 270 500 Q 320 480 370 465" stroke="#22C55E" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)"/>
+                <text x="295" y="475" class="relationship-label" fill="#22C55E">contracts</text>
+
+                <!-- Core → Benefits Agencies (compliant calcs) -->
+                <path d="M 370 480 Q 320 500 270 515" stroke="#EF4444" stroke-width="1.5" fill="none" marker-end="url(#arrow-red)"/>
+                <text x="295" y="510" class="relationship-label" fill="#EF4444">eligibility engine</text>
+
+                <!-- Tax Software → Core (API revenue) -->
+                <path d="M 900 275 Q 845 320 790 370" stroke="#22C55E" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)"/>
+                <text x="860" y="310" class="relationship-label" fill="#22C55E">$0.02/hh</text>
+
+                <!-- Core → Tax Software (certified calcs) -->
+                <path d="M 790 385 Q 845 340 900 290" stroke="#EF4444" stroke-width="1.5" fill="none" marker-end="url(#arrow-red)"/>
+                <text x="860" y="360" class="relationship-label" fill="#EF4444">Rules API</text>
+
+                <!-- Financial Planners → Core (API revenue) -->
+                <path d="M 900 375 Q 850 395 790 420" stroke="#22C55E" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)"/>
+                <text x="855" y="395" class="relationship-label" fill="#22C55E">API $</text>
+
+                <!-- Core → Financial Planners (tax calcs) -->
+                <path d="M 790 430 Q 850 410 900 395" stroke="#EF4444" stroke-width="1.5" fill="none" marker-end="url(#arrow-red)"/>
+                <text x="855" y="435" class="relationship-label" fill="#EF4444">tax calcs</text>
+
+                <!-- Banks → Core (API revenue) -->
+                <path d="M 900 470 Q 850 465 790 460" stroke="#22C55E" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)"/>
+                <text x="855" y="460" class="relationship-label" fill="#22C55E">API $</text>
+
+                <!-- Core → Banks (Microplex imputation) -->
+                <path d="M 790 475 Q 850 480 900 485" stroke="#8B5CF6" stroke-width="1.5" fill="none" marker-end="url(#arrow-purple)"/>
+                <text x="855" y="498" class="relationship-label" fill="#8B5CF6">Microplex</text>
+
+                <!-- Insurance → Core (API revenue) -->
+                <path d="M 900 560 Q 850 540 790 510" stroke="#22C55E" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)"/>
+                <text x="855" y="530" class="relationship-label" fill="#22C55E">API $</text>
+
+                <!-- Core → Insurance (ACA rules) -->
+                <path d="M 790 520 Q 850 545 900 570" stroke="#EF4444" stroke-width="1.5" fill="none" marker-end="url(#arrow-red)"/>
+                <text x="855" y="565" class="relationship-label" fill="#EF4444">ACA rules</text>
+
+                <!-- Marketing/Data → Core (API revenue) -->
+                <path d="M 395 710 Q 440 660 490 570" stroke="#22C55E" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)"/>
+                <text x="420" y="640" class="relationship-label" fill="#22C55E">API $</text>
+
+                <!-- Core → Marketing/Data (Microplex enrichment) -->
+                <path d="M 510 570 Q 460 660 415 710" stroke="#8B5CF6" stroke-width="1.5" fill="none" marker-end="url(#arrow-purple)"/>
+                <text x="475" y="670" class="relationship-label" fill="#8B5CF6">Microplex data</text>
+
+                <!-- Benefit Platforms → Core (revenue + feedback) -->
+                <path d="M 765 710 Q 720 660 670 570" stroke="#22C55E" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)"/>
+                <text x="735" y="640" class="relationship-label" fill="#22C55E">$ + feedback</text>
+
+                <!-- Core → Benefit Platforms (eligibility API) -->
+                <path d="M 680 570 Q 730 660 780 710" stroke="#EF4444" stroke-width="1.5" fill="none" marker-end="url(#arrow-red)"/>
+                <text x="745" y="675" class="relationship-label" fill="#EF4444">eligibility API</text>
+
+                <!-- ========== NOTES ========== -->
+                <g transform="translate(20, 620)">
+                    <rect x="0" y="0" width="180" height="70" class="note-box" rx="5"/>
+                    <text x="90" y="15" text-anchor="middle" class="note-text" font-weight="600">Assumptions to test</text>
+                    <text x="10" y="30" class="note-text">1. Gov agencies buy OSS rules?</text>
+                    <text x="10" y="42" class="note-text">2. $0.02/hh beats internal build?</text>
+                    <text x="10" y="54" class="note-text">3. AI labs pay for verifier?</text>
+                    <text x="10" y="66" class="note-text">4. Microplex accurate enough?</text>
+                </g>
+
+                <g transform="translate(20, 710)">
+                    <rect x="0" y="0" width="180" height="55" class="note-box" rx="5"/>
+                    <text x="90" y="15" text-anchor="middle" class="note-text" font-weight="600">Business model</text>
+                    <text x="10" y="30" class="note-text">Open source core (AGPL)</text>
+                    <text x="10" y="42" class="note-text">Hosted API: pay-per-call</text>
+                    <text x="10" y="54" class="note-text">Enterprise: contract pricing</text>
+                </g>
+
+                <g transform="translate(20, 785)">
+                    <rect x="0" y="0" width="180" height="55" class="note-box" rx="5"/>
+                    <text x="90" y="15" text-anchor="middle" class="note-text" font-weight="600">Two product lines</text>
+                    <text x="10" y="30" class="note-text">Rules: statute → code (8 segments)</text>
+                    <text x="10" y="42" class="note-text">Simulate: data → inference (3 segments)</text>
+                    <text x="10" y="54" class="note-text" font-style="italic">Most segments touch Rules</text>
+                </g>
+
+            </svg>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-stat">
+                <span class="label">Government TAM:</span>
+                <span class="value">$1.5B+</span>
+            </div>
+            <div class="footer-stat">
+                <span class="label">Commercial TAM:</span>
+                <span class="value">$245B+</span>
+            </div>
+            <div class="footer-stat">
+                <span class="label">Segments:</span>
+                <span class="value">10</span>
+            </div>
+            <div class="footer-stat">
+                <span class="label">Product lines:</span>
+                <span class="value" style="color: #0891B2; font-size: 1.25rem;">2</span>
+            </div>
+            <div>
+                <span style="color: #0891B2; font-weight: 500;">Cosilico PBC</span>
+                · NSF Award #4373
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

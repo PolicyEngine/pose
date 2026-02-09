@@ -1,0 +1,225 @@
+# Rules Foundation ecosystem map
+# For multi-perspective analysis by subagents
+
+meta:
+  project: Rules Foundation POSE
+  version: 2026-01
+  description: >
+    Neutral, multi-stakeholder foundation that maintains the authoritative
+    encoding of law as code. Like OpenStreetMap for law.
+  entity_type: "501(c)(3)"
+  tagline: "Encode the law"
+
+core_artifacts:
+  document_archive:
+    - name: Source document archive
+      type: legal_documents
+      description: >
+        Statutes, regulations, and guidance documents encoded in Akoma Ntoso
+        XML standard. The canonical source layer that .rac files compile from.
+
+  dsl:
+    - name: .rac DSL
+      type: domain_specific_language
+      description: >
+        Self-contained encoding format for expressing legal rules as
+        executable code. Includes reference compiler.
+    - name: Reference compiler
+      type: toolchain
+      description: >
+        Open-source compiler that transforms .rac files into executable
+        rule engines. Serves as the specification implementation.
+
+  validation:
+    - name: AutoRAC validation harness
+      type: ci_pipeline
+      description: >
+        3-tier validation system: CI tests (unit + integration),
+        Oracle checks (authoritative scenario tests from agencies),
+        LLM reviewers (AI-assisted statute interpretation review).
+
+  benchmarks:
+    - name: Ground truth test data
+      type: benchmark_dataset
+      description: >
+        Open benchmarks for evaluating AI policy reasoning. Curated
+        scenario-outcome pairs with statute citations, used for RLVR
+        training and model evaluation.
+
+# ============ SEGMENTS ============
+
+segments:
+  # --- Government standards bodies ---
+  government_standards_bodies:
+    category: validation
+    titles: [Tax Law Specialist, Policy Analyst, Regulatory Counsel]
+    orgs: [IRS, SSA, CMS, Treasury OTA]
+    job_to_be_done: >
+      Validate that encoded rules accurately reflect statutes and
+      regulatory guidance. Ensure interpretations are authoritative.
+    value_prop: >
+      Transparent, auditable encodings of the laws they administer.
+      Reduces ambiguity in implementation across vendors.
+    steady_state_count: 50
+    interview_target: 8
+    relationship_to_rf:
+      gives: [official_interpretations, regulatory_guidance, scenario_validation]
+      receives: [transparent_encodings, audit_trail, implementation_feedback]
+
+  # --- AI labs ---
+  ai_labs:
+    category: technical_partners
+    titles: [Research Scientist, Product Lead, Policy AI Researcher]
+    orgs: [Anthropic, OpenAI, Google DeepMind]
+    job_to_be_done: >
+      Build policy-aware AI that doesn't hallucinate on legal/tax questions.
+      Create verifiable reasoning chains grounded in statute.
+    value_prop: >
+      Ground truth for RLVR training, verifiable policy reasoning
+      benchmarks, structured evaluation datasets.
+    steady_state_count: 20
+    interview_target: 6
+    relationship_to_rf:
+      gives: [compute_for_encoding, research_collaboration, autorac_improvements]
+      receives: [ground_truth_data, rlvr_signals, policy_benchmarks]
+
+  # --- OSS contributors / Encoding community ---
+  encoding_community:
+    category: contributors
+    titles: [Lawyer, Policy Analyst, Software Engineer, Legal Informaticist]
+    orgs: [External volunteers, law firms pro bono, civic tech orgs]
+    job_to_be_done: >
+      Review, validate, and improve rule encodings. Interpret statutes
+      and translate them into .rac format.
+    value_prop: >
+      Public good contribution, legal tech skills development,
+      portfolio of open-source legal encoding work.
+    steady_state_count: 100
+    interview_target: 10
+    relationship_to_rf:
+      gives: [encoding_review, statute_interpretation, validation, bug_reports]
+      receives: [public_good_impact, legal_tech_skills, community_recognition]
+
+  # --- Academic researchers (law and policy) ---
+  academic_researchers:
+    category: research
+    titles: [Law Professor, Legal Informatics Researcher, Computational Law Scholar]
+    orgs: [Stanford CodeX, MIT Computational Law, law schools, policy schools]
+    job_to_be_done: >
+      Advance computational law as a field. Publish research on
+      legal formalization, validate encoding methodologies.
+    value_prop: >
+      Structured legal data for research, computational law platform,
+      citation-worthy open datasets, teaching materials.
+    steady_state_count: 80
+    interview_target: 8
+    relationship_to_rf:
+      gives: [academic_validation, citations, methodology_feedback, research]
+      receives: [structured_legal_data, research_platform, datasets]
+
+  # --- Downstream consumers ---
+  downstream_consumers:
+    category: integrators
+    titles: [CTO, Product Lead, Engineering Manager]
+    orgs: [Cosilico, PolicyEngine, other rules engines]
+    job_to_be_done: >
+      Consume authoritative rule encodings for production use.
+      Build products and services on top of tested, validated rules.
+    value_prop: >
+      Authoritative, tested rule encodings with citations.
+      No need to independently encode statutes.
+    steady_state_count: 30
+    interview_target: 5
+    relationship_to_rf:
+      gives: [usage_feedback, bug_reports, compiler_improvements]
+      receives: [authoritative_encodings, test_suites, encoding_updates]
+
+  # --- Government grants / Foundations ---
+  government_grants_foundations:
+    category: funding
+    titles: [Program Manager, Program Officer, Foundation Director]
+    orgs: [NSF, Sloan Foundation, Knight Foundation, Ford Foundation]
+    job_to_be_done: >
+      Fund public legal infrastructure. Support open-source projects
+      that increase government transparency and civic engagement.
+    value_prop: >
+      Open-source legal infrastructure serving the public good.
+      Measurable impact via encoding coverage and adoption metrics.
+    steady_state_count: 15
+    interview_target: 5
+    relationship_to_rf:
+      gives: [grant_funding]
+      receives: [open_source_legal_infrastructure, impact_reports]
+
+# ============ RELATIONSHIP TYPES ============
+
+relationship_types:
+  funding:
+    color: "#22C55E"
+    examples: [grants, foundation_support, government_funding]
+
+  ideas_feedback:
+    color: "#0EA5E9"
+    examples: [methodology_feedback, statute_interpretations, bug_reports]
+
+  technical:
+    color: "#EF4444"
+    examples: [code, PRs, compiler_patches, encoding_contributions]
+
+  data_analysis:
+    color: "#8B5CF6"
+    examples: [ground_truth_data, benchmarks, validation_results, research]
+
+  influence:
+    color: "#6B7280"
+    style: dashed
+    examples: [legitimacy, academic_citations, standards_adoption]
+
+# ============ KEY ASSUMPTIONS TO TEST ============
+
+assumptions:
+  - id: gov_statute_contributions
+    statement: >
+      Government agencies will contribute statute interpretations
+      to an open platform
+    alternative: >
+      Agencies are too risk-averse or legally constrained to participate
+      in open-source legal encoding
+    test_via: interviews with IRS/SSA/CMS staff, FOIA analysis
+
+  - id: ai_lab_investment
+    statement: >
+      AI labs will invest in policy ground truth rather than building
+      internally
+    alternative: >
+      Labs prefer proprietary training data or consider policy
+      reasoning low priority vs. other domains
+    test_via: interviews with AI research leads, partnership proposals
+
+  - id: multi_stakeholder_governance
+    statement: >
+      Multi-stakeholder governance can work across partisan lines
+      for legal encoding
+    alternative: >
+      Partisan disagreements over statutory interpretation make
+      neutral encoding impossible
+    test_via: governance design workshops, advisory board recruitment
+
+  - id: encoding_community_sustainability
+    statement: >
+      An encoding community will sustain without paid contributors
+    alternative: >
+      Legal encoding is too specialized and tedious for volunteer
+      contributions to scale
+    test_via: contributor tracking, community engagement metrics
+
+# ============ INTERVIEW TOTALS ============
+
+totals:
+  government_standards_bodies: 8
+  ai_labs: 6
+  encoding_community: 10
+  academic_researchers: 8
+  downstream_consumers: 5
+  government_grants_foundations: 5
+  total_target: 42
