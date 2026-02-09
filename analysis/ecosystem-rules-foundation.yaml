@@ -9,6 +9,11 @@ meta:
     encoding of law as code. Like OpenStreetMap for law.
   entity_type: "501(c)(3)"
   tagline: "Encode the law"
+  scope_note: >
+    Rules Foundation should be "really literal and bounded" — just encoding
+    the law as written. Benefit agency tooling (flowcharts, coverage tools,
+    customized outputs) belongs to Cosilico as products. Intermediate layers
+    for API-specific assumptions and uncertainty handling also belong to Cosilico.
 
 core_artifacts:
   document_archive:
@@ -96,6 +101,11 @@ segments:
       portfolio of open-source legal encoding work.
     steady_state_count: 100
     interview_target: 10
+    notes: >
+      Pavel notes: AutoRAC automation significantly reduces the need for
+      manual encoding community. May be "nice to have" rather than critical
+      for a government-scale project. Open source means people can always
+      contribute, but active recruitment may not be necessary.
     relationship_to_rf:
       gives: [encoding_review, statute_interpretation, validation, bug_reports]
       receives: [public_good_impact, legal_tech_skills, community_recognition]

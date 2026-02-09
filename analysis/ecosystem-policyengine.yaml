@@ -14,6 +14,9 @@ meta:
   note: >
     PolicyEngine USES Cosilico infrastructure (Rules API, Microsim API)
     but its core mission is research and analysis, not infrastructure.
+    Certified Cosilico partner (Salesforce model) — one of potentially many
+    partners using Cosilico APIs. Differentiation through research quality,
+    domain expertise, and specialized tools (trackers, dashboards, calculators).
 
 core_artifacts:
   models:
@@ -305,6 +308,26 @@ assumptions:
     statement: Research clients will pay for custom analysis using PE tools
     alternative: They prefer to build internal capacity or use established consultancies
     test_via: sales pipeline, interviews
+
+# ============ PARTNERSHIP MODEL ============
+
+partnership_model:
+  relationship: "Certified Cosilico partner (Salesforce-style accreditation)"
+  tension: >
+    More organizations using Cosilico infrastructure means more competition
+    for PolicyEngine's analysis market. PE diversifies through specialized
+    tools (state legislative trackers, district dashboards, custom calculators)
+    and deep domain expertise in policy research.
+  cosilico_services_used:
+    - Rules API (tax/benefit calculations)
+    - Microsim API (population-scale modeling)
+    - Microplex (synthetic population data)
+  pe_differentiators:
+    - Research quality and methodology
+    - Domain expertise in US/UK policy
+    - Existing relationships with think tanks, government
+    - Specialized tools and dashboards
+    - Open-source community and transparency
 
 # ============ INTERVIEW TOTALS ============
 

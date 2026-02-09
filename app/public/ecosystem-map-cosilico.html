@@ -160,7 +160,7 @@
         </header>
 
         <div class="map-container">
-            <svg viewBox="0 0 1200 960" preserveAspectRatio="xMidYMid meet">
+            <svg viewBox="0 0 1200 1060" preserveAspectRatio="xMidYMid meet">
                 <defs>
                     <marker id="arrow-blue" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
                         <path d="M0,0 L0,6 L6,3 z" fill="#0EA5E9"/>
@@ -214,6 +214,10 @@
                 <!-- Data / Platforms (bottom) -->
                 <rect x="400" y="790" width="110" height="20" fill="#FEF3C7" rx="3"/>
                 <text x="455" y="804" text-anchor="middle" class="category-label" fill="#92400E">Data / Platforms</text>
+
+                <!-- Funding (left bottom) -->
+                <rect x="20" y="580" width="70" height="20" fill="#D1FAE5" rx="3"/>
+                <text x="55" y="594" text-anchor="middle" class="category-label" fill="#065F46">Funding</text>
 
                 <!-- ========== USE CASES (dotted boxes) ========== -->
 
@@ -397,11 +401,35 @@
                 <g class="entity-box" transform="translate(680, 710)">
                     <rect x="0" y="0" width="170" height="60" fill="white" stroke="#EF4444" stroke-width="1.5" rx="6"/>
                     <rect x="135" y="-10" width="24" height="24" fill="#EF4444" rx="3"/>
-                    <text x="147" y="6" text-anchor="middle" class="count-badge" fill="white">3</text>
+                    <text x="147" y="6" text-anchor="middle" class="count-badge" fill="white">2</text>
                     <text x="85" y="16" text-anchor="middle" class="entity-title" fill="#344054">Benefit platform builders</text>
                     <text x="85" y="28" text-anchor="middle" class="entity-desc" fill="#6B7280">PM, Engineer at screeners</text>
                     <text x="85" y="39" text-anchor="middle" class="entity-desc" fill="#6B7280">(Benefits screeners, fintech)</text>
                     <text x="85" y="52" text-anchor="middle" class="entity-desc" fill="#EF4444" font-weight="500">API + feedback</text>
+                </g>
+
+                <!-- === FUNDING (left bottom) === -->
+
+                <!-- VC / IMPACT INVESTORS -->
+                <g class="entity-box" transform="translate(100, 600)">
+                    <rect x="0" y="0" width="170" height="60" fill="white" stroke="#22C55E" stroke-width="1.5" rx="6"/>
+                    <rect x="135" y="-10" width="24" height="24" fill="#22C55E" rx="3"/>
+                    <text x="147" y="6" text-anchor="middle" class="count-badge" fill="white">2</text>
+                    <text x="85" y="16" text-anchor="middle" class="entity-title" fill="#344054">VC / Impact investors</text>
+                    <text x="85" y="28" text-anchor="middle" class="entity-desc" fill="#6B7280">VC Partner, Impact Investor</text>
+                    <text x="85" y="39" text-anchor="middle" class="entity-desc" fill="#6B7280">(Impact VCs, ESG funds)</text>
+                    <text x="85" y="52" text-anchor="middle" class="entity-desc" fill="#22C55E" font-weight="500">investment capital</text>
+                </g>
+
+                <!-- QUANT FINANCE / ECONOMIC SIM -->
+                <g class="entity-box" transform="translate(900, 640)">
+                    <rect x="0" y="0" width="170" height="60" fill="white" stroke="#8B5CF6" stroke-width="1.5" rx="6"/>
+                    <rect x="135" y="-10" width="24" height="24" fill="#8B5CF6" rx="3"/>
+                    <text x="147" y="6" text-anchor="middle" class="count-badge" fill="white">2</text>
+                    <text x="85" y="16" text-anchor="middle" class="entity-title" fill="#344054">Quant finance / Econ sim</text>
+                    <text x="85" y="28" text-anchor="middle" class="entity-desc" fill="#6B7280">Quant Researcher, Economist</text>
+                    <text x="85" y="39" text-anchor="middle" class="entity-desc" fill="#6B7280">(Barclays, hedge funds, QURI)</text>
+                    <text x="85" y="52" text-anchor="middle" class="entity-desc" fill="#8B5CF6" font-weight="500">$500B+ quant finance</text>
                 </g>
 
                 <!-- ========== RELATIONSHIP ARROWS ========== -->
@@ -486,8 +514,24 @@
                 <path d="M 680 570 Q 730 660 780 710" stroke="#EF4444" stroke-width="1.5" fill="none" marker-end="url(#arrow-red)"/>
                 <text x="745" y="675" class="relationship-label" fill="#EF4444">eligibility API</text>
 
+                <!-- VC/Investors → Core (investment capital) -->
+                <path d="M 270 620 Q 320 580 370 540" stroke="#22C55E" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)"/>
+                <text x="290" y="570" class="relationship-label" fill="#22C55E">investment $</text>
+
+                <!-- Core → VC/Investors (impact metrics) -->
+                <path d="M 370 550 Q 310 590 270 630" stroke="#8B5CF6" stroke-width="1.5" fill="none" marker-end="url(#arrow-purple)"/>
+                <text x="290" y="610" class="relationship-label" fill="#8B5CF6">impact metrics</text>
+
+                <!-- Quant Finance → Core (API revenue) -->
+                <path d="M 900 660 Q 850 620 790 560" stroke="#22C55E" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)"/>
+                <text x="860" y="600" class="relationship-label" fill="#22C55E">API $</text>
+
+                <!-- Core → Quant Finance (microsim data) -->
+                <path d="M 790 570 Q 850 630 900 670" stroke="#8B5CF6" stroke-width="1.5" fill="none" marker-end="url(#arrow-purple)"/>
+                <text x="860" y="660" class="relationship-label" fill="#8B5CF6">microsim</text>
+
                 <!-- ========== NOTES ========== -->
-                <g transform="translate(20, 620)">
+                <g transform="translate(20, 720)">
                     <rect x="0" y="0" width="180" height="70" class="note-box" rx="5"/>
                     <text x="90" y="15" text-anchor="middle" class="note-text" font-weight="600">Assumptions to test</text>
                     <text x="10" y="30" class="note-text">1. Gov agencies buy OSS rules?</text>
@@ -496,7 +540,7 @@
                     <text x="10" y="66" class="note-text">4. Microplex accurate enough?</text>
                 </g>
 
-                <g transform="translate(20, 710)">
+                <g transform="translate(20, 810)">
                     <rect x="0" y="0" width="180" height="55" class="note-box" rx="5"/>
                     <text x="90" y="15" text-anchor="middle" class="note-text" font-weight="600">Business model</text>
                     <text x="10" y="30" class="note-text">Open source core (AGPL)</text>
@@ -504,10 +548,10 @@
                     <text x="10" y="54" class="note-text">Enterprise: contract pricing</text>
                 </g>
 
-                <g transform="translate(20, 785)">
+                <g transform="translate(20, 885)">
                     <rect x="0" y="0" width="180" height="55" class="note-box" rx="5"/>
                     <text x="90" y="15" text-anchor="middle" class="note-text" font-weight="600">Two product lines</text>
-                    <text x="10" y="30" class="note-text">Rules: statute → code (8 segments)</text>
+                    <text x="10" y="30" class="note-text">Rules: statute → code (9 segments)</text>
                     <text x="10" y="42" class="note-text">Simulate: data → inference (3 segments)</text>
                     <text x="10" y="54" class="note-text" font-style="italic">Most segments touch Rules</text>
                 </g>
@@ -526,7 +570,7 @@
             </div>
             <div class="footer-stat">
                 <span class="label">Segments:</span>
-                <span class="value">10</span>
+                <span class="value">12</span>
             </div>
             <div class="footer-stat">
                 <span class="label">Product lines:</span>

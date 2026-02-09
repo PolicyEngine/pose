@@ -235,6 +235,34 @@ segments:
       gives: [api_revenue]
       receives: [household_level_fiscal_impacts, microsimulation, statute_based_tax_calcs]
 
+  vc_impact_investors:
+    category: funding
+    titles: [VC Partner, Impact Investor, Fund Manager]
+    orgs: [Impact VCs, social enterprise funds, ESG-focused investors]
+    job_to_be_done: Identify and fund infrastructure companies in policy/gov tech
+    value_prop: Open-source moat, public benefit structure, massive TAM across gov + commercial
+    market_size: "Growing impact investing market"
+    product_line: both
+    relationship_to_cosilico:
+      gives: [investment_capital, strategic_connections]
+      receives: [equity_returns, impact_metrics, public_benefit_reports]
+
+  quant_finance:
+    category: commercial
+    titles: [Quant Researcher, Economist, Portfolio Manager]
+    orgs: [Barclays, hedge funds, economic research firms, QURI]
+    job_to_be_done: Model economic scenarios, predict policy impacts on markets
+    value_prop: Household-level economic simulation from actual statutes, not aggregate assumptions
+    market_size: "$500B+ quantitative finance"
+    incumbents: [Internal models, Bloomberg, academic models]
+    product_line: cosilico_simulate
+    notes: >
+      Includes Quantified Uncertainty Research Institute (QURI) for
+      uncertainty quantification. Economic simulation beyond I-O multipliers.
+    relationship_to_cosilico:
+      gives: [api_revenue, research_collaboration]
+      receives: [microsimulation_api, population_projections, policy_scenarios]
+
 # ============ RELATIONSHIP TYPES ============
 
 relationship_types:
