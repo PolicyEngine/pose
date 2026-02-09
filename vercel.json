@@ -1,0 +1,7 @@
+{
+  "outputDirectory": "app/public",
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/", "destination": "/ecosystem-maps", "permanent": false }
+  ]
+}
