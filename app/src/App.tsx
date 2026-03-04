@@ -1,15 +1,15 @@
 import { ScrollStory } from './components/presentation/ScrollStory';
 import { createPlaceholder } from './components/slides/PlaceholderSection';
+import { ColdOpenSlide } from './components/slides/ColdOpenSlide';
+import { WhoWeAreSlide } from './components/slides/WhoWeAreSlide';
+import { WhatWeDoSlide } from './components/slides/WhatWeDoSlide';
+import { JourneyBeginsSlide } from './components/slides/JourneyBeginsSlide';
+import { TensionBuildsSlide } from './components/slides/TensionBuildsSlide';
 import { EcosystemEvolutionSlide } from './components/ecosystem/EcosystemEvolution';
 import { colors } from './lib/colors';
 import type { ScrollSection } from './lib/types';
 
-// Main story sections (10) - placeholders for now, will be replaced by section-building agents
-const ColdOpen = createPlaceholder('COLD OPEN', colors.highlight, 'The question', '"What would it take to encode every rule that governs American life?"');
-const WhoWeAre = createPlaceholder('THE TEAM', colors.primary, 'Who we are', 'Three people. One mission. 1M+ simulations.');
-const WhatWeDo = createPlaceholder('THESIS + IMPACT', colors.accentOrange, 'What we do', 'Open-source policy simulation for everyone.');
-const JourneyBegins = createPlaceholder('THE JOURNEY BEGINS', colors.primary, '100 conversations', 'Week by week, the ecosystem revealed itself.');
-const TensionBuilds = createPlaceholder('TENSION', colors.error, 'The tension builds', 'The contradictions started piling up.');
+// Sections 1-5: built components
 // AhaMoment uses the EcosystemEvolution component directly
 const MeetTheThree = createPlaceholder('THE THREE ORGS', colors.peTeal, 'Meet the three', 'Rules Foundation. Cosilico. PolicyEngine.');
 const Governance = createPlaceholder('GOVERNANCE', colors.accentPurple, 'How we\'ll govern it', 'From founder-led to multi-stakeholder.');
@@ -29,11 +29,11 @@ const Market = createPlaceholder('MARKET SEGMENTS', colors.cosilicoCyan, 'Market
 
 const sections: ScrollSection[] = [
   // Main presentation (10 sections matching narrative arc)
-  { id: 'cold-open', title: 'The question', tag: 'COLD OPEN', component: ColdOpen },
-  { id: 'who-we-are', title: 'Who we are', tag: 'THE TEAM', component: WhoWeAre },
-  { id: 'what-we-do', title: 'What we do', tag: 'THESIS + IMPACT', component: WhatWeDo },
-  { id: 'journey-begins', title: '100 conversations', tag: 'THE JOURNEY', component: JourneyBegins },
-  { id: 'tension-builds', title: 'Tension builds', tag: 'TENSION', component: TensionBuilds },
+  { id: 'cold-open', title: 'The question', tag: 'COLD OPEN', component: ColdOpenSlide },
+  { id: 'who-we-are', title: 'Who we are', tag: 'THE TEAM', component: WhoWeAreSlide },
+  { id: 'what-we-do', title: 'What we do', tag: 'THESIS + IMPACT', component: WhatWeDoSlide },
+  { id: 'journey-begins', title: '100 conversations', tag: 'THE JOURNEY', component: JourneyBeginsSlide },
+  { id: 'tension-builds', title: 'Tension builds', tag: 'TENSION', component: TensionBuildsSlide },
   { id: 'aha-moment', title: 'One became three', tag: 'A-HA MOMENT', component: EcosystemEvolutionSlide, stickyHeight: 3 },
   { id: 'meet-the-three', title: 'Meet the three', tag: 'THREE ORGS', component: MeetTheThree },
   { id: 'governance', title: 'Governance', tag: 'GOVERNANCE', component: Governance },
