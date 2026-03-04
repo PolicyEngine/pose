@@ -7,10 +7,10 @@ export const sustainability: SustainabilityOrg[] = [
     color: colors.rulesBlue,
     budget: '~$300K/year',
     items: [
-      'Government grants: 40%',
-      'Foundation grants: 30%',
-      'AI lab in-kind (compute): 20%',
-      'Downstream contributions: 10%',
+      'Government grants',
+      'Foundation grants',
+      'AI lab in-kind (compute)',
+      'Downstream contributions',
     ],
   },
   {
@@ -29,10 +29,9 @@ export const sustainability: SustainabilityOrg[] = [
     color: colors.peTeal,
     budget: '~$500K/year',
     items: [
-      'Foundation grants: 60%',
-      'Government grants (NSF): 20%',
-      'Earned revenue: 20%',
-      'Path to 40%+ earned revenue',
+      'Foundation grants',
+      'Government grants (NSF)',
+      'Earned revenue',
     ],
   },
 ];

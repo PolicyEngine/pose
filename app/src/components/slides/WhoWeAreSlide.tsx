@@ -7,7 +7,15 @@ import { trustedBy } from '../../data/impact';
 export function WhoWeAreSlide(_props: SlideProps) {
   return (
     <div className="px-8 md:px-16">
-      <SlideHeader tag="THE TEAM" tagColor={colors.primary} title="Who we are" />
+      <SlideHeader tag="NSF POSE TEAM 4373" tagColor={colors.primary} title="Who we are" />
+
+      {/* Key numbers */}
+      <div className="scroll-reveal flex items-center gap-6 mt-4 mb-2" style={{ transitionDelay: '0.05s' }}>
+        <div className="flex items-baseline gap-2">
+          <span className="text-2xl font-bold" style={{ color: colors.highlight }}>100+</span>
+          <span className="text-sm" style={{ color: colors.textSecondary }}>interviews conducted</span>
+        </div>
+      </div>
 
       {/* Team cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">

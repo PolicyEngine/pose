@@ -22,24 +22,24 @@ import type { ScrollSection } from './lib/types';
 
 const sections: ScrollSection[] = [
   // Main presentation (10 sections matching narrative arc)
-  { id: 'cold-open', title: 'The question', tag: 'COLD OPEN', component: ColdOpenSlide },
   { id: 'who-we-are', title: 'Who we are', tag: 'THE TEAM', component: WhoWeAreSlide },
+  { id: 'cold-open', title: 'The question', tag: 'COLD OPEN', component: ColdOpenSlide },
   { id: 'what-we-do', title: 'What we do', tag: 'THESIS + IMPACT', component: WhatWeDoSlide },
   { id: 'journey-begins', title: '100 conversations', tag: 'THE JOURNEY', component: JourneyBeginsSlide },
   { id: 'tension-week4', title: 'Week 4', tag: 'VALIDATION', component: TensionBuildsWeek4Slide },
   { id: 'tension-week5', title: 'Week 5', tag: 'VALIDATION', component: TensionBuildsWeek5Slide },
-  { id: 'aha-moment', title: 'One became three', tag: 'THE ECOSYSTEM', component: EcosystemEvolutionSlide, stickyHeight: 3 },
   { id: 'meet-the-three', title: 'Meet the three', tag: 'THREE ORGS', component: MeetTheThreeSlide },
-  { id: 'governance', title: 'Governance', tag: 'GOVERNANCE', component: GovernanceSlideNew },
+  { id: 'aha-moment', title: 'One became three', tag: 'THE ECOSYSTEM', component: EcosystemEvolutionSlide, stickyHeight: 3 },
   { id: 'road-ahead', title: 'Road ahead', tag: 'TIMELINE', component: RoadAheadSlide },
   { id: 'the-close', title: 'The close', tag: 'THE CLOSE', component: TheCloseSlide },
 
-  // Appendix (9 sections)
+  // Appendix
   { id: 'voices', title: 'Voices', component: VoicesSlide, isAppendix: true },
   { id: 'impact-goals', title: 'Impact goals', component: ImpactGoalsSlide, isAppendix: true },
   { id: 'partners', title: 'Partners', component: PartnersSlide, isAppendix: true },
   { id: 'canvas', title: 'Canvas', component: CanvasSlide, isAppendix: true },
   { id: 'canvas-detail', title: 'Canvas detail', component: CanvasDetailSlide, isAppendix: true },
+  { id: 'governance', title: 'Governance', component: GovernanceSlideNew, isAppendix: true },
   { id: 'gov-detail', title: 'Gov detail', component: GovernanceDetailSlide, isAppendix: true },
   { id: 'competitive', title: 'Competitive', component: CompetitiveSlide, isAppendix: true },
   { id: 'highlights', title: 'Highlights', component: HighlightsSlide, isAppendix: true },

@@ -3,8 +3,7 @@ import { milestones, orgTimelines } from '../../data/timeline';
 import type { SlideProps } from '../../lib/types';
 import { SlideHeader } from '../ui/SlideHeader';
 
-const ALL_LABELS = ['NOW', 'LAUNCH', 'GROW', 'SCALE', 'SUSTAIN'];
-const ALL_PERIODS = ['Q1 2026', 'Q2-Q3 2026', 'Q4 2026', '2027', '2028'];
+const ALL_LABELS = ['Q1 2026', 'Q2-Q3 2026', 'Q4 2026', '2027', '2028'];
 const ALL_COLORS = [colors.highlight, colors.accentBlue, colors.accentTeal, colors.accentGreen, colors.accentPurple];
 
 const PHASE_LABELS = ALL_LABELS.slice(1);
@@ -49,14 +48,13 @@ export function RoadAheadSlide(_props: SlideProps) {
           </div>
         </div>
 
-        {/* Row 2: Phase labels + periods (spans cols 2-6) */}
+        {/* Row 2: Time period labels (spans cols 2-6) */}
         <div style={{ gridColumn: '1', gridRow: '2' }} />
         {ALL_LABELS.map((label, i) => (
           <div key={label} className="scroll-reveal text-center" style={{ gridColumn: i + 2, gridRow: '2', transitionDelay: `${i * 0.1}s` }}>
-            <p className="text-[10px] font-bold tracking-wider uppercase" style={{ color: ALL_COLORS[i] }}>
+            <p className="text-xs font-bold" style={{ color: ALL_COLORS[i] }}>
               {label}
             </p>
-            <p className="text-[10px] text-text-tertiary">{ALL_PERIODS[i]}</p>
           </div>
         ))}
         {/* Org labels column — rows 3-5 */}
@@ -66,9 +64,14 @@ export function RoadAheadSlide(_props: SlideProps) {
             className="scroll-reveal flex items-center pr-3"
             style={{ gridColumn: 1, gridRow: oi + 3, transitionDelay: `${oi * 0.1}s` }}
           >
-            <p className="text-xs font-bold tracking-wider uppercase whitespace-nowrap" style={{ color: org.color }}>
-              {org.org}
-            </p>
+            <div>
+              <p className="text-xs font-bold tracking-wider uppercase whitespace-nowrap" style={{ color: org.color }}>
+                {org.org}
+              </p>
+              {org.subtitle && (
+                <p className="text-[9px] text-text-tertiary whitespace-nowrap">{org.subtitle}</p>
+              )}
+            </div>
           </div>
         ))}
 
