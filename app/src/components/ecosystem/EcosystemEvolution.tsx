@@ -13,6 +13,12 @@ const LEGEND: { label: string; org: 'rules' | 'cosilico' | 'pe' | 'all'; color: 
   { label: 'Shared', org: 'all', color: '#64748B', bg: 'rgba(100, 116, 139, 0.1)' },
 ];
 
+const STEP_NARRATIVES = [
+  'This was us. One organization trying to serve researchers, government agencies, AI labs, and funders. One governance model. One funding strategy. One brand.',
+  '100 interviews revealed that each audience needs fundamentally different things: different governance, different funding models, different technical architecture.',
+  'Three organizations. Each specialized. Each stronger for the separation. Connected by shared open-source code flowing between them.',
+];
+
 export function EcosystemEvolutionSlide(_props: SlideProps) {
   const { containerRef, currentStep } = useScrollProgress(3);
   const stepData = EVOLUTION_STEPS[currentStep - 1];
@@ -21,7 +27,7 @@ export function EcosystemEvolutionSlide(_props: SlideProps) {
   return (
     <div ref={containerRef} style={{ height: '300vh' }}>
       <div className="sticky top-0 h-screen flex flex-col px-8 md:px-16 py-4 bg-page-bg">
-        <SlideHeader tag="ECOSYSTEM EVOLUTION" tagColor={colors.highlight} title="How the ecosystem transformed" />
+        <SlideHeader tag="THE A-HA MOMENT" tagColor={colors.highlight} title="One became three" />
 
         <div className="flex items-center gap-4 mt-2">
           <div className="flex gap-1 flex-1">
@@ -70,8 +76,14 @@ export function EcosystemEvolutionSlide(_props: SlideProps) {
         </div>
 
         <p
-          key={currentStep}
-          className="text-sm text-text-secondary mt-2 text-center transition-opacity duration-300"
+          key={`narrative-${currentStep}`}
+          className="text-sm md:text-base text-text-secondary mt-3 text-center italic leading-relaxed max-w-3xl mx-auto transition-opacity duration-500"
+        >
+          {STEP_NARRATIVES[currentStep - 1]}
+        </p>
+        <p
+          key={`desc-${currentStep}`}
+          className="text-xs text-text-tertiary mt-1 text-center transition-opacity duration-300"
         >
           {stepData.description}
         </p>
