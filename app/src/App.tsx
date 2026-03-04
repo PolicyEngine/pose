@@ -1,374 +1,59 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Plus, RefreshCw, Calendar, Users, Target, ExternalLink, BookOpen, ClipboardList, ListChecks, Presentation, Mail } from 'lucide-react'
-import { useInterviews } from './hooks/useInterviews'
-import { ProgressRing } from './components/ProgressRing'
-import { MilestoneTracker } from './components/MilestoneTracker'
-import { SegmentChart } from './components/SegmentChart'
-import { InterviewTable } from './components/InterviewTable'
-import { AddInterviewModal } from './components/AddInterviewModal'
-import { Materials } from './components/Materials'
-import { Assignments } from './components/Assignments'
-import { Slides } from './components/Slides'
-import { Outreach } from './components/Outreach'
-import type { Interview } from './types/database'
-import { isSupabaseConfigured } from './lib/supabase'
+import { ScrollStory } from './components/presentation/ScrollStory';
+import { createPlaceholder } from './components/slides/PlaceholderSection';
+import { EcosystemEvolutionSlide } from './components/ecosystem/EcosystemEvolution';
+import { colors } from './lib/colors';
+import type { ScrollSection } from './lib/types';
 
-type Tab = 'interviews' | 'assignments' | 'materials' | 'slides' | 'outreach'
+// Main story sections (10) - placeholders for now, will be replaced by section-building agents
+const ColdOpen = createPlaceholder('COLD OPEN', colors.highlight, 'The question', '"What would it take to encode every rule that governs American life?"');
+const WhoWeAre = createPlaceholder('THE TEAM', colors.primary, 'Who we are', 'Three people. One mission. 1M+ simulations.');
+const WhatWeDo = createPlaceholder('THESIS + IMPACT', colors.accentOrange, 'What we do', 'Open-source policy simulation for everyone.');
+const JourneyBegins = createPlaceholder('THE JOURNEY BEGINS', colors.primary, '100 conversations', 'Week by week, the ecosystem revealed itself.');
+const TensionBuilds = createPlaceholder('TENSION', colors.error, 'The tension builds', 'The contradictions started piling up.');
+// AhaMoment uses the EcosystemEvolution component directly
+const MeetTheThree = createPlaceholder('THE THREE ORGS', colors.peTeal, 'Meet the three', 'Rules Foundation. Cosilico. PolicyEngine.');
+const Governance = createPlaceholder('GOVERNANCE', colors.accentPurple, 'How we\'ll govern it', 'From founder-led to multi-stakeholder.');
+const RoadAhead = createPlaceholder('TIMELINE', colors.primary, 'The road ahead', 'Q1 2026 through 2028.');
+const TheClose = createPlaceholder('THE CLOSE', colors.highlight, 'The genome project for rules', 'One ecosystem became three. Each stronger for it.');
+
+// Appendix sections (9)
+const Voices = createPlaceholder('VOICES FROM THE FIELD', colors.primary, 'Voices from the field', undefined, true);
+const ImpactGoals = createPlaceholder('IMPACT GOALS', colors.success, 'Impact goals', undefined, true);
+const Partners = createPlaceholder('STRATEGIC PARTNERS', colors.accentPurple, 'Strategic partners', undefined, true);
+const Canvas = createPlaceholder('OSE CANVAS', colors.highlight, 'OSE Canvas', undefined, true);
+const CanvasDetail = createPlaceholder('CANVAS DETAIL', colors.primary, 'Canvas detail', undefined, true);
+const GovDetail = createPlaceholder('GOVERNANCE DETAIL', colors.accentPurple, 'Governance detail', undefined, true);
+const Competitive = createPlaceholder('COMPETITIVE LANDSCAPE', colors.cosilicoCyan, 'Competitive landscape', undefined, true);
+const Highlights = createPlaceholder('INTERVIEW HIGHLIGHTS', colors.primary, 'Interview highlights', undefined, true);
+const Market = createPlaceholder('MARKET SEGMENTS', colors.cosilicoCyan, 'Market segments', undefined, true);
+
+const sections: ScrollSection[] = [
+  // Main presentation (10 sections matching narrative arc)
+  { id: 'cold-open', title: 'The question', tag: 'COLD OPEN', component: ColdOpen },
+  { id: 'who-we-are', title: 'Who we are', tag: 'THE TEAM', component: WhoWeAre },
+  { id: 'what-we-do', title: 'What we do', tag: 'THESIS + IMPACT', component: WhatWeDo },
+  { id: 'journey-begins', title: '100 conversations', tag: 'THE JOURNEY', component: JourneyBegins },
+  { id: 'tension-builds', title: 'Tension builds', tag: 'TENSION', component: TensionBuilds },
+  { id: 'aha-moment', title: 'One became three', tag: 'A-HA MOMENT', component: EcosystemEvolutionSlide, stickyHeight: 3 },
+  { id: 'meet-the-three', title: 'Meet the three', tag: 'THREE ORGS', component: MeetTheThree },
+  { id: 'governance', title: 'Governance', tag: 'GOVERNANCE', component: Governance },
+  { id: 'road-ahead', title: 'Road ahead', tag: 'TIMELINE', component: RoadAhead },
+  { id: 'the-close', title: 'The close', tag: 'THE CLOSE', component: TheClose },
+
+  // Appendix (9 sections)
+  { id: 'voices', title: 'Voices', component: Voices, isAppendix: true },
+  { id: 'impact-goals', title: 'Impact goals', component: ImpactGoals, isAppendix: true },
+  { id: 'partners', title: 'Partners', component: Partners, isAppendix: true },
+  { id: 'canvas', title: 'Canvas', component: Canvas, isAppendix: true },
+  { id: 'canvas-detail', title: 'Canvas detail', component: CanvasDetail, isAppendix: true },
+  { id: 'gov-detail', title: 'Gov detail', component: GovDetail, isAppendix: true },
+  { id: 'competitive', title: 'Competitive', component: Competitive, isAppendix: true },
+  { id: 'highlights', title: 'Highlights', component: Highlights, isAppendix: true },
+  { id: 'market', title: 'Market', component: Market, isAppendix: true },
+];
 
 function App() {
-  const {
-    interviews,
-    loading,
-    error,
-    addInterview,
-    updateInterview,
-    deleteInterview,
-    refresh,
-    completedCount,
-    scheduledCount,
-    segmentCounts,
-  } = useInterviews()
-
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [editingInterview, setEditingInterview] = useState<Interview | null>(null)
-  const [activeTab, setActiveTab] = useState<Tab>('interviews')
-
-  const handleSave = async (interview: Omit<Interview, 'id' | 'created_at' | 'updated_at'>) => {
-    if (editingInterview) {
-      await updateInterview(editingInterview.id, interview)
-    } else {
-      await addInterview(interview)
-    }
-    setEditingInterview(null)
-  }
-
-  const handleEdit = (interview: Interview) => {
-    setEditingInterview(interview)
-    setIsModalOpen(true)
-  }
-
-  const handleStatusChange = async (id: string, status: Interview['status']) => {
-    const updates: Partial<Interview> = { status }
-    if (status === 'completed') {
-      updates.completed_date = new Date().toISOString().split('T')[0]
-    }
-    await updateInterview(id, updates)
-  }
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false)
-    setEditingInterview(null)
-  }
-
-  return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-teal-500 rounded-lg flex items-center justify-center">
-                  <Target className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <h1 className="text-lg font-semibold text-gray-900">POSE Tracker</h1>
-                  <p className="text-xs text-gray-500">Ecosystem discovery</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3">
-              {!isSupabaseConfigured() && (
-                <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">
-                  Local mode
-                </span>
-              )}
-              {activeTab === 'interviews' && (
-                <>
-                  <button
-                    onClick={refresh}
-                    disabled={loading}
-                    className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
-                  >
-                    <RefreshCw className={`w-5 h-5 ${loading ? 'animate-spin' : ''}`} />
-                  </button>
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => setIsModalOpen(true)}
-                    className="flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors font-medium shadow-sm"
-                  >
-                    <Plus className="w-5 h-5" />
-                    <span className="hidden sm:inline">Add interview</span>
-                  </motion.button>
-                </>
-              )}
-            </div>
-          </div>
-
-          {/* Tab Navigation */}
-          <div className="flex gap-1 -mb-px">
-            <button
-              onClick={() => setActiveTab('interviews')}
-              className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
-                activeTab === 'interviews'
-                  ? 'border-teal-500 text-teal-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              }`}
-            >
-              <ClipboardList className="w-4 h-4" />
-              Interviews
-              <span className={`text-xs px-2 py-0.5 rounded-full ${
-                activeTab === 'interviews'
-                  ? 'bg-teal-100 text-teal-700'
-                  : 'bg-gray-100 text-gray-600'
-              }`}>
-                {completedCount}/100
-              </span>
-            </button>
-            <button
-              onClick={() => setActiveTab('assignments')}
-              className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
-                activeTab === 'assignments'
-                  ? 'border-teal-500 text-teal-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              }`}
-            >
-              <ListChecks className="w-4 h-4" />
-              Assignments
-            </button>
-            <button
-              onClick={() => setActiveTab('materials')}
-              className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
-                activeTab === 'materials'
-                  ? 'border-teal-500 text-teal-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              }`}
-            >
-              <BookOpen className="w-4 h-4" />
-              Materials
-            </button>
-            <button
-              onClick={() => setActiveTab('slides')}
-              className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
-                activeTab === 'slides'
-                  ? 'border-teal-500 text-teal-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              }`}
-            >
-              <Presentation className="w-4 h-4" />
-              Slides
-            </button>
-            <button
-              onClick={() => setActiveTab('outreach')}
-              className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
-                activeTab === 'outreach'
-                  ? 'border-teal-500 text-teal-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              }`}
-            >
-              <Mail className="w-4 h-4" />
-              Outreach
-            </button>
-          </div>
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <AnimatePresence mode="wait">
-          {activeTab === 'interviews' ? (
-            <motion.div
-              key="interviews"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-            >
-              {error && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="mb-6 px-4 py-3 bg-yellow-50 border border-yellow-200 rounded-lg text-yellow-800 text-sm"
-                >
-                  {error}
-                </motion.div>
-              )}
-
-              {/* Stats Overview */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="bg-white rounded-xl border border-gray-200 p-6 flex items-center justify-between"
-                >
-                  <div>
-                    <p className="text-sm text-gray-500 mb-1">Total progress</p>
-                    <p className="text-3xl font-bold text-gray-900">
-                      {completedCount}
-                      <span className="text-lg font-normal text-gray-400"> / 100</span>
-                    </p>
-                    <p className="text-sm text-teal-600 font-medium mt-1">
-                      {100 - completedCount} remaining
-                    </p>
-                  </div>
-                  <ProgressRing current={completedCount} target={100} size={100} strokeWidth={8} label="" />
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                  className="bg-white rounded-xl border border-gray-200 p-6"
-                >
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                      <Calendar className="w-5 h-5 text-blue-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-500">Scheduled</p>
-                      <p className="text-2xl font-bold text-gray-900">{scheduledCount}</p>
-                    </div>
-                  </div>
-                  <p className="text-sm text-gray-500">
-                    {scheduledCount > 0
-                      ? `${scheduledCount} interview${scheduledCount === 1 ? '' : 's'} coming up`
-                      : 'No interviews scheduled'}
-                  </p>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="bg-white rounded-xl border border-gray-200 p-6"
-                >
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                      <Users className="w-5 h-5 text-purple-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-500">Segments covered</p>
-                      <p className="text-2xl font-bold text-gray-900">
-                        {Object.keys(segmentCounts).length}
-                        <span className="text-lg font-normal text-gray-400"> / 6</span>
-                      </p>
-                    </div>
-                  </div>
-                  <p className="text-sm text-gray-500">
-                    {6 - Object.keys(segmentCounts).length > 0
-                      ? `${6 - Object.keys(segmentCounts).length} segment${6 - Object.keys(segmentCounts).length === 1 ? '' : 's'} to explore`
-                      : 'All segments covered!'}
-                  </p>
-                </motion.div>
-              </div>
-
-              {/* Main Grid */}
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-                <div className="lg:col-span-1">
-                  <MilestoneTracker completedCount={completedCount} />
-                </div>
-                <div className="lg:col-span-2">
-                  <SegmentChart segmentCounts={segmentCounts} totalCompleted={completedCount} />
-                </div>
-              </div>
-
-              {/* Interview Log */}
-              <div className="mb-8">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-semibold text-gray-900">Interview log</h2>
-                  <span className="text-sm text-gray-500">{interviews.length} total</span>
-                </div>
-                <InterviewTable
-                  interviews={interviews}
-                  onEdit={handleEdit}
-                  onDelete={deleteInterview}
-                  onStatusChange={handleStatusChange}
-                />
-              </div>
-            </motion.div>
-          ) : activeTab === 'assignments' ? (
-            <motion.div
-              key="assignments"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-            >
-              <Assignments />
-            </motion.div>
-          ) : activeTab === 'materials' ? (
-            <motion.div
-              key="materials"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-            >
-              <Materials />
-            </motion.div>
-          ) : activeTab === 'slides' ? (
-            <motion.div
-              key="slides"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-            >
-              <Slides />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="outreach"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-            >
-              <Outreach />
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Footer */}
-        <footer className="text-center py-8 border-t border-gray-200 mt-8">
-          <p className="text-sm text-gray-500 mb-2">
-            Built for the{' '}
-            <a
-              href="https://new.nsf.gov/funding/initiatives/pose"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-teal-600 hover:text-teal-700"
-            >
-              NSF POSE program
-            </a>
-          </p>
-          <p className="text-xs text-gray-400 flex items-center justify-center gap-1">
-            Created by the{' '}
-            <a
-              href="https://policyengine.org"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-teal-600 hover:text-teal-700 inline-flex items-center gap-1"
-            >
-              PolicyEngine team
-              <ExternalLink className="w-3 h-3" />
-            </a>
-          </p>
-        </footer>
-      </main>
-
-      {/* Modal */}
-      <AddInterviewModal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        onSave={handleSave}
-        editInterview={editingInterview}
-      />
-    </div>
-  )
+  return <ScrollStory sections={sections} />;
 }
 
-export default App
+export default App;

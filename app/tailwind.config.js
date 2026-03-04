@@ -7,13 +7,26 @@ export default {
   theme: {
     extend: {
       colors: {
+        'page-bg': '#0A0F1C',
+        'card-bg': '#111827',
+        'card-bg-alt': '#1E293B',
+        'text-primary': '#F1F5F9',
+        'text-secondary': '#94A3B8',
+        'text-tertiary': '#64748B',
+        'border-light': '#1E293B',
+        'border-medium': '#334155',
+        'primary': '#319795',
+        'primary-light': 'rgba(49, 151, 149, 0.2)',
+        'rules-blue': '#3B82F6',
+        'cosilico-cyan': '#06B6D4',
+        'pe-teal': '#319795',
         teal: {
           50: '#f0fdfa',
           100: '#ccfbf1',
           200: '#99f6e4',
           300: '#5eead4',
           400: '#2dd4bf',
-          500: '#319795',  // PolicyEngine primary
+          500: '#319795',
           600: '#0d9488',
           700: '#0f766e',
           800: '#115e59',
@@ -27,17 +40,21 @@ export default {
           400: '#9ca3af',
           500: '#6b7280',
           600: '#4b5563',
-          700: '#344054',  // PolicyEngine gray
+          700: '#344054',
           800: '#1f2937',
           900: '#111827',
-        }
+          950: '#0A0F1C',
+        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
+      boxShadow: {
+        'card': '0px 1px 3px rgba(0, 0, 0, 0.3), 0px 1px 2px rgba(0, 0, 0, 0.2)',
+        'card-hover': '0px 4px 12px rgba(0, 0, 0, 0.4), 0px 2px 6px rgba(0, 0, 0, 0.3)',
+        'float': '0px 10px 20px rgba(0, 0, 0, 0.4), 0px 4px 8px rgba(0, 0, 0, 0.3)',
+      },
     },
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-  ],
+  plugins: [],
 }
