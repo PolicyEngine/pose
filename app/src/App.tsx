@@ -3,7 +3,7 @@ import { ColdOpenSlide } from './components/slides/ColdOpenSlide';
 import { WhoWeAreSlide } from './components/slides/WhoWeAreSlide';
 import { WhatWeDoSlide } from './components/slides/WhatWeDoSlide';
 import { JourneyBeginsSlide } from './components/slides/JourneyBeginsSlide';
-import { TensionBuildsSlide } from './components/slides/TensionBuildsSlide';
+import { TensionBuildsWeek4Slide, TensionBuildsWeek5Slide } from './components/slides/TensionBuildsSlide';
 import { EcosystemEvolutionSlide } from './components/ecosystem/EcosystemEvolution';
 import { MeetTheThreeSlide } from './components/slides/MeetTheThreeSlide';
 import { GovernanceSlideNew } from './components/slides/GovernanceSlideNew';
@@ -26,7 +26,8 @@ const sections: ScrollSection[] = [
   { id: 'who-we-are', title: 'Who we are', tag: 'THE TEAM', component: WhoWeAreSlide },
   { id: 'what-we-do', title: 'What we do', tag: 'THESIS + IMPACT', component: WhatWeDoSlide },
   { id: 'journey-begins', title: '100 conversations', tag: 'THE JOURNEY', component: JourneyBeginsSlide },
-  { id: 'tension-builds', title: 'Validation', tag: 'VALIDATION', component: TensionBuildsSlide },
+  { id: 'tension-week4', title: 'Week 4', tag: 'VALIDATION', component: TensionBuildsWeek4Slide },
+  { id: 'tension-week5', title: 'Week 5', tag: 'VALIDATION', component: TensionBuildsWeek5Slide },
   { id: 'aha-moment', title: 'One became three', tag: 'THE ECOSYSTEM', component: EcosystemEvolutionSlide, stickyHeight: 3 },
   { id: 'meet-the-three', title: 'Meet the three', tag: 'THREE ORGS', component: MeetTheThreeSlide },
   { id: 'governance', title: 'Governance', tag: 'GOVERNANCE', component: GovernanceSlideNew },

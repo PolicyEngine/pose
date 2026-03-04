@@ -1,81 +1,134 @@
 import { colors } from '../../lib/colors';
-import { milestones } from '../../data/timeline';
+import { milestones, orgTimelines } from '../../data/timeline';
 import type { SlideProps } from '../../lib/types';
 import { SlideHeader } from '../ui/SlideHeader';
 
+const ALL_LABELS = ['NOW', 'LAUNCH', 'GROW', 'SCALE', 'SUSTAIN'];
+const ALL_PERIODS = ['Q1 2026', 'Q2-Q3 2026', 'Q4 2026', '2027', '2028'];
+const ALL_COLORS = [colors.highlight, colors.accentBlue, colors.accentTeal, colors.accentGreen, colors.accentPurple];
+
+const PHASE_LABELS = ALL_LABELS.slice(1);
+
 export function RoadAheadSlide(_props: SlideProps) {
+  const now = milestones[0];
+
   return (
     <div className="px-8 md:px-16">
       <SlideHeader tag="TIMELINE" tagColor={colors.primary} title="The road ahead" />
 
-      {/* Horizontal timeline */}
-      <div className="mt-8 relative">
-        {/* Timeline connector line */}
-        <div className="hidden md:block absolute top-5 left-0 right-0 h-0.5" style={{ backgroundColor: colors.borderMedium }}>
-          <div
-            className="h-full rounded-full"
-            style={{
-              background: `linear-gradient(90deg, ${colors.highlight}, ${colors.primary}, ${colors.accentPurple})`,
-              boxShadow: `0 0 12px ${colors.primary}40`,
-            }}
-          />
-        </div>
+      {/* Everything in one grid so dots align with cells */}
+      <div className="mt-8 grid gap-x-3 gap-y-2" style={{ gridTemplateColumns: 'auto repeat(5, 1fr)' }}>
 
-        {/* Milestone cards - horizontal on desktop, vertical on mobile */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-3 relative">
-          {milestones.map((milestone, i) => (
+        {/* Row 1: Timeline connector line with glowing dots (spans cols 2-6) */}
+        <div style={{ gridColumn: '1', gridRow: '1' }} />
+        <div className="relative col-span-5" style={{ gridColumn: '2 / 7', gridRow: '1' }}>
+          <div className="absolute top-5 left-0 right-0 h-0.5" style={{ backgroundColor: colors.borderMedium }}>
             <div
-              key={milestone.period}
-              className="scroll-reveal flex flex-col items-center"
-              style={{ transitionDelay: `${i * 0.12}s` }}
-            >
-              {/* Glowing dot */}
-              <div
-                className="w-10 h-10 rounded-full flex items-center justify-center relative z-10 mb-4"
-                style={{
-                  backgroundColor: `${milestone.color}20`,
-                  border: `2px solid ${milestone.color}`,
-                  boxShadow: `0 0 16px ${milestone.color}40`,
-                }}
-              >
+              className="h-full rounded-full"
+              style={{
+                background: `linear-gradient(90deg, ${colors.highlight}, ${colors.accentBlue}, ${colors.accentTeal}, ${colors.accentGreen}, ${colors.accentPurple})`,
+                boxShadow: `0 0 12px ${colors.primary}40`,
+              }}
+            />
+          </div>
+          <div className="grid grid-cols-5 gap-3 relative">
+            {ALL_LABELS.map((_, i) => (
+              <div key={i} className="flex justify-center">
                 <div
-                  className="w-3 h-3 rounded-full"
-                  style={{ backgroundColor: milestone.color }}
-                />
+                  className="w-10 h-10 rounded-full flex items-center justify-center relative z-10"
+                  style={{
+                    backgroundColor: `${ALL_COLORS[i]}20`,
+                    border: `2px solid ${ALL_COLORS[i]}`,
+                    boxShadow: `0 0 16px ${ALL_COLORS[i]}40`,
+                  }}
+                >
+                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: ALL_COLORS[i] }} />
+                </div>
               </div>
+            ))}
+          </div>
+        </div>
 
-              {/* Card */}
+        {/* Row 2: Phase labels + periods (spans cols 2-6) */}
+        <div style={{ gridColumn: '1', gridRow: '2' }} />
+        {ALL_LABELS.map((label, i) => (
+          <div key={label} className="scroll-reveal text-center" style={{ gridColumn: i + 2, gridRow: '2', transitionDelay: `${i * 0.1}s` }}>
+            <p className="text-[10px] font-bold tracking-wider uppercase" style={{ color: ALL_COLORS[i] }}>
+              {label}
+            </p>
+            <p className="text-[10px] text-text-tertiary">{ALL_PERIODS[i]}</p>
+          </div>
+        ))}
+        {/* Org labels column — rows 3-5 */}
+        {orgTimelines.map((org, oi) => (
+          <div
+            key={`label-${org.org}`}
+            className="scroll-reveal flex items-center pr-3"
+            style={{ gridColumn: 1, gridRow: oi + 3, transitionDelay: `${oi * 0.1}s` }}
+          >
+            <p className="text-xs font-bold tracking-wider uppercase whitespace-nowrap" style={{ color: org.color }}>
+              {org.org}
+            </p>
+          </div>
+        ))}
+
+        {/* NOW — single merged box spanning all 3 org rows */}
+        <div
+          className="scroll-reveal rounded-lg border p-3 flex flex-col justify-center"
+          style={{
+            gridColumn: 2,
+            gridRow: '3 / 6',
+            borderColor: `${now.color}50`,
+            backgroundColor: `${now.color}10`,
+            boxShadow: `0 0 20px ${now.color}15`,
+          }}
+        >
+          <ul className="space-y-1">
+            {now.description.map((item) => (
+              <li key={item} className="text-xs text-text-secondary flex items-start gap-1.5">
+                <span
+                  className="mt-1 w-1 h-1 rounded-full shrink-0"
+                  style={{ backgroundColor: now.color }}
+                />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Swim lane cells for each org × each phase (LAUNCH–SUSTAIN) */}
+        {orgTimelines.map((org, oi) => (
+          PHASE_LABELS.map((phase, pi) => {
+            const match = org.milestones.find((m) => m.period === phase);
+            return (
               <div
-                className="bg-card-bg rounded-lg border p-4 w-full card-hover"
+                key={`${org.org}-${phase}`}
+                className="scroll-reveal rounded-md border p-2.5 min-h-[48px]"
                 style={{
-                  borderColor: `${milestone.color}30`,
-                  boxShadow: `0px 1px 3px rgba(0, 0, 0, 0.3), 0 0 8px ${milestone.color}10`,
+                  gridColumn: pi + 3,
+                  gridRow: oi + 3,
+                  transitionDelay: `${(oi * 4 + pi) * 0.05}s`,
+                  borderColor: match ? `${org.color}30` : colors.borderLight,
+                  backgroundColor: match ? `${org.color}08` : 'transparent',
                 }}
               >
-                <p
-                  className="text-[10px] font-bold tracking-wider uppercase"
-                  style={{ color: milestone.color }}
-                >
-                  {milestone.label}
-                </p>
-                <p className="text-sm font-semibold text-text-primary mt-0.5">
-                  {milestone.period}
-                </p>
-                <ul className="mt-2 space-y-1">
-                  {milestone.description.map((item) => (
-                    <li key={item} className="text-xs text-text-secondary flex items-start gap-1.5">
-                      <span
-                        className="mt-1 w-1 h-1 rounded-full shrink-0"
-                        style={{ backgroundColor: milestone.color }}
-                      />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+                {match && (
+                  <ul className="space-y-0.5">
+                    {match.items.map((item) => (
+                      <li key={item} className="text-xs text-text-secondary flex items-start gap-1.5">
+                        <span
+                          className="mt-1 w-1 h-1 rounded-full shrink-0"
+                          style={{ backgroundColor: org.color }}
+                        />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
-            </div>
-          ))}
-        </div>
+            );
+          })
+        ))}
       </div>
     </div>
   );

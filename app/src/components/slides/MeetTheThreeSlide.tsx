@@ -100,13 +100,10 @@ export function MeetTheThreeSlide(_props: SlideProps) {
                 <p className="text-xs text-text-tertiary italic">{org.analogy}</p>
               </div>
 
-              {/* Budget */}
+              {/* Revenue breakdown */}
               <div className="mt-4">
                 <p className="text-[10px] font-bold tracking-wider uppercase text-text-tertiary mb-1">
-                  Budget
-                </p>
-                <p className="text-sm font-semibold" style={{ color: org.color }}>
-                  {org.budget}
+                  Revenue
                 </p>
                 <ul className="mt-1.5 space-y-0.5">
                   {org.revenueItems.map((item) => (

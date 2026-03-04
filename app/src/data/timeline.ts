@@ -11,25 +11,64 @@ export const milestones: Milestone[] = [
   {
     period: 'Q2-Q3 2026',
     label: 'LAUNCH',
-    description: ['Rules Foundation incorporates', 'Cosilico beta launch', 'First certified partners'],
+    description: [],
     color: colors.accentBlue,
   },
   {
     period: 'Q4 2026',
     label: 'GROW',
-    description: ['First paying customers', 'First agency encodings', 'Research partnerships live'],
+    description: [],
     color: colors.accentTeal,
   },
   {
     period: '2027',
     label: 'SCALE',
-    description: ['Cosilico $3M ARR', '5+ agency partnerships', '10+ institutional partners'],
+    description: [],
     color: colors.accentGreen,
   },
   {
     period: '2028',
     label: 'SUSTAIN',
-    description: ['Cosilico $10M ARR', 'Self-sustaining operations', '40%+ earned revenue (PE)'],
+    description: [],
     color: colors.accentPurple,
+  },
+];
+
+export interface OrgTimeline {
+  org: string;
+  color: string;
+  milestones: { period: string; items: string[] }[];
+}
+
+export const orgTimelines: OrgTimeline[] = [
+  {
+    org: 'Rules Foundation',
+    color: colors.rulesBlue,
+    milestones: [
+      { period: 'LAUNCH', items: ['Incorporate'] },
+      { period: 'GROW', items: ['First agency encodings'] },
+      { period: 'SCALE', items: ['5+ agency partnerships'] },
+      { period: 'SUSTAIN', items: ['Self-sustaining operations'] },
+    ],
+  },
+  {
+    org: 'Cosilico',
+    color: colors.cosilicoCyan,
+    milestones: [
+      { period: 'LAUNCH', items: ['Beta launch', 'First certified partners'] },
+      { period: 'GROW', items: ['First paying customers'] },
+      { period: 'SCALE', items: ['$3M ARR'] },
+      { period: 'SUSTAIN', items: ['$10M ARR'] },
+    ],
+  },
+  {
+    org: 'PolicyEngine',
+    color: colors.peTeal,
+    milestones: [
+      { period: 'LAUNCH', items: ['Full TAXSIM → PolicyEngine transition'] },
+      { period: 'GROW', items: ['Research partnerships live'] },
+      { period: 'SCALE', items: ['10+ institutional partners'] },
+      { period: 'SUSTAIN', items: ['40%+ earned revenue'] },
+    ],
   },
 ];

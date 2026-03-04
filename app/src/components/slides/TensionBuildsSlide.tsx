@@ -5,9 +5,8 @@ import { QuoteCard } from '../ui/QuoteCard';
 import { weeklyJourney } from '../../data/story';
 import { assumptions } from '../../data/assumptions';
 
-export function TensionBuildsSlide(_props: SlideProps) {
-  const week4 = weeklyJourney[3]; // Week 4
-  const week5 = weeklyJourney[4]; // Week 5
+export function TensionBuildsWeek4Slide(_props: SlideProps) {
+  const week4 = weeklyJourney[3];
 
   return (
     <div className="px-8 md:px-16">
@@ -17,7 +16,6 @@ export function TensionBuildsSlide(_props: SlideProps) {
         title="Testing the hypothesis"
       />
 
-      {/* Week 4 */}
       <div className="mt-8">
         <div className="scroll-reveal-left flex items-center gap-3 mb-4">
           <div
@@ -54,7 +52,6 @@ export function TensionBuildsSlide(_props: SlideProps) {
           {week4.insight}
         </p>
 
-        {/* Two contrasting quotes side by side */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <QuoteCard
             quote="Institutions like the Fed face strong IT/security barriers to external APIs — installable, low-dependency tools fit much better than cloud services."
@@ -80,10 +77,23 @@ export function TensionBuildsSlide(_props: SlideProps) {
           Funders wanted a third. Every interview confirmed the pattern we hypothesized.
         </p>
       </div>
+    </div>
+  );
+}
 
-      {/* Week 5 */}
-      <div className="mt-12">
-        <div className="scroll-reveal-left flex items-center gap-3 mb-4" style={{ transitionDelay: '0.5s' }}>
+export function TensionBuildsWeek5Slide(_props: SlideProps) {
+  const week6 = weeklyJourney[5];
+
+  return (
+    <div className="px-8 md:px-16">
+      <SlideHeader
+        tag="VALIDATION"
+        tagColor={colors.highlight}
+        title="Hypothesis validated"
+      />
+
+      <div className="mt-8">
+        <div className="scroll-reveal-left flex items-center gap-3 mb-4">
           <div
             className="w-3 h-3 rounded-full shrink-0"
             style={{
@@ -95,13 +105,13 @@ export function TensionBuildsSlide(_props: SlideProps) {
             className="text-xs font-semibold tracking-wider uppercase"
             style={{ color: colors.textTertiary }}
           >
-            Week 5
+            Week 6
           </span>
           <span
             className="text-xl font-bold"
             style={{ color: colors.highlight }}
           >
-            {week5.cumulative}
+            {week6.cumulative}
           </span>
           <span
             className="text-[10px] uppercase tracking-wider"
@@ -113,9 +123,9 @@ export function TensionBuildsSlide(_props: SlideProps) {
 
         <p
           className="scroll-reveal text-sm font-medium mb-5"
-          style={{ color: colors.textPrimary, transitionDelay: '0.55s' }}
+          style={{ color: colors.textPrimary, transitionDelay: '0.1s' }}
         >
-          {week5.insight}
+          {week6.insight}
         </p>
 
         {/* Assumption cards */}
@@ -130,10 +140,9 @@ export function TensionBuildsSlide(_props: SlideProps) {
                   borderColor: isRejected ? colors.highlight : colors.borderLight,
                   borderWidth: isRejected ? '2px' : '1px',
                   boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.3)',
-                  transitionDelay: `${0.6 + i * 0.1}s`,
+                  transitionDelay: `${0.2 + i * 0.1}s`,
                 }}
               >
-                {/* Status badge */}
                 <span
                   className="inline-block text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded"
                   style={{
@@ -167,14 +176,13 @@ export function TensionBuildsSlide(_props: SlideProps) {
           })}
         </div>
 
-        {/* Week 5 quote */}
         <div className="mt-6">
           <QuoteCard
-            quote={week5.quote}
-            name={week5.quoteSource.split(',')[0]}
-            title={week5.quoteSource.split(',').slice(1).join(',').trim() || ''}
+            quote={week6.quote}
+            name={week6.quoteSource.split(',')[0]}
+            title={week6.quoteSource.split(',').slice(1).join(',').trim() || ''}
             color={colors.highlight}
-            delay={1}
+            delay={0.6}
           />
         </div>
       </div>
