@@ -56,11 +56,11 @@ export const impactGoals: ImpactGoal[] = [
 
 export const partners: Partner[] = [
   {
-    name: 'AI Labs',
-    orgs: 'Anthropic, OpenAI, Google DeepMind',
-    type: 'Tech Development + Funding',
-    value: ['Verifiable ground truth for RLVR training'],
-    risk: 'Labs may build policy reasoning internally',
+    name: 'AI + Econ Researchers',
+    orgs: 'AI-economics researchers across institutions',
+    type: 'Research + Validation',
+    value: ['Verifiable ground truth for AI policy reasoning'],
+    risk: 'May build bespoke tools internally',
     color: colors.accentBlue,
   },
   {
@@ -98,7 +98,7 @@ export const canvasMembers = {
     title: 'Other Stakeholders (44 interviews)',
     color: colors.accentTeal,
     items: [
-      'AI Labs: 10 | AI + policy research',
+      'AI + Econ Researchers: 10 | AI + policy research',
       'Funders: 10 | Fund development',
       'Non-Users: 8 | Understand barriers',
       'Gov Standards Bodies: 7 | Interoperability',
@@ -134,7 +134,7 @@ export const markets: MarketSegment[] = [
   { name: 'Financial Planners', tam: '$5B+' },
   { name: 'Banks & Lenders', tam: '$100B+' },
   { name: 'Insurance/Actuaries', tam: '$50B+' },
-  { name: 'AI Labs', tam: 'Strategic' },
+  { name: 'AI + Econ Researchers', tam: 'Strategic' },
   { name: 'AI Agent Builders', tam: '$10B+' },
   { name: 'Marketing/Data', tam: '$2.4B+' },
   { name: 'Economic Analysts', tam: '$50-100M+' },

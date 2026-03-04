@@ -14,7 +14,7 @@ export const weeklyProgress: WeekProgress[] = [
 export const segments: Segment[] = [
   { name: 'Academic Researchers', count: 18, color: colors.accentBlue },
   { name: 'Think Tank Analysts', count: 12, color: colors.accentTeal },
-  { name: 'AI Labs', count: 10, color: colors.cosilicoCyan },
+  { name: 'AI + Econ Researchers', count: 10, color: colors.cosilicoCyan },
   { name: 'PE Team', count: 10, color: colors.peTeal },
   { name: 'Funders', count: 10, color: colors.accentOrange },
   { name: 'Non-Users', count: 8, color: colors.highlight },

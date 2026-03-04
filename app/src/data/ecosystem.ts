@@ -23,7 +23,7 @@ export const ecosystemNodes: EcosystemNode[] = [
   { id: 'pe-team', label: 'PE Team', ring: 1, angle: 310, color: colors.peTeal, org: 'all', count: 10, description: 'Build core models', visibleAtStep: 1 },
 
   // Ring 2: Channel partners
-  { id: 'ai-labs', label: 'AI Labs', ring: 2, angle: 20, color: colors.cosilicoCyan, org: 'cosilico', count: 10, description: 'AI + policy research', visibleAtStep: 1 },
+  { id: 'ai-labs', label: 'AI + Econ\nResearchers', ring: 2, angle: 20, color: colors.cosilicoCyan, org: 'cosilico', count: 10, description: 'AI + policy research', visibleAtStep: 1 },
   { id: 'gov-standards', label: 'Gov Standards\nBodies', ring: 2, angle: 92, color: colors.rulesBlue, org: 'rules', count: 7, description: 'Interoperability', visibleAtStep: 1 },
   { id: 'funders', label: 'Funders', ring: 2, angle: 164, color: colors.accentOrange, org: 'all', count: 10, description: 'Fund development', visibleAtStep: 1 },
   { id: 'non-users', label: 'Non-Users', ring: 2, angle: 236, color: colors.highlight, org: 'all', count: 8, description: 'Understand barriers', visibleAtStep: 1 },
