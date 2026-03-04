@@ -73,9 +73,9 @@ export function JourneyBeginsSlide(_props: SlideProps) {
                   className="text-sm mt-4 italic leading-relaxed"
                   style={{ color: colors.textSecondary }}
                 >
-                  Government standards bodies and AI labs kept showing up in our
-                  interviews. These weren't our users&mdash;they were adjacent
-                  ecosystems with parallel needs.
+                  Government standards bodies and AI + econ researchers kept
+                  surfacing&mdash;adjacent ecosystems with parallel needs, just
+                  as we had hypothesized.
                 </p>
               )}
             </div>

@@ -12,9 +12,9 @@ export function TensionBuildsSlide(_props: SlideProps) {
   return (
     <div className="px-8 md:px-16">
       <SlideHeader
-        tag="TENSION"
+        tag="VALIDATION"
         tagColor={colors.error}
-        title="The tension builds"
+        title="Testing the hypothesis"
       />
 
       {/* Week 4 */}
@@ -76,8 +76,8 @@ export function TensionBuildsSlide(_props: SlideProps) {
           className="scroll-reveal text-sm italic mt-4 leading-relaxed max-w-2xl"
           style={{ color: colors.textSecondary, transitionDelay: '0.4s' }}
         >
-          Government agencies needed one thing. AI labs needed another. Funders
-          wanted a third. And one organization was trying to be all of them.
+          Government agencies needed one thing. AI + econ researchers needed another.
+          Funders wanted a third. Every interview confirmed the pattern we hypothesized.
         </p>
       </div>
 

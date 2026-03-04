@@ -6,8 +6,8 @@ export const storySections: StorySection[] = [
   { id: 'who-we-are', title: 'Who we are', tag: 'THE TEAM', duration: '0:30 - 1:00' },
   { id: 'what-we-do', title: 'What we do', tag: 'THESIS + IMPACT', duration: '1:00 - 1:45' },
   { id: 'journey-begins', title: '100 conversations', tag: 'THE JOURNEY BEGINS', duration: '1:45 - 2:30' },
-  { id: 'tension-builds', title: 'The tension builds', tag: 'TENSION', duration: '2:30 - 3:15' },
-  { id: 'aha-moment', title: 'One became three', tag: 'THE A-HA MOMENT', duration: '3:15 - 4:15', stickyHeight: 3 },
+  { id: 'tension-builds', title: 'Validation', tag: 'VALIDATION', duration: '2:30 - 3:15' },
+  { id: 'aha-moment', title: 'One became three', tag: 'THE ECOSYSTEM', duration: '3:15 - 4:15', stickyHeight: 3 },
   { id: 'meet-the-three', title: 'Meet the three', tag: 'THE THREE ORGS', duration: '4:15 - 5:15' },
   { id: 'governance', title: 'How we\'ll govern it', tag: 'GOVERNANCE', duration: '5:15 - 5:45' },
   { id: 'road-ahead', title: 'The road ahead', tag: 'TIMELINE', duration: '5:45 - 6:15' },
@@ -32,7 +32,7 @@ export const weeklyJourney: WeekJourney[] = [
     cumulative: 8,
     quote: 'Speed + open source + prototyping is our edge, but encoding is fast while review/debugging is the bottleneck.',
     quoteSource: 'Nikhil Woodruff, CTO',
-    insight: 'We started with our own team and closest users.',
+    insight: 'We brought a hypothesis to POSE: PolicyEngine should become an ecosystem of specialized organizations. We\u2019d already pitched a three-org vision to investors that same week. Now we had to pressure-test it.',
     ecosystemPhase: 'Center node (PE unified) + PE Team light up',
   },
   {
@@ -41,7 +41,7 @@ export const weeklyJourney: WeekJourney[] = [
     cumulative: 28,
     quote: 'Fast, open tools are especially valuable for quick turnaround vs. slow official scores.',
     quoteSource: 'Andrew Lautz, BPC',
-    insight: 'We talked to think tanks, researchers, and our first government economists.',
+    insight: 'Think tanks and researchers confirmed demand. The week before, we\u2019d published our 10 Downing Street work\u2014PolicyEngine was already in government.',
     ecosystemPhase: 'Ring 1 nodes light up (researchers, think tanks, gov economists)',
   },
   {
@@ -50,8 +50,8 @@ export const weeklyJourney: WeekJourney[] = [
     cumulative: 44,
     quote: 'Most leverage is upstream: getting legislative drafters to author executable rules early.',
     quoteSource: 'Jason Morris, Thomson Reuters',
-    insight: 'Then we found something we didn\'t expect.',
-    ecosystemPhase: 'Ring 2 nodes appear (AI labs, gov standards, funders)',
+    insight: 'Government standards bodies and AI + econ researchers kept surfacing. Each needed something different from us.',
+    ecosystemPhase: 'Ring 2 nodes appear (AI + econ researchers, gov standards, funders)',
   },
   {
     week: 4,
@@ -59,7 +59,7 @@ export const weeklyJourney: WeekJourney[] = [
     cumulative: 62,
     quote: 'Institutions like the Fed face strong IT/security barriers to external APIs.',
     quoteSource: 'Jacob Walker, Atlanta Fed',
-    insight: 'The contradictions started piling up.',
+    insight: 'Every conversation reinforced the pattern: different audiences need different governance, funding models, and technical architecture.',
     ecosystemPhase: 'All Ring 1+2 nodes visible, tangled connections',
   },
   {
@@ -68,8 +68,8 @@ export const weeklyJourney: WeekJourney[] = [
     cumulative: 75,
     quote: 'You want this fresh start with clean governance from day one.',
     quoteSource: 'Foundation governance advisor',
-    insight: 'We tested our assumptions. One broke.',
-    ecosystemPhase: 'The "rejected" assumption overlays the map',
+    insight: 'Our hypothesis was validated. One organization genuinely cannot serve all these segments well.',
+    ecosystemPhase: 'The hypothesis confirmed across the map',
   },
   {
     week: 6,
@@ -77,7 +77,7 @@ export const weeklyJourney: WeekJourney[] = [
     cumulative: 87,
     quote: 'Data and rules complexity create big gaps where better microsim tools are still missing.',
     quoteSource: 'Jack Landry, Jane Family Institute',
-    insight: 'The three-org vision crystallized.',
+    insight: 'The ecosystem vision was resonating beyond our interviews. Funders and foundations were engaging.',
     ecosystemPhase: 'Transition: preparing for the split',
   },
   {
@@ -86,7 +86,7 @@ export const weeklyJourney: WeekJourney[] = [
     cumulative: 100,
     quote: 'Programs and tax rules in silos create severe unintended consequences.',
     quoteSource: 'Ray Packer, Georgia Center for Opportunity',
-    insight: 'One hundred interviews. Three organizations.',
+    insight: 'The Ballmer Group engaged on a major Rules as Code investment. 100 interviews validated three organizations.',
     ecosystemPhase: 'Full ecosystem revealed',
   },
 ];

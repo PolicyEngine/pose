@@ -35,8 +35,10 @@ export function WhatWeDoSlide(_props: SlideProps) {
           className="text-base md:text-lg leading-relaxed"
           style={{ color: colors.textSecondary }}
         >
-          Policy decisions affecting millions of people are made using black-box
-          models that cost{' '}
+          We encode tax and benefit rules into open-source code, run
+          microsimulations against representative household survey data, and
+          produce the analysis that researchers, journalists, and policymakers
+          use to understand reform impacts. Today the alternatives cost{' '}
           <span className="font-semibold" style={{ color: colors.highlight }}>
             $10K+ per license
           </span>
@@ -46,8 +48,8 @@ export function WhatWeDoSlide(_props: SlideProps) {
           className="text-base md:text-lg leading-relaxed mt-4 font-medium"
           style={{ color: colors.textPrimary }}
         >
-          We believe every citizen deserves transparent, instant policy
-          analysis.{' '}
+          Our technology already powers analysis at 10 Downing Street, US
+          congressional offices, and leading think tanks.{' '}
           <span style={{ color: colors.primary }}>Free and open.</span>
         </p>
       </div>

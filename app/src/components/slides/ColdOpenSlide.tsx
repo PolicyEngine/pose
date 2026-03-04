@@ -25,7 +25,7 @@ export function ColdOpenSlide(_props: SlideProps) {
         className="scroll-reveal text-3xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight max-w-4xl"
         style={{ color: colors.textPrimary, transitionDelay: '0.15s' }}
       >
-        What would it take to encode every rule that governs American life?
+        What would it take to simulate the impact of every policy on every person?
       </h1>
 
       {/* HGP analogy */}
@@ -34,8 +34,9 @@ export function ColdOpenSlide(_props: SlideProps) {
         style={{ color: colors.textSecondary, transitionDelay: '0.35s' }}
       >
         The Human Genome Project cost $3B and generated $800B+ in economic value.
-        The rules governing taxes, benefits, and regulations are at least as
-        complex&mdash;and no one has mapped them.
+        Encoding and simulating the rules governing taxes, benefits, and
+        regulations is at least as complex&mdash;and the payoff could be even
+        larger.
       </p>
 
       {/* Animated counter line */}
@@ -44,7 +45,8 @@ export function ColdOpenSlide(_props: SlideProps) {
         style={{ color: colors.primary, transitionDelay: '0.55s' }}
       >
         160,000+ pages of federal tax code&ensp;&middot;&ensp;50 state
-        systems&ensp;&middot;&ensp;100+ benefit programs
+        systems&ensp;&middot;&ensp;100+ benefit programs&ensp;&middot;&ensp;330M
+        people affected
       </p>
 
       {/* The hook */}
@@ -52,8 +54,12 @@ export function ColdOpenSlide(_props: SlideProps) {
         className="scroll-reveal text-lg md:text-xl font-semibold mt-12 max-w-2xl"
         style={{ color: colors.textPrimary, transitionDelay: '0.75s' }}
       >
-        We thought we were building one tool to do this.{' '}
-        <span style={{ color: colors.highlight }}>We were wrong.</span>
+        We had a hypothesis: encoding rules, running simulations, and telling the
+        policy story each need{' '}
+        <span style={{ color: colors.highlight }}>
+          a dedicated organization.
+        </span>{' '}
+        We spent 100 conversations finding out if we were right.
       </p>
     </div>
   );

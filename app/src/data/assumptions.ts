@@ -30,10 +30,10 @@ export const assumptions: Assumption[] = [
     color: colors.accentOrange,
   },
   {
-    status: '\u2717 REJECTED',
+    status: '\u2713 VALIDATED',
     statusType: 'rejected',
-    title: 'One organization can\nserve all segments',
-    learning: 'Infrastructure, standards, and research need different governance and funding.',
+    title: 'One organization cannot\nserve all segments',
+    learning: 'Our pre-POSE hypothesis confirmed: infrastructure, standards, and research need different governance and funding.',
     quote: '\u201CYou want this fresh start with clean governance from day one.\u201D',
     source: '\u2014 Foundation governance advisor',
     color: colors.highlight,

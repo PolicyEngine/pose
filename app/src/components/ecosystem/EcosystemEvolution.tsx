@@ -14,8 +14,8 @@ const LEGEND: { label: string; org: 'rules' | 'cosilico' | 'pe' | 'all'; color: 
 ];
 
 const STEP_NARRATIVES = [
-  'This was us. One organization trying to serve researchers, government agencies, AI labs, and funders. One governance model. One funding strategy. One brand.',
-  '100 interviews revealed that each audience needs fundamentally different things: different governance, different funding models, different technical architecture.',
+  'This was us going in. One organization serving researchers, government agencies, AI + econ researchers, and funders. We hypothesized this couldn\'t scale.',
+  '100 interviews confirmed it: each audience needs fundamentally different governance, different funding models, different technical architecture.',
   'Three organizations. Each specialized. Each stronger for the separation. Connected by shared open-source code flowing between them.',
 ];
 
@@ -27,7 +27,7 @@ export function EcosystemEvolutionSlide(_props: SlideProps) {
   return (
     <div ref={containerRef} style={{ height: '300vh' }}>
       <div className="sticky top-0 h-screen flex flex-col px-8 md:px-16 py-4 bg-page-bg">
-        <SlideHeader tag="THE A-HA MOMENT" tagColor={colors.highlight} title="One became three" />
+        <SlideHeader tag="THE ECOSYSTEM" tagColor={colors.highlight} title="One became three" />
 
         <div className="flex items-center gap-4 mt-2">
           <div className="flex gap-1 flex-1">

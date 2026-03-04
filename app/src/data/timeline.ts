@@ -5,7 +5,7 @@ export const milestones: Milestone[] = [
   {
     period: 'Q1 2026',
     label: 'NOW',
-    description: ['POSE complete', '100 interviews', '3-org structure defined'],
+    description: ['POSE complete', '100 interviews validated 3-org structure', 'Ballmer Group engaged'],
     color: colors.highlight,
   },
   {

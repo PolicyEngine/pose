@@ -10,7 +10,7 @@ const ORGS = [
 const CTA_ITEMS = [
   'Foundation partners',
   'Agency pilot programs',
-  'AI lab collaborations',
+  'Investor conversations underway',
 ];
 
 const LINKS = [
@@ -29,6 +29,8 @@ export function TheCloseSlide(_props: SlideProps) {
 
       <p className="scroll-reveal text-base md:text-lg text-text-secondary italic leading-relaxed max-w-3xl mt-4" style={{ transitionDelay: '0.15s' }}>
         We're building the same thing for the rules that govern American life.
+        Our technology is already in use at 10 Downing Street. Major foundations
+        are engaging. 100 interviews confirmed the vision. Now we're ready to build.
       </p>
 
       {/* Three org circles with connections */}
@@ -75,8 +77,8 @@ export function TheCloseSlide(_props: SlideProps) {
           transitionDelay: '0.45s',
         }}
       >
-        One ecosystem became three.{' '}
-        <span style={{ color: colors.highlight }}>Each stronger for it.</span>
+        We hypothesized an ecosystem. 100 interviews proved it.{' '}
+        <span style={{ color: colors.highlight }}>Now we're building it.</span>
       </h2>
 
       {/* CTA */}
