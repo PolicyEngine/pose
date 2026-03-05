@@ -9,6 +9,6 @@ export const stats: StatItem[] = [
 ];
 
 export const trustedBy = {
-  line1: '10 Downing Street (policy analysis)  \u00b7  US Congress (distributional analysis)',
-  line2: 'Brookings  \u00b7  NBER  \u00b7  Atlanta Fed  \u00b7  CRFB  \u00b7  Niskanen Center  \u00b7  Yale Budget Lab  \u00b7  BPC',
+  line1: '10 Downing Street \u00b7 US Congress',
+  line2: 'Brookings \u00b7 NBER \u00b7 Atlanta Fed \u00b7 Niskanen Center \u00b7 Living Wage Institute \u00b7 Bureau of Economic Analysis',
 };

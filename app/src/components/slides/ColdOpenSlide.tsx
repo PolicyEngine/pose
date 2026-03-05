@@ -18,7 +18,7 @@ const LAYERS = [
     items: [
       { name: 'DeepMind / AlphaFold', desc: 'Predicted 3D structures for the entire human proteome cataloged by HGP', highlight: true },
       { name: 'Schrödinger', desc: 'Molecular simulation on open structural data', highlight: false },
-      { name: 'IHME', desc: 'Global Burden of Disease modeling', highlight: false },
+      { name: 'Broad Institute', desc: 'Open-source genomic analysis tools (GATK, Terra)', highlight: false },
     ],
   },
   {

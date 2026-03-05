@@ -84,7 +84,7 @@ export function WhoWeAreSlide(_props: SlideProps) {
         style={{ color: colors.textSecondary, transitionDelay: '0.4s' }}
       >
         Together we've built the most widely used open-source tax-benefit
-        microsimulation platform in the US.
+        microsimulation platform in the US and the UK.
       </p>
 
       {/* Trusted by */}

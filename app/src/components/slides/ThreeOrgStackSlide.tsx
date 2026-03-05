@@ -81,7 +81,7 @@ export function ThreeOrgStackSlide(_props: SlideProps) {
                   boxShadow: `0 0 20px ${layer.color}12`,
                 }}
               >
-                <img src={layer.logo} alt={layer.org} className="h-8 shrink-0" />
+                <img src={layer.logo} alt={layer.org} style={{ width: '120px' }} className="shrink-0 object-contain object-left" />
                 <div className="flex-1">
                   <p className="text-sm leading-relaxed" style={{ color: colors.textPrimary }}>
                     {layer.description}

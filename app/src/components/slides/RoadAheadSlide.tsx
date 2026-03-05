@@ -66,7 +66,7 @@ export function RoadAheadSlide(_props: SlideProps) {
           >
             <div>
               {org.logo ? (
-                <img src={org.logo} alt={org.org} className="h-8" />
+                <img src={org.logo} alt={org.org} style={{ width: '120px' }} className="object-contain object-left" />
               ) : (
                 <p className="text-xs font-bold tracking-wider uppercase whitespace-nowrap" style={{ color: org.color }}>
                   {org.org}

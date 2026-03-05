@@ -1,9 +1,10 @@
 "use client";
 
 import { ScrollStory } from "@/components/presentation/ScrollStory";
+import { ProblemSlide } from "@/components/slides/ProblemSlide";
+import { FourthOptionSlide } from "@/components/slides/FourthOptionSlide";
 import { ColdOpenSlide } from "@/components/slides/ColdOpenSlide";
 import { WhoWeAreSlide } from "@/components/slides/WhoWeAreSlide";
-import { HowMicrosimSlide } from "@/components/slides/HowMicrosimSlide";
 import { WhatWeDoSlide } from "@/components/slides/WhatWeDoSlide";
 import { HowWeOperateSlide } from "@/components/slides/HowWeOperateSlide";
 import { JourneyBeginsSlide } from "@/components/slides/JourneyBeginsSlide";
@@ -11,6 +12,7 @@ import {
   TensionBuildsWeek4Slide,
   TensionBuildsWeek5Slide,
 } from "@/components/slides/TensionBuildsSlide";
+import { ThreeOrgStackSlide } from "@/components/slides/ThreeOrgStackSlide";
 import { EcosystemEvolutionSlide } from "@/components/ecosystem/EcosystemEvolution";
 import { MeetTheThreeSlide } from "@/components/slides/MeetTheThreeSlide";
 import { GovernanceSlideNew } from "@/components/slides/GovernanceSlideNew";
@@ -35,6 +37,18 @@ const sections: ScrollSection[] = [
     component: WhoWeAreSlide,
   },
   {
+    id: "problem",
+    title: "The problem",
+    tag: "THE PROBLEM",
+    component: ProblemSlide,
+  },
+  {
+    id: "fourth-option",
+    title: "A fourth option",
+    tag: "THE OPPORTUNITY",
+    component: FourthOptionSlide,
+  },
+  {
     id: "cold-open",
     title: "The HGP ecosystem",
     tag: "INSPIRATION",
@@ -53,12 +67,6 @@ const sections: ScrollSection[] = [
     component: WhatWeDoSlide,
   },
   {
-    id: "how-microsim",
-    title: "How microsimulation works",
-    tag: "HOW IT WORKS",
-    component: HowMicrosimSlide,
-  },
-  {
     id: "journey-begins",
     title: "100 conversations",
     tag: "THE JOURNEY",
@@ -75,6 +83,18 @@ const sections: ScrollSection[] = [
     title: "Week 5",
     tag: "VALIDATION",
     component: TensionBuildsWeek5Slide,
+  },
+  {
+    id: "stack-reprise",
+    title: "PE across the stack (reprise)",
+    tag: "OUR WORK",
+    component: HowWeOperateSlide,
+  },
+  {
+    id: "three-org-stack",
+    title: "Each layer, one org",
+    tag: "THE INSIGHT",
+    component: ThreeOrgStackSlide,
   },
   {
     id: "meet-the-three",
