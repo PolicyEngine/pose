@@ -1,159 +1,184 @@
 import pptxgen from 'pptxgenjs';
+import puppeteer from 'puppeteer';
+import { spawn } from 'child_process';
+import { mkdirSync, rmSync, existsSync } from 'fs';
+import { setTimeout as sleep } from 'timers/promises';
 
-// Colors
-const teal = '319795';
-const purple = '7C3AED';
-const blue = '2563EB';
-const orange = 'EA580C';
-const green = '16A34A';
+const SCREENSHOT_DIR = '/tmp/pose-slides';
+const OUTPUT_FILE = new URL('./PolicyEngine_POSE_Presentation.pptx', import.meta.url).pathname;
+const VIEWPORT = { width: 1440, height: 900, deviceScaleFactor: 2 };
 
-// Team photos
-const teamPhotos = {
-  'Max Ghenis': '/tmp/max-ghenis.png',
-  'Pavel Makarchuk': '/tmp/pavel-makarchuk.jpeg',
-  'Daniel Feenberg': '/tmp/daniel-feenberg.jpg',
-};
+// Section IDs matching page.tsx order
+const SECTIONS = [
+  'who-we-are', 'problem', 'fourth-option', 'cold-open', 'how-we-operate',
+  'what-we-do', 'journey-begins', 'tension-week4', 'tension-week5',
+  'stack-reprise', 'three-org-stack', 'meet-the-three',
+  'aha-moment',  // ecosystem — will capture 3 steps separately
+  'road-ahead', 'the-close',
+  'voices', 'impact-goals', 'partners', 'canvas', 'canvas-detail',
+  'governance', 'gov-detail', 'competitive', 'highlights', 'market',
+];
 
-// Common slide generators
-function addTeamSlide(pptx) {
-  const slide = pptx.addSlide();
-  slide.addText('PolicyEngine POSE Team', { x: 0.5, y: 0.3, w: '90%', fontSize: 32, bold: true, color: '1F2937' });
+// Port: use existing dev server or start one
+const DEV_PORT = process.env.PORT || '5174';
+const DEV_URL = `http://localhost:${DEV_PORT}`;
 
-  const teamData = [
-    { name: 'Max Ghenis', role: 'Co-Founder & CEO', bio: 'MS Economics' },
-    { name: 'Pavel Makarchuk', role: 'Chief of Staff', bio: 'Led development of PolicyEngine US state-level tax-benefit model' },
-    { name: 'Daniel Feenberg', role: 'Advisor', bio: 'PhD Economics, created TAXSIM' },
-  ];
-
-  teamData.forEach((member, i) => {
-    const xPos = 0.8 + i * 3.0;
-    // Add photo
-    slide.addImage({
-      path: teamPhotos[member.name],
-      x: xPos + 0.5,
-      y: 1.2,
-      w: 1.5,
-      h: 1.5,
-      rounding: true
+function startDevServer() {
+  return new Promise((resolve, reject) => {
+    const proc = spawn('bunx', ['next', 'dev', '--port', DEV_PORT], {
+      cwd: new URL('.', import.meta.url).pathname,
+      stdio: ['ignore', 'pipe', 'pipe'],
     });
-    slide.addText(member.name, { x: xPos, y: 2.9, w: 2.5, fontSize: 16, bold: true, color: '1F2937', align: 'center' });
-    slide.addText(member.role, { x: xPos, y: 3.3, w: 2.5, fontSize: 12, color: teal, align: 'center' });
-    slide.addText(member.bio, { x: xPos, y: 3.7, w: 2.5, fontSize: 9, color: '6B7280', align: 'center', wrap: true });
+    let started = false;
+    const onData = (chunk) => {
+      const text = chunk.toString();
+      if (!started && (text.includes('Local:') || text.includes('Ready'))) {
+        started = true;
+        resolve(proc);
+      }
+    };
+    proc.stdout.on('data', onData);
+    proc.stderr.on('data', onData);
+    proc.on('error', reject);
+    setTimeout(() => { if (!started) reject(new Error('Dev server timeout')); }, 30000);
   });
-  return slide;
 }
 
-function addThesisSlide(pptx) {
-  const slide = pptx.addSlide();
-  slide.addText('4373 PolicyEngine | OSE Thesis', { x: 0.5, y: 0.2, w: '90%', fontSize: 24, bold: true, color: '1F2937' });
-  const thesisLines = [
-    { prefix: 'FOR', text: 'economists, policy researchers, think tanks, journalists, advocates, and developers building benefit access tools', color: teal },
-    { prefix: 'WHO NEED TO', text: 'understand taxes and benefits for households or analyze policy impacts on populations', color: purple },
-    { prefix: 'THE STATUS QUO', text: 'proprietary microsimulation tools', color: 'DC2626', suffix: 'FAILS DUE TO high cost, limited accessibility, and restrictions in government/secure environments, CAUSING policy decisions without rigorous distributional analysis.' },
-    { prefix: 'WE WILL ESTABLISH A MANAGING ORGANIZATION FOR', text: 'open-source fiscal policy simulation', color: blue },
-    { prefix: 'TO DELIVER', text: 'PolicyEngine models, web apps, and APIs', color: blue, suffix: 'WITH AGPL license and transparent governance.' },
-    { prefix: 'WE WILL GROW THE COMMUNITY THROUGH', text: 'documentation and partnerships with universities and think tanks', color: green },
-    { prefix: 'WE WILL ACHIEVE', text: 'democratized access to sophisticated policy analysis', color: green },
-    { prefix: 'MEASURE SUCCESS BY', text: 'citations, applications built on PolicyEngine, their users, contributors, and funding', color: orange },
-    { prefix: 'AND SUSTAIN THE ECOSYSTEM VIA', text: 'diversified foundation grants, government funding, and SaaS offerings', color: orange },
-  ];
-  thesisLines.forEach((line, i) => {
-    const yPos = 0.7 + i * 0.48;
-    slide.addText([
-      { text: line.prefix + ' ', options: { bold: true, color: '374151' } },
-      { text: line.text, options: { color: line.color } },
-      ...(line.suffix ? [{ text: ' ' + line.suffix, options: { color: '374151' } }] : []),
-    ], { x: 0.5, y: yPos, w: 9, fontSize: 11 });
-  });
-  return slide;
+async function checkServer(url) {
+  try {
+    const res = await fetch(url, { signal: AbortSignal.timeout(2000) });
+    return res.ok;
+  } catch { return false; }
 }
 
-function addAssumptionsSlide(pptx) {
-  const slide = pptx.addSlide();
-  slide.addText('Assumptions', { x: 0.5, y: 0.3, w: '90%', fontSize: 32, bold: true, color: '1F2937' });
-  const goalsAndAssumptions = [
-    { goal: 'Grow adoption among policy analysts', assumption: 'Policy researchers will adopt open-source tools if they are accessible without programming expertise', color: teal },
-    { goal: 'Achieve sustainable, diversified funding', assumption: 'Funders value transparency and reproducibility enough to fund open-source over proprietary alternatives', color: purple },
-    { goal: 'Build active contributor community', assumption: 'Developers will contribute for policy impact without requiring competitive compensation', color: blue },
-  ];
-  goalsAndAssumptions.forEach((item, i) => {
-    const yPos = 1.0 + i * 1.3;
-    slide.addShape('rect', { x: 0.5, y: yPos, w: 9, h: 1.1, fill: { color: item.color, transparency: 90 }, line: { color: item.color } });
-    slide.addText([{ text: 'Goal: ', options: { color: '6B7280' } }, { text: item.goal, options: { bold: true, color: item.color } }], { x: 0.7, y: yPos + 0.15, w: 8.5, fontSize: 12 });
-    slide.addText([{ text: 'Assumption: ', options: { color: '6B7280' } }, { text: item.assumption, options: { color: item.color } }], { x: 0.7, y: yPos + 0.55, w: 8.5, fontSize: 10 });
+// ── Screenshot logic ──
+async function captureSlides() {
+  // Prep
+  if (existsSync(SCREENSHOT_DIR)) rmSync(SCREENSHOT_DIR, { recursive: true });
+  mkdirSync(SCREENSHOT_DIR, { recursive: true });
+
+  let server = null;
+  const alreadyRunning = await checkServer(DEV_URL);
+  if (alreadyRunning) {
+    console.log(`Using existing dev server at ${DEV_URL}`);
+  } else {
+    console.log('Starting dev server...');
+    server = await startDevServer();
+    console.log('Dev server ready.');
+  }
+
+  const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
+  const page = await browser.newPage();
+  await page.setViewport(VIEWPORT);
+  await page.goto(DEV_URL, { waitUntil: 'networkidle2', timeout: 30000 });
+
+  // Force all sections visible (bypass scroll-reveal animations)
+  await page.evaluate(() => {
+    document.querySelectorAll('section').forEach(s => s.classList.add('section-visible'));
+    // Also force all scroll-reveal elements visible
+    document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-scale').forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
   });
-  return slide;
+  await sleep(500);
+
+  const screenshots = [];
+  let slideNum = 0;
+
+  for (const sectionId of SECTIONS) {
+    if (sectionId === 'aha-moment') {
+      // Ecosystem: capture 3 scroll steps
+      for (let step = 1; step <= 3; step++) {
+        slideNum++;
+        const fileName = `${SCREENSHOT_DIR}/slide-${String(slideNum).padStart(2, '0')}.png`;
+
+        await page.evaluate((id, stepNum) => {
+          const section = document.getElementById(id);
+          if (!section) return;
+          const sectionRect = section.getBoundingClientRect();
+          const sectionTop = window.scrollY + sectionRect.top;
+          const sectionHeight = section.scrollHeight;
+          // Scroll to appropriate fraction of the 300vh container
+          const scrollTarget = sectionTop + (sectionHeight * (stepNum - 1)) / 3 + 10;
+          window.scrollTo(0, scrollTarget);
+        }, sectionId, step);
+
+        await sleep(800); // Let sticky + transitions settle
+
+        // Force visibility again after scroll
+        await page.evaluate(() => {
+          document.querySelectorAll('section').forEach(s => s.classList.add('section-visible'));
+          document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-scale').forEach(el => {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+          });
+        });
+        await sleep(300);
+
+        await page.screenshot({ path: fileName, fullPage: false });
+        screenshots.push(fileName);
+        console.log(`  [${slideNum}] ${sectionId} step ${step}`);
+      }
+    } else {
+      slideNum++;
+      const fileName = `${SCREENSHOT_DIR}/slide-${String(slideNum).padStart(2, '0')}.png`;
+
+      await page.evaluate((id) => {
+        const section = document.getElementById(id);
+        if (section) section.scrollIntoView({ behavior: 'instant', block: 'start' });
+      }, sectionId);
+
+      await sleep(500);
+
+      // Force visibility after scroll
+      await page.evaluate(() => {
+        document.querySelectorAll('section').forEach(s => s.classList.add('section-visible'));
+        document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-scale').forEach(el => {
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        });
+      });
+      await sleep(300);
+
+      await page.screenshot({ path: fileName, fullPage: false });
+      screenshots.push(fileName);
+      console.log(`  [${slideNum}] ${sectionId}`);
+    }
+  }
+
+  await browser.close();
+  if (server) server.kill();
+  return screenshots;
 }
 
-function addInterviewLogSlide(pptx) {
-  const slide = pptx.addSlide();
-  slide.addText('Interview log', { x: 0.5, y: 0.2, w: '90%', fontSize: 28, bold: true, color: '1F2937' });
+// ── Build PPTX from screenshots ──
+async function buildPptx(screenshots) {
+  const pptx = new pptxgen();
+  pptx.layout = 'LAYOUT_16x9';
+  pptx.title = 'PolicyEngine POSE Presentation';
+  pptx.author = 'PolicyEngine';
 
-  // Add screenshot of the POSE Tracker app (preserve aspect ratio 2208x1948)
-  slide.addImage({
-    path: '/tmp/interview-log.png',
-    x: 2.5,
-    y: 0.55,
-    w: 5.0,
-    h: 4.4,
-  });
+  for (const imgPath of screenshots) {
+    const slide = pptx.addSlide();
+    slide.background = { color: '0A0F1C' };
+    slide.addImage({
+      path: imgPath,
+      x: 0,
+      y: 0,
+      w: '100%',
+      h: '100%',
+    });
+  }
 
-  return slide;
+  await pptx.writeFile({ fileName: OUTPUT_FILE });
+  console.log(`\nCreated: ${OUTPUT_FILE}`);
 }
 
-function addGoalsCharterSlide(pptx) {
-  const slide = pptx.addSlide();
-  slide.addText('Team goals and charter', { x: 0.5, y: 0.3, w: '90%', fontSize: 32, bold: true, color: '1F2937' });
+// ── Main ──
+const screenshots = await captureSlides();
+console.log(`\nCaptured ${screenshots.length} screenshots.`);
+await buildPptx(screenshots);
 
-  slide.addText('Goals', { x: 0.5, y: 1.0, w: 4, fontSize: 16, bold: true, color: '1F2937' });
-  const goals = [
-    'Complete 100 ecosystem discovery interviews across all 6 stakeholder segments',
-    'Identify 3+ sustainable funding models beyond traditional grants',
-    'Establish partnerships with 5+ policy think tanks and media organizations',
-    'Develop community governance structure with clear decision rights',
-  ];
-  goals.forEach((goal, i) => {
-    slide.addShape('rect', { x: 0.5, y: 1.4 + i * 0.38, w: 4.3, h: 0.33, fill: { color: green, transparency: 90 }, line: { color: green } });
-    slide.addText(`${i + 1}. ${goal}`, { x: 0.6, y: 1.45 + i * 0.38, w: 4.1, fontSize: 8, color: green });
-  });
-
-  slide.addText('Working agreements', { x: 5.2, y: 1.0, w: 4, fontSize: 16, bold: true, color: '1F2937' });
-  const agreements = [
-    'Weekly team sync (Mondays)',
-    '24-hour response time on Slack',
-    'Share interview notes within 24 hours',
-    'Consensus on strategic decisions, CEO decides operational matters',
-  ];
-  agreements.forEach((agreement, i) => {
-    slide.addShape('rect', { x: 5.2, y: 1.4 + i * 0.38, w: 4.3, h: 0.33, fill: { color: teal, transparency: 90 }, line: { color: teal } });
-    slide.addText(`• ${agreement}`, { x: 5.3, y: 1.45 + i * 0.38, w: 4.1, fontSize: 8, color: teal });
-  });
-  return slide;
-}
-
-// Generate PPTX 1: Team, Thesis, Assumptions, Interview Log
-const pptx1 = new pptxgen();
-pptx1.layout = 'LAYOUT_16x9';
-pptx1.title = 'PolicyEngine POSE - Weekly Session';
-pptx1.author = 'PolicyEngine';
-
-addTeamSlide(pptx1);
-addThesisSlide(pptx1);
-addAssumptionsSlide(pptx1);
-addInterviewLogSlide(pptx1);
-
-await pptx1.writeFile({ fileName: '/Users/maxghenis/Downloads/4373_PolicyEngine_01202026.pptx' });
-console.log('Created: 4373_PolicyEngine_01202026.pptx');
-
-// Generate PPTX 2: Team, Thesis, Goals & Charter
-const pptx2 = new pptxgen();
-pptx2.layout = 'LAYOUT_16x9';
-pptx2.title = 'PolicyEngine POSE - Kickoff';
-pptx2.author = 'PolicyEngine';
-
-addTeamSlide(pptx2);
-addThesisSlide(pptx2);
-addGoalsCharterSlide(pptx2);
-
-await pptx2.writeFile({ fileName: '/Users/maxghenis/Downloads/4373_PolicyEngine_01202026_OfficeHours.pptx' });
-console.log('Created: 4373_PolicyEngine_01202026_OfficeHours.pptx');
+// Cleanup
+rmSync(SCREENSHOT_DIR, { recursive: true });

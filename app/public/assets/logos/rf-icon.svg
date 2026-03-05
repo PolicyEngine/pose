@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <!-- Background -->
+    <rect width="100" height="100" fill="#0f172a"/>
+    <!-- Pillar with brackets -->
+    <g fill="none" stroke="#60a5fa" stroke-width="4">
+        <path d="M24 20 L12 20 L12 80 L24 80" stroke-linecap="round"/>
+        <path d="M76 20 L88 20 L88 80 L76 80" stroke-linecap="round"/>
+    </g>
+    <rect x="28" y="16" width="44" height="68" rx="3" fill="#3b82f6"/>
+    <line x1="38" y1="24" x2="38" y2="76" stroke="#1e293b" stroke-width="2.5"/>
+    <line x1="50" y1="24" x2="50" y2="76" stroke="#1e293b" stroke-width="2.5"/>
+    <line x1="62" y1="24" x2="62" y2="76" stroke="#1e293b" stroke-width="2.5"/>
+</svg>

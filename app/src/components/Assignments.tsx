@@ -14,8 +14,8 @@ import {
   Filter,
   ExternalLink,
 } from 'lucide-react'
-import { useAssignments } from '../hooks/useAssignments'
-import type { Assignment, AssignmentCategory } from '../types/database'
+import { useAssignments } from '@/hooks/useAssignments'
+import type { Assignment, AssignmentCategory } from '@/types/database'
 
 // Category metadata
 const CATEGORY_INFO: Record<

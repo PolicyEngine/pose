@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X } from 'lucide-react'
-import type { Interview, Segment, PoseHypothesis } from '../types/database'
-import { SEGMENTS, POSE_HYPOTHESES } from '../types/database'
-import { InterviewGuidance } from './InterviewGuidance'
+import type { Interview, Segment, PoseHypothesis } from '@/types/database'
+import { SEGMENTS, POSE_HYPOTHESES } from '@/types/database'
+import { InterviewGuidance } from '@/components/InterviewGuidance'
 
 interface AddInterviewModalProps {
   isOpen: boolean

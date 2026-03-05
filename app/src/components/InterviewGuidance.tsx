@@ -13,7 +13,7 @@ import {
   Handshake
 } from 'lucide-react'
 import { useState } from 'react'
-import type { Segment } from '../types/database'
+import type { Segment } from '@/types/database'
 
 interface InterviewGuidanceProps {
   segment: Segment

@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { renderHook, act, waitFor } from '@testing-library/react'
-import { useInterviews } from './useInterviews'
-import type { Interview } from '../types/database'
+import { useInterviews } from '@/hooks/useInterviews'
+import type { Interview } from '@/types/database'
 
 // Mock the supabase module to ensure localStorage fallback
 vi.mock('../lib/supabase', () => ({

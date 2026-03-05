@@ -1,7 +1,7 @@
 import { format, isPast, isToday, differenceInDays } from 'date-fns'
 import { motion } from 'framer-motion'
 import { CheckCircle2, Circle, Clock } from 'lucide-react'
-import { POSE_MILESTONES } from '../types/database'
+import { POSE_MILESTONES } from '@/types/database'
 
 interface MilestoneTrackerProps {
   completedCount: number

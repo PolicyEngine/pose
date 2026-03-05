@@ -1,8 +1,8 @@
 import { useState, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { Mail, Copy, Check, User, Building, Briefcase, RefreshCw } from 'lucide-react'
-import type { Segment } from '../types/database'
-import { SEGMENTS } from '../types/database'
+import type { Segment } from '@/types/database'
+import { SEGMENTS } from '@/types/database'
 
 interface OutreachFormData {
   recipientName: string

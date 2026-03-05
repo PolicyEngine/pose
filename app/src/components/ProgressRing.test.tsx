@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import { ProgressRing } from './ProgressRing'
+import { ProgressRing } from '@/components/ProgressRing'
 
 describe('ProgressRing', () => {
   it('renders the current count', () => {

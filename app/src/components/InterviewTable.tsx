@@ -12,8 +12,8 @@ import {
   XCircle,
   AlertCircle
 } from 'lucide-react'
-import type { Interview, Segment } from '../types/database'
-import { SEGMENTS } from '../types/database'
+import type { Interview, Segment } from '@/types/database'
+import { SEGMENTS } from '@/types/database'
 
 interface InterviewTableProps {
   interviews: Interview[]
