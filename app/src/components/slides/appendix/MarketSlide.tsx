@@ -1,7 +1,7 @@
-import type { SlideProps } from '../../../lib/types';
-import { colors } from '../../../lib/colors';
-import { SlideHeader } from '../../ui/SlideHeader';
-import { markets } from '../../../data/appendix';
+import type { SlideProps } from '@/lib/types';
+import { colors } from '@/lib/colors';
+import { SlideHeader } from '@/components/ui/SlideHeader';
+import { markets } from '@/data/appendix';
 
 // Parse TAM string to a numeric value for bar sizing
 function tamToValue(tam: string): number {

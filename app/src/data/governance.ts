@@ -1,5 +1,5 @@
-import type { GovernanceOrg } from '../lib/types';
-import { colors } from '../lib/colors';
+import type { GovernanceOrg } from '@/lib/types';
+import { colors } from '@/lib/colors';
 
 export const governanceBefore = {
   title: 'BDFL model',

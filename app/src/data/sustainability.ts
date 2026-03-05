@@ -1,5 +1,5 @@
-import type { SustainabilityOrg } from '../lib/types';
-import { colors } from '../lib/colors';
+import type { SustainabilityOrg } from '@/lib/types';
+import { colors } from '@/lib/colors';
 
 export const sustainability: SustainabilityOrg[] = [
   {

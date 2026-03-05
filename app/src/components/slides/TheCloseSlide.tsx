@@ -1,5 +1,5 @@
-import { colors } from '../../lib/colors';
-import type { SlideProps } from '../../lib/types';
+import { colors } from '@/lib/colors';
+import type { SlideProps } from '@/lib/types';
 
 const ORGS = [
   { name: 'Rules Foundation', tagline: 'Encoding the world\u2019s rules', color: colors.rulesBlue, logo: '/assets/logos/rf-icon.svg' },
@@ -14,8 +14,8 @@ const CTA_ITEMS = [
 ];
 
 const LINKS = [
-  { label: 'pose-ecosystem.vercel.app', url: 'https://pose-ecosystem.vercel.app' },
-  { label: 'github.com/PolicyEngine/pose', url: 'https://github.com/PolicyEngine/pose' },
+  { label: 'rules.foundation', url: 'https://rules.foundation' },
+  { label: 'cosilico.ai', url: 'https://cosilico.ai' },
   { label: 'policyengine.org', url: 'https://policyengine.org' },
 ];
 

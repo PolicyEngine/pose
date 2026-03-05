@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react';
-import { useScrollReveal } from '../../hooks/useScrollReveal';
-import type { SlideProps } from '../../lib/types';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
+import type { SlideProps } from '@/lib/types';
 
 interface ScrollSectionProps {
   id: string;

@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { Outreach } from '../components/Outreach'
+import { Outreach } from '@/components/Outreach'
 
 describe('Outreach', () => {
   it('renders the email generator form', () => {

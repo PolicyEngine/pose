@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { SEGMENTS, POSE_MILESTONES, type Segment } from './database'
+import { SEGMENTS, POSE_MILESTONES, type Segment } from '@/types/database'
 
 describe('SEGMENTS', () => {
   it('has exactly 6 segments', () => {

@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
-import { ecosystemNodes, ecosystemEdges, RING_RADII, CENTER } from '../../data/ecosystem';
-import { EcosystemNodeComponent } from './EcosystemNode';
-import { EcosystemEdgeComponent } from './EcosystemEdge';
-import { EcosystemRing } from './EcosystemRing';
-import { colors } from '../../lib/colors';
+import { ecosystemNodes, ecosystemEdges, RING_RADII, CENTER } from '@/data/ecosystem';
+import { EcosystemNodeComponent } from '@/components/ecosystem/EcosystemNode';
+import { EcosystemEdgeComponent } from '@/components/ecosystem/EcosystemEdge';
+import { EcosystemRing } from '@/components/ecosystem/EcosystemRing';
+import { colors } from '@/lib/colors';
 
 interface EcosystemMapInteractiveProps {
   step: number;

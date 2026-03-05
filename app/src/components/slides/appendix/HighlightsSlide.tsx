@@ -1,7 +1,7 @@
-import type { SlideProps } from '../../../lib/types';
-import { colors } from '../../../lib/colors';
-import { SlideHeader } from '../../ui/SlideHeader';
-import { interviewHighlights } from '../../../data/appendix';
+import type { SlideProps } from '@/lib/types';
+import { colors } from '@/lib/colors';
+import { SlideHeader } from '@/components/ui/SlideHeader';
+import { interviewHighlights } from '@/data/appendix';
 
 export function HighlightsSlide(_props: SlideProps) {
   return (

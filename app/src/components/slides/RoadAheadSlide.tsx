@@ -1,7 +1,7 @@
-import { colors } from '../../lib/colors';
-import { milestones, orgTimelines } from '../../data/timeline';
-import type { SlideProps } from '../../lib/types';
-import { SlideHeader } from '../ui/SlideHeader';
+import { colors } from '@/lib/colors';
+import { milestones, orgTimelines } from '@/data/timeline';
+import type { SlideProps } from '@/lib/types';
+import { SlideHeader } from '@/components/ui/SlideHeader';
 
 const ALL_LABELS = ['Q1 2026', 'Q2-Q3 2026', 'Q4 2026', '2027', '2028'];
 const ALL_COLORS = [colors.highlight, colors.accentBlue, colors.accentTeal, colors.accentGreen, colors.accentPurple];
@@ -65,9 +65,13 @@ export function RoadAheadSlide(_props: SlideProps) {
             style={{ gridColumn: 1, gridRow: oi + 3, transitionDelay: `${oi * 0.1}s` }}
           >
             <div>
-              <p className="text-xs font-bold tracking-wider uppercase whitespace-nowrap" style={{ color: org.color }}>
-                {org.org}
-              </p>
+              {org.logo ? (
+                <img src={org.logo} alt={org.org} className="h-8" />
+              ) : (
+                <p className="text-xs font-bold tracking-wider uppercase whitespace-nowrap" style={{ color: org.color }}>
+                  {org.org}
+                </p>
+              )}
               {org.subtitle && (
                 <p className="text-[9px] text-text-tertiary whitespace-nowrap">{org.subtitle}</p>
               )}

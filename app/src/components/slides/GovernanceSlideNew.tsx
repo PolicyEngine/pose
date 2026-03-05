@@ -1,8 +1,8 @@
-import { colors } from '../../lib/colors';
-import { governanceBefore, governanceAfter, governanceQuote, governanceDetail } from '../../data/governance';
-import type { SlideProps } from '../../lib/types';
-import { SlideHeader } from '../ui/SlideHeader';
-import { Card } from '../ui/Card';
+import { colors } from '@/lib/colors';
+import { governanceBefore, governanceAfter, governanceQuote, governanceDetail } from '@/data/governance';
+import type { SlideProps } from '@/lib/types';
+import { SlideHeader } from '@/components/ui/SlideHeader';
+import { Card } from '@/components/ui/Card';
 
 export function GovernanceSlideNew(_props: SlideProps) {
   return (

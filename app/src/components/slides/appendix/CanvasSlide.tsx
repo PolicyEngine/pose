@@ -1,8 +1,8 @@
-import type { SlideProps } from '../../../lib/types';
-import { colors } from '../../../lib/colors';
-import { SlideHeader } from '../../ui/SlideHeader';
-import { Card } from '../../ui/Card';
-import { canvasMembers } from '../../../data/appendix';
+import type { SlideProps } from '@/lib/types';
+import { colors } from '@/lib/colors';
+import { SlideHeader } from '@/components/ui/SlideHeader';
+import { Card } from '@/components/ui/Card';
+import { canvasMembers } from '@/data/appendix';
 
 export function CanvasSlide(_props: SlideProps) {
   const sections = [canvasMembers.community, canvasMembers.stakeholders, canvasMembers.valueProps];

@@ -1,4 +1,4 @@
-import type { StorySection, WeekJourney } from '../lib/types';
+import type { StorySection, WeekJourney } from '@/lib/types';
 
 export const storySections: StorySection[] = [
   // Main story (10 sections)

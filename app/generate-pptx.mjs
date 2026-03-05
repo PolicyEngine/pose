@@ -20,14 +20,14 @@ const SECTIONS = [
 // ── Start dev server ──
 function startDevServer() {
   return new Promise((resolve, reject) => {
-    const proc = spawn('bun', ['run', 'dev', '--host', '0.0.0.0', '--port', '5199'], {
+    const proc = spawn('bunx', ['next', 'dev', '--port', '5199'], {
       cwd: new URL('.', import.meta.url).pathname,
       stdio: ['ignore', 'pipe', 'pipe'],
     });
     let started = false;
     const onData = (chunk) => {
       const text = chunk.toString();
-      if (!started && text.includes('Local:')) {
+      if (!started && (text.includes('Local:') || text.includes('Ready'))) {
         started = true;
         resolve(proc);
       }

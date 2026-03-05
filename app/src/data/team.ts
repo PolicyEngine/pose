@@ -1,5 +1,5 @@
-import type { TeamMember } from '../lib/types';
-import { colors } from '../lib/colors';
+import type { TeamMember } from '@/lib/types';
+import { colors } from '@/lib/colors';
 
 export const team: TeamMember[] = [
   {

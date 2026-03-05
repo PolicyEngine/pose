@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecosystem maps | POSE Winter 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Serif:opsz,wght@8..144,400;8..144,600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #FAFAFA;
+            min-height: 100vh;
+            color: #344054;
+            padding: 48px 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-family: 'Roboto Serif', Georgia, serif;
+            font-size: 2rem;
+            margin-bottom: 8px;
+            color: #1D4044;
+        }
+        .subtitle {
+            color: #6B7280;
+            margin-bottom: 40px;
+            font-size: 1rem;
+        }
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        a.card {
+            display: block;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            padding: 28px 32px;
+            text-decoration: none;
+            color: inherit;
+            border-left: 5px solid transparent;
+            transition: box-shadow 0.2s, transform 0.15s;
+        }
+        a.card:hover {
+            box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+        }
+        .card-rules { border-left-color: #2563EB; }
+        .card-cosilico { border-left-color: #0891B2; }
+        .card-policyengine { border-left-color: #319795; }
+        .card-unified { border-left-color: #9CA3AF; }
+        .card h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .card .entity {
+            font-size: 0.8rem;
+            color: #6B7280;
+            margin-bottom: 8px;
+        }
+        .card p {
+            font-size: 0.95rem;
+            color: #4B5563;
+            line-height: 1.5;
+        }
+        .badge {
+            display: inline-block;
+            background: #F3F4F6;
+            color: #6B7280;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        .footer {
+            margin-top: 48px;
+            text-align: center;
+            color: #9CA3AF;
+            font-size: 0.85rem;
+        }
+        .footer a { color: #319795; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ecosystem maps</h1>
+        <p class="subtitle">NSF POSE Winter 2026 &mdash; three organizations, clear boundaries</p>
+
+        <div class="cards">
+            <a href="ecosystem-map-rules-foundation.html" class="card card-rules">
+                <h2>Rules Foundation <span class="badge">501(c)(3)</span></h2>
+                <div class="entity">Encode the law</div>
+                <p>Neutral, multi-stakeholder foundation maintaining the authoritative encoding of law as code. Source document archive, .rac DSL, AutoRAC validation harness, ground truth test data.</p>
+            </a>
+
+            <a href="ecosystem-map-cosilico.html" class="card card-cosilico">
+                <h2>Cosilico <span class="badge">Public Benefit Corp</span></h2>
+                <div class="entity">Run the infrastructure</div>
+                <p>Production infrastructure with two product lines: Cosilico Rules (deterministic tax/benefit calculations) and Cosilico Simulate (microsimulation, imputation, Microplex). 11 market segments, $250B+ total addressable markets.</p>
+            </a>
+
+            <a href="ecosystem-map-policyengine.html" class="card card-policyengine">
+                <h2>PolicyEngine <span class="badge">501(c)(3) / UK Charity</span></h2>
+                <div class="entity">Tell the story</div>
+                <p>Focused research organization: policy analysis, interactive tools, congressional district dashboards, research partnerships with NBER, Atlanta Fed, Brookings, NIESR. 12 segments, 100+ interview targets.</p>
+            </a>
+
+            <a href="ecosystem-map.html" class="card card-unified">
+                <h2>Unified (original) <span class="badge">Pre-split</span></h2>
+                <div class="entity">Combined ecosystem</div>
+                <p>Original unified PolicyEngine ecosystem map before the three-org split. Kept for reference.</p>
+            </a>
+        </div>
+
+        <div class="footer">
+            <a href="https://github.com/PolicyEngine/pose">PolicyEngine/pose</a> &middot; NSF Award #4373
+        </div>
+    </div>
+</body>
+</html>

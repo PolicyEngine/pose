@@ -1,5 +1,5 @@
-import type { EcosystemNode, EcosystemEdge } from '../lib/types';
-import { colors } from '../lib/colors';
+import type { EcosystemNode, EcosystemEdge } from '@/lib/types';
+import { colors } from '@/lib/colors';
 
 // Ring radii (used in the SVG viewBox 1800x900)
 export const RING_RADII = [0, 200, 330, 440, 540];

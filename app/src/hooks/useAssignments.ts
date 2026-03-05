@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from 'react'
-import type { Assignment, AssignmentStatus, AssignmentCategory } from '../types/database'
-import { POSE_ASSIGNMENTS } from '../types/database'
+import type { Assignment, AssignmentStatus, AssignmentCategory } from '@/types/database'
+import { POSE_ASSIGNMENTS } from '@/types/database'
 
 const LOCAL_STORAGE_KEY = 'pose_assignments'
 

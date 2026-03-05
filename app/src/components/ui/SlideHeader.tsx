@@ -1,4 +1,4 @@
-import { AccentLine } from './AccentLine';
+import { AccentLine } from '@/components/ui/AccentLine';
 
 interface SlideHeaderProps {
   tag: string;

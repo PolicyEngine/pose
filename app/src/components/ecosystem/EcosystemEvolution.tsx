@@ -1,15 +1,16 @@
 import { useState } from 'react';
-import { EcosystemMapInteractive } from './EcosystemMapInteractive';
-import { EVOLUTION_STEPS } from '../../data/ecosystem';
-import { colors } from '../../lib/colors';
-import type { SlideProps } from '../../lib/types';
-import { SlideHeader } from '../ui/SlideHeader';
-import { useScrollProgress } from '../../hooks/useScrollProgress';
+import { EcosystemMapInteractive } from '@/components/ecosystem/EcosystemMapInteractive';
+import { EVOLUTION_STEPS } from '@/data/ecosystem';
+import { colors } from '@/lib/colors';
+import type { SlideProps } from '@/lib/types';
+import { SlideHeader } from '@/components/ui/SlideHeader';
+import { useScrollProgress } from '@/hooks/useScrollProgress';
 
-const LEGEND: { label: string; org: 'rules' | 'cosilico' | 'pe' | 'all'; color: string; bg: string }[] = [
-  { label: 'Rules Foundation', org: 'rules', color: colors.rulesBlue, bg: 'rgba(59, 130, 246, 0.1)' },
-  { label: 'Cosilico', org: 'cosilico', color: colors.cosilicoCyan, bg: 'rgba(6, 182, 212, 0.1)' },
-  { label: 'PolicyEngine', org: 'pe', color: colors.peTeal, bg: 'rgba(49, 151, 149, 0.1)' },
+const LEGEND: { label: string; org: 'rules' | 'cosilico' | 'pe' | 'all'; color: string; bg: string; logo?: string }[] = [
+  { label: 'Rules Foundation', org: 'rules', color: colors.rulesBlue, bg: 'rgba(59, 130, 246, 0.1)', logo: '/assets/logos/rf-full.svg' },
+  { label: 'Cosilico', org: 'cosilico', color: colors.cosilicoCyan, bg: 'rgba(6, 182, 212, 0.1)', logo: '/assets/logos/cosilico-full.svg' },
+
+  { label: 'PolicyEngine', org: 'pe', color: colors.peTeal, bg: 'rgba(49, 151, 149, 0.1)', logo: '/assets/logos/pe-full-white.svg' },
   { label: 'Shared', org: 'all', color: '#64748B', bg: 'rgba(100, 116, 139, 0.1)' },
 ];
 
@@ -66,9 +67,13 @@ export function EcosystemEvolutionSlide(_props: SlideProps) {
                       border: `2px solid ${item.color}`,
                     }}
                   />
-                  <span className="text-[11px] font-medium" style={{ color: isActive ? item.color : '#94A3B8' }}>
-                    {item.label}
-                  </span>
+                  {item.logo ? (
+                    <img src={item.logo} alt={item.label} className="h-3.5" style={{ opacity: isActive ? 1 : 0.6 }} />
+                  ) : (
+                    <span className="text-[11px] font-medium" style={{ color: isActive ? item.color : '#94A3B8' }}>
+                      {item.label}
+                    </span>
+                  )}
                 </button>
               );
             })}

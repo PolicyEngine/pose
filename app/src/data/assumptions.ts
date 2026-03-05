@@ -1,5 +1,5 @@
-import type { Assumption } from '../lib/types';
-import { colors } from '../lib/colors';
+import type { Assumption } from '@/lib/types';
+import { colors } from '@/lib/colors';
 
 export const assumptions: Assumption[] = [
   {

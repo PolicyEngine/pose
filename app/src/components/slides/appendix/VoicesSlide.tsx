@@ -1,8 +1,8 @@
-import type { SlideProps } from '../../../lib/types';
-import { colors } from '../../../lib/colors';
-import { SlideHeader } from '../../ui/SlideHeader';
-import { QuoteCard } from '../../ui/QuoteCard';
-import { voicesQuotes } from '../../../data/appendix';
+import type { SlideProps } from '@/lib/types';
+import { colors } from '@/lib/colors';
+import { SlideHeader } from '@/components/ui/SlideHeader';
+import { QuoteCard } from '@/components/ui/QuoteCard';
+import { voicesQuotes } from '@/data/appendix';
 
 export function VoicesSlide(_props: SlideProps) {
   return (

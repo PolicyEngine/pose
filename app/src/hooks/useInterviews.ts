@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
-import { supabase, isSupabaseConfigured } from '../lib/supabase'
-import type { Interview, Segment } from '../types/database'
+import { supabase, isSupabaseConfigured } from '@/lib/supabase'
+import type { Interview, Segment } from '@/types/database'
 
 const LOCAL_STORAGE_KEY = 'pose_interviews'
 

@@ -1,8 +1,8 @@
-import type { SlideProps } from '../../lib/types';
-import { colors } from '../../lib/colors';
-import { SlideHeader } from '../ui/SlideHeader';
-import { team } from '../../data/team';
-import { trustedBy } from '../../data/impact';
+import type { SlideProps } from '@/lib/types';
+import { colors } from '@/lib/colors';
+import { SlideHeader } from '@/components/ui/SlideHeader';
+import { team } from '@/data/team';
+import { trustedBy } from '@/data/impact';
 
 export function WhoWeAreSlide(_props: SlideProps) {
   return (

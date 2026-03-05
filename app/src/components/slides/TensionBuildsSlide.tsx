@@ -1,9 +1,9 @@
-import type { SlideProps } from '../../lib/types';
-import { colors } from '../../lib/colors';
-import { SlideHeader } from '../ui/SlideHeader';
-import { QuoteCard } from '../ui/QuoteCard';
-import { weeklyJourney } from '../../data/story';
-import { assumptions } from '../../data/assumptions';
+import type { SlideProps } from '@/lib/types';
+import { colors } from '@/lib/colors';
+import { SlideHeader } from '@/components/ui/SlideHeader';
+import { QuoteCard } from '@/components/ui/QuoteCard';
+import { weeklyJourney } from '@/data/story';
+import { assumptions } from '@/data/assumptions';
 
 export function TensionBuildsWeek4Slide(_props: SlideProps) {
   const week4 = weeklyJourney[3];

@@ -1,5 +1,5 @@
-import type { WeekProgress, Segment } from '../lib/types';
-import { colors } from '../lib/colors';
+import type { WeekProgress, Segment } from '@/lib/types';
+import { colors } from '@/lib/colors';
 
 export const weeklyProgress: WeekProgress[] = [
   { week: 'Week 1 (Jan 23)', count: 8 },

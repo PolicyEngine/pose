@@ -1,8 +1,8 @@
-import type { SlideProps } from '../../lib/types';
-import { colors } from '../../lib/colors';
-import { SlideHeader } from '../ui/SlideHeader';
-import { QuoteCard } from '../ui/QuoteCard';
-import { weeklyJourney } from '../../data/story';
+import type { SlideProps } from '@/lib/types';
+import { colors } from '@/lib/colors';
+import { SlideHeader } from '@/components/ui/SlideHeader';
+import { QuoteCard } from '@/components/ui/QuoteCard';
+import { weeklyJourney } from '@/data/story';
 
 export function JourneyBeginsSlide(_props: SlideProps) {
   // Weeks 1-3 for this section

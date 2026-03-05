@@ -1,5 +1,5 @@
-import type { SlideProps } from '../../lib/types';
-import { SlideHeader } from '../ui/SlideHeader';
+import type { SlideProps } from '@/lib/types';
+import { SlideHeader } from '@/components/ui/SlideHeader';
 
 export function createPlaceholder(tag: string, tagColor: string, title: string, subtitle?: string, isAppendix?: boolean) {
   return function PlaceholderSlide(_props: SlideProps) {

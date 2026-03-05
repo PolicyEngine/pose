@@ -1,12 +1,12 @@
 import { useCallback, useMemo } from 'react';
-import { useFullscreen } from '../../hooks/useFullscreen';
-import { useKeyboardNav } from '../../hooks/useKeyboardNav';
-import { useScrollNavigation } from '../../hooks/useScrollNavigation';
-import { ScrollSection } from './ScrollSection';
-import { SideProgressNav } from './SideProgressNav';
-import { FloatingControls } from './FloatingControls';
-import { AppendixDivider } from './AppendixDivider';
-import type { ScrollSection as ScrollSectionType } from '../../lib/types';
+import { useFullscreen } from '@/hooks/useFullscreen';
+import { useKeyboardNav } from '@/hooks/useKeyboardNav';
+import { useScrollNavigation } from '@/hooks/useScrollNavigation';
+import { ScrollSection } from '@/components/presentation/ScrollSection';
+import { SideProgressNav } from '@/components/presentation/SideProgressNav';
+import { FloatingControls } from '@/components/presentation/FloatingControls';
+import { AppendixDivider } from '@/components/presentation/AppendixDivider';
+import type { ScrollSection as ScrollSectionType } from '@/lib/types';
 
 interface ScrollStoryProps {
   sections: ScrollSectionType[];

@@ -1,5 +1,5 @@
-import type { Quote, Partner, Competitor, MarketSegment, ImpactGoal, InterviewHighlight } from '../lib/types';
-import { colors } from '../lib/colors';
+import type { Quote, Partner, Competitor, MarketSegment, ImpactGoal, InterviewHighlight } from '@/lib/types';
+import { colors } from '@/lib/colors';
 
 export const voicesQuotes: Quote[] = [
   {

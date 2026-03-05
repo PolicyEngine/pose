@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { SEGMENTS, type Segment } from '../types/database'
+import { SEGMENTS, type Segment } from '@/types/database'
 
 interface SegmentChartProps {
   segmentCounts: Record<Segment, number>

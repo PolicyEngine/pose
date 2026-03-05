@@ -1,4 +1,4 @@
-import type { ScrollSection } from '../../lib/types';
+import type { ScrollSection } from '@/lib/types';
 
 interface SideProgressNavProps {
   sections: ScrollSection[];

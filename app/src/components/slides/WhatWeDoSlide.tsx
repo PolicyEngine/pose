@@ -1,8 +1,8 @@
-import type { SlideProps } from '../../lib/types';
-import { colors } from '../../lib/colors';
-import { SlideHeader } from '../ui/SlideHeader';
-import { StatCard } from '../ui/StatCard';
-import { stats } from '../../data/impact';
+import type { SlideProps } from '@/lib/types';
+import { colors } from '@/lib/colors';
+import { SlideHeader } from '@/components/ui/SlideHeader';
+import { StatCard } from '@/components/ui/StatCard';
+import { stats } from '@/data/impact';
 
 export function WhatWeDoSlide(_props: SlideProps) {
   return (

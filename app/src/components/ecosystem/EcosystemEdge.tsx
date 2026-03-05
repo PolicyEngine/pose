@@ -1,4 +1,4 @@
-import type { EcosystemEdge as EdgeType } from '../../lib/types';
+import type { EcosystemEdge as EdgeType } from '@/lib/types';
 
 interface EcosystemEdgeProps {
   edge: EdgeType;

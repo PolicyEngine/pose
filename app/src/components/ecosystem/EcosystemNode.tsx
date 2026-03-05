@@ -1,4 +1,4 @@
-import type { EcosystemNode as NodeType } from '../../lib/types';
+import type { EcosystemNode as NodeType } from '@/lib/types';
 
 interface EcosystemNodeProps {
   node: NodeType;
@@ -27,17 +27,25 @@ const ORG_BORDER: Record<string, string> = {
 // Core org nodes (ring 0) get solid colored backgrounds
 const CORE_IDS = new Set(['rules', 'cosilico', 'pe', 'pe-unified']);
 
+// Map core node IDs to their full logo paths
+const CORE_LOGOS: Record<string, string> = {
+  rules: '/assets/logos/rf-full-white.svg',
+  cosilico: '/assets/logos/cosilico-full-white.svg',
+  pe: '/assets/logos/pe-full-white.svg',
+  'pe-unified': '/assets/logos/pe-full-white.svg',
+};
+
 export function EcosystemNodeComponent({ node, x, y, visible, highlighted }: EcosystemNodeProps) {
   const lines = node.label.split('\n');
   const isCore = CORE_IDS.has(node.id);
   const width = isCore ? 160 : 150;
-  const height = isCore
-    ? (lines.length > 1 ? 72 : 52)
-    : (lines.length > 1 ? 64 : 46);
+  const height = isCore ? 60 : (lines.length > 1 ? 64 : 46);
 
   const bgColor = isCore ? node.color : (ORG_BG[node.org] || ORG_BG.all);
   const borderColor = isCore ? node.color : (ORG_BORDER[node.org] || ORG_BORDER.all);
-  const textColor = isCore ? '#FFFFFF' : '#F1F5F9';
+  const textColor = '#F1F5F9';
+
+  const coreLogo = CORE_LOGOS[node.id];
 
   return (
     <g
@@ -80,21 +88,31 @@ export function EcosystemNodeComponent({ node, x, y, visible, highlighted }: Eco
           fill={borderColor}
         />
       )}
-      {lines.map((line, i) => (
-        <text
-          key={i}
-          x={x + (isCore ? 0 : 2)}
-          y={y + (i - (lines.length - 1) / 2) * 18 + (isCore ? 0 : 2)}
-          textAnchor="middle"
-          dominantBaseline="central"
-          fill={textColor}
-          fontSize={isCore ? 17 : 14}
-          fontFamily="Inter, sans-serif"
-          fontWeight={isCore ? 700 : 600}
-        >
-          {line}
-        </text>
-      ))}
+      {isCore && coreLogo ? (
+        <image
+          href={coreLogo}
+          x={x - 60}
+          y={y - 14}
+          width={120}
+          height={28}
+        />
+      ) : (
+        lines.map((line, i) => (
+          <text
+            key={i}
+            x={x + (isCore ? 0 : 2)}
+            y={y + (i - (lines.length - 1) / 2) * 18 + (isCore ? 0 : 2)}
+            textAnchor="middle"
+            dominantBaseline="central"
+            fill={textColor}
+            fontSize={14}
+            fontFamily="Inter, sans-serif"
+            fontWeight={600}
+          >
+            {line}
+          </text>
+        ))
+      )}
       {node.count && (
         <g>
           <circle

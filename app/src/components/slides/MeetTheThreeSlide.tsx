@@ -1,8 +1,8 @@
-import { colors } from '../../lib/colors';
-import { sustainability } from '../../data/sustainability';
-import type { SlideProps } from '../../lib/types';
-import { SlideHeader } from '../ui/SlideHeader';
-import { Card } from '../ui/Card';
+import { colors } from '@/lib/colors';
+import { sustainability } from '@/data/sustainability';
+import type { SlideProps } from '@/lib/types';
+import { SlideHeader } from '@/components/ui/SlideHeader';
+import { Card } from '@/components/ui/Card';
 
 interface OrgPanel {
   name: string;

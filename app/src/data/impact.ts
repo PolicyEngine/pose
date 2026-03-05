@@ -1,5 +1,5 @@
-import type { StatItem } from '../lib/types';
-import { colors } from '../lib/colors';
+import type { StatItem } from '@/lib/types';
+import { colors } from '@/lib/colors';
 
 export const stats: StatItem[] = [
   { number: '75K+', label: 'API calls in 2025', color: colors.accentBlue },
