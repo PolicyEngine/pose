@@ -68,7 +68,7 @@ export function EcosystemMapInteractive({ step, filterOrg }: EcosystemMapInterac
   const visibleRings = step === 1 ? [1, 2] : step === 3 ? [1, 2, 3, 4] : [];
 
   return (
-    <svg viewBox="0 0 1800 900" className="w-full h-full">
+    <svg viewBox="0 0 1900 1400" className="w-full h-full">
       <defs>
         {ARROW_COLORS.map((c) => (
           <marker

@@ -2,9 +2,9 @@ import type { EcosystemNode, EcosystemEdge } from '@/lib/types';
 import { colors } from '@/lib/colors';
 
 // Ring radii (used in the SVG viewBox 1800x900)
-export const RING_RADII = [0, 200, 330, 440, 540];
+export const RING_RADII = [0, 260, 400, 510, 620];
 export const RING_LABELS = ['Core', 'Direct Users', 'Channel Partners', 'Capabilities', 'Revenue'];
-export const CENTER = { x: 900, y: 470 };
+export const CENTER = { x: 950, y: 680 };
 
 export const ecosystemNodes: EcosystemNode[] = [
   // Ring 0: Core orgs
@@ -17,17 +17,17 @@ export const ecosystemNodes: EcosystemNode[] = [
   { id: 'researchers', label: 'Academic\nResearchers', ring: 1, angle: 355, color: colors.accentBlue, org: 'pe', count: 18, description: 'Empirical policy questions', visibleAtStep: 1 },
   { id: 'think-tanks', label: 'Think Tank\nAnalysts', ring: 1, angle: 50, color: colors.accentTeal, org: 'pe', count: 12, description: 'Policy reports & analysis', visibleAtStep: 1 },
   { id: 'gov-econ', label: 'Government\nEconomists', ring: 1, angle: 105, color: colors.accentGreen, org: 'rules', count: 7, description: 'Validate estimates', visibleAtStep: 1 },
-  { id: 'journalists', label: 'Data\nJournalists', ring: 1, angle: 155, color: colors.lightGray, org: 'pe', count: 5, description: 'Fact-check & interactives', visibleAtStep: 1 },
+  { id: 'journalists', label: 'Data\nJournalists', ring: 1, angle: 175, color: colors.lightGray, org: 'pe', count: 5, description: 'Fact-check & interactives', visibleAtStep: 1 },
   { id: 'advocates', label: 'Policy\nAdvocates', ring: 1, angle: 205, color: colors.accentPurple, org: 'pe', count: 6, description: 'Shape policy narrative', visibleAtStep: 1 },
   { id: 'contributors', label: 'OSS\nContributors', ring: 1, angle: 255, color: colors.accentGreen, org: 'rules', count: 4, description: 'Code & fix bugs', visibleAtStep: 1 },
-  { id: 'pe-team', label: 'PE Team', ring: 1, angle: 310, color: colors.peTeal, org: 'all', count: 10, description: 'Build core models', visibleAtStep: 1 },
+  { id: 'pe-team', label: 'PE Team', ring: 1, angle: 338, color: colors.peTeal, org: 'all', count: 10, description: 'Build core models', visibleAtStep: 1 },
 
   // Ring 2: Channel partners
   { id: 'ai-labs', label: 'AI + Econ\nResearchers', ring: 2, angle: 20, color: colors.cosilicoCyan, org: 'cosilico', count: 10, description: 'AI + policy research', visibleAtStep: 1 },
   { id: 'gov-standards', label: 'Gov Standards\nBodies', ring: 2, angle: 92, color: colors.rulesBlue, org: 'rules', count: 7, description: 'Interoperability', visibleAtStep: 1 },
-  { id: 'funders', label: 'Funders', ring: 2, angle: 164, color: colors.accentOrange, org: 'all', count: 10, description: 'Fund development', visibleAtStep: 1 },
+  { id: 'funders', label: 'Funders', ring: 2, angle: 160, color: colors.accentOrange, org: 'all', count: 10, description: 'Fund development', visibleAtStep: 1 },
   { id: 'non-users', label: 'Non-Users', ring: 2, angle: 236, color: colors.highlight, org: 'all', count: 8, description: 'Understand barriers', visibleAtStep: 1 },
-  { id: 'competitors', label: 'Competitors', ring: 2, angle: 308, color: colors.dimText, org: 'all', count: 3, description: 'Ecosystem mapping', visibleAtStep: 1 },
+  { id: 'competitors', label: 'Competitors', ring: 2, angle: 295, color: colors.dimText, org: 'all', count: 3, description: 'Ecosystem mapping', visibleAtStep: 1 },
 
   // Ring 3: Capabilities
   { id: 'tax-calc', label: 'Tax\nCalculation', ring: 3, angle: 5, color: colors.cosilicoCyan, org: 'cosilico', description: 'API endpoints', visibleAtStep: 3 },

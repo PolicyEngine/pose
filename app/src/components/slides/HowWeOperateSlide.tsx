@@ -62,7 +62,7 @@ export function HowWeOperateSlide(_props: SlideProps) {
             <div className="flex items-start gap-3">
               {/* Layer label — same style as HGP slide */}
               <div
-                className="w-28 shrink-0 py-3 px-3 rounded-lg text-center flex flex-col justify-center"
+                className="w-32 shrink-0 py-3 px-3 rounded-lg text-center flex flex-col justify-center"
                 style={{
                   color: layer.color,
                   backgroundColor: `${layer.color}10`,
@@ -89,11 +89,11 @@ export function HowWeOperateSlide(_props: SlideProps) {
                     {layer.description}
                   </p>
                 </div>
-                <div className="shrink-0 flex flex-col gap-1.5">
+                <div className="shrink-0 flex flex-col gap-1.5 items-stretch">
                   {layer.examples.map((ex) => (
                     <span
                       key={ex}
-                      className="text-[11px] px-2 py-0.5 rounded-md whitespace-nowrap text-right"
+                      className="text-[11px] px-2 py-0.5 rounded-md whitespace-nowrap text-left"
                       style={{
                         color: layer.color,
                         backgroundColor: `${layer.color}10`,
@@ -109,7 +109,7 @@ export function HowWeOperateSlide(_props: SlideProps) {
 
             {/* Connector — same as HGP slide */}
             {li < LAYERS.length - 1 && (
-              <div className="flex justify-center ml-28 my-1">
+              <div className="flex justify-center ml-32 my-1">
                 <svg width="20" height="16" viewBox="0 0 20 16">
                   <path d="M10 0 L10 12 M5 8 L10 14 L15 8" stroke={colors.textTertiary} strokeWidth="1.5" fill="none" strokeLinecap="round" />
                 </svg>
@@ -124,7 +124,7 @@ export function HowWeOperateSlide(_props: SlideProps) {
         style={{ color: colors.textTertiary, transitionDelay: '0.6s' }}
       >
         Today the alternatives cost $10K+ per license, take weeks, and can&apos;t be audited.{' '}
-        <span className="font-medium" style={{ color: colors.primary }}>Ours is free and open.</span>
+        <span className="font-medium" style={{ color: colors.primary }}>PolicyEngine is free and open.</span>
       </p>
     </div>
   );

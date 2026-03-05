@@ -16,11 +16,12 @@ export function RoadAheadSlide(_props: SlideProps) {
       <SlideHeader tag="TIMELINE" tagColor={colors.primary} title="The road ahead" />
 
       {/* Everything in one grid so dots align with cells */}
-      <div className="mt-8 grid gap-x-3 gap-y-2" style={{ gridTemplateColumns: 'auto repeat(5, 1fr)' }}>
+      <div className="mt-8 grid gap-x-3 gap-y-3" style={{ gridTemplateColumns: 'auto repeat(5, 1fr)', gridTemplateRows: 'auto auto 1fr 1fr 1fr' }}>
 
-        {/* Row 1: Timeline connector line with glowing dots (spans cols 2-6) */}
+        {/* Row 1: Timeline connector line spanning cols 2-6, with dots placed per-column */}
         <div style={{ gridColumn: '1', gridRow: '1' }} />
-        <div className="relative col-span-5" style={{ gridColumn: '2 / 7', gridRow: '1' }}>
+        {/* Gradient line behind dots */}
+        <div className="relative" style={{ gridColumn: '2 / 7', gridRow: '1', pointerEvents: 'none' }}>
           <div className="absolute top-5 left-0 right-0 h-0.5" style={{ backgroundColor: colors.borderMedium }}>
             <div
               className="h-full rounded-full"
@@ -30,25 +31,24 @@ export function RoadAheadSlide(_props: SlideProps) {
               }}
             />
           </div>
-          <div className="grid grid-cols-5 gap-3 relative">
-            {ALL_LABELS.map((_, i) => (
-              <div key={i} className="flex justify-center">
-                <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center relative z-10"
-                  style={{
-                    backgroundColor: `${ALL_COLORS[i]}20`,
-                    border: `2px solid ${ALL_COLORS[i]}`,
-                    boxShadow: `0 0 16px ${ALL_COLORS[i]}40`,
-                  }}
-                >
-                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: ALL_COLORS[i] }} />
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
+        {/* Individual dots in each column */}
+        {ALL_LABELS.map((_, i) => (
+          <div key={`dot-${i}`} className="flex justify-center relative z-10" style={{ gridColumn: i + 2, gridRow: '1' }}>
+            <div
+              className="w-10 h-10 rounded-full flex items-center justify-center"
+              style={{
+                backgroundColor: `${ALL_COLORS[i]}20`,
+                border: `2px solid ${ALL_COLORS[i]}`,
+                boxShadow: `0 0 16px ${ALL_COLORS[i]}40`,
+              }}
+            >
+              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: ALL_COLORS[i] }} />
+            </div>
+          </div>
+        ))}
 
-        {/* Row 2: Time period labels (spans cols 2-6) */}
+        {/* Row 2: Time period labels per-column */}
         <div style={{ gridColumn: '1', gridRow: '2' }} />
         {ALL_LABELS.map((label, i) => (
           <div key={label} className="scroll-reveal text-center" style={{ gridColumn: i + 2, gridRow: '2', transitionDelay: `${i * 0.1}s` }}>
@@ -90,11 +90,11 @@ export function RoadAheadSlide(_props: SlideProps) {
             boxShadow: `0 0 20px ${now.color}15`,
           }}
         >
-          <ul className="space-y-1">
+          <ul className="space-y-2">
             {now.description.map((item) => (
-              <li key={item} className="text-xs text-text-secondary flex items-start gap-1.5">
+              <li key={item} className="text-xs text-text-secondary flex items-start gap-2">
                 <span
-                  className="mt-1 w-1 h-1 rounded-full shrink-0"
+                  className="mt-[5px] w-1.5 h-1.5 rounded-full shrink-0"
                   style={{ backgroundColor: now.color }}
                 />
                 {item}
@@ -110,7 +110,7 @@ export function RoadAheadSlide(_props: SlideProps) {
             return (
               <div
                 key={`${org.org}-${phase}`}
-                className="scroll-reveal rounded-md border p-2.5 min-h-[48px]"
+                className="scroll-reveal rounded-md border p-2.5 flex items-start"
                 style={{
                   gridColumn: pi + 3,
                   gridRow: oi + 3,
@@ -120,11 +120,11 @@ export function RoadAheadSlide(_props: SlideProps) {
                 }}
               >
                 {match && (
-                  <ul className="space-y-0.5">
+                  <ul className="space-y-2">
                     {match.items.map((item) => (
-                      <li key={item} className="text-xs text-text-secondary flex items-start gap-1.5">
+                      <li key={item} className="text-xs text-text-secondary flex items-start gap-2">
                         <span
-                          className="mt-1 w-1 h-1 rounded-full shrink-0"
+                          className="mt-[5px] w-1.5 h-1.5 rounded-full shrink-0"
                           style={{ backgroundColor: org.color }}
                         />
                         {item}

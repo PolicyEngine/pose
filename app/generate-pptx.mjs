@@ -8,19 +8,24 @@ const SCREENSHOT_DIR = '/tmp/pose-slides';
 const OUTPUT_FILE = new URL('./PolicyEngine_POSE_Presentation.pptx', import.meta.url).pathname;
 const VIEWPORT = { width: 1440, height: 900, deviceScaleFactor: 2 };
 
-// Section IDs matching App.tsx order
+// Section IDs matching page.tsx order
 const SECTIONS = [
-  'cold-open', 'who-we-are', 'what-we-do', 'journey-begins', 'tension-week4', 'tension-week5',
+  'who-we-are', 'problem', 'fourth-option', 'cold-open', 'how-we-operate',
+  'what-we-do', 'journey-begins', 'tension-week4', 'tension-week5',
+  'stack-reprise', 'three-org-stack', 'meet-the-three',
   'aha-moment',  // ecosystem — will capture 3 steps separately
-  'meet-the-three', 'governance', 'road-ahead', 'the-close',
+  'road-ahead', 'the-close',
   'voices', 'impact-goals', 'partners', 'canvas', 'canvas-detail',
-  'gov-detail', 'competitive', 'highlights', 'market',
+  'governance', 'gov-detail', 'competitive', 'highlights', 'market',
 ];
 
-// ── Start dev server ──
+// Port: use existing dev server or start one
+const DEV_PORT = process.env.PORT || '5174';
+const DEV_URL = `http://localhost:${DEV_PORT}`;
+
 function startDevServer() {
   return new Promise((resolve, reject) => {
-    const proc = spawn('bunx', ['next', 'dev', '--port', '5199'], {
+    const proc = spawn('bunx', ['next', 'dev', '--port', DEV_PORT], {
       cwd: new URL('.', import.meta.url).pathname,
       stdio: ['ignore', 'pipe', 'pipe'],
     });
@@ -39,20 +44,33 @@ function startDevServer() {
   });
 }
 
+async function checkServer(url) {
+  try {
+    const res = await fetch(url, { signal: AbortSignal.timeout(2000) });
+    return res.ok;
+  } catch { return false; }
+}
+
 // ── Screenshot logic ──
 async function captureSlides() {
   // Prep
   if (existsSync(SCREENSHOT_DIR)) rmSync(SCREENSHOT_DIR, { recursive: true });
   mkdirSync(SCREENSHOT_DIR, { recursive: true });
 
-  console.log('Starting dev server...');
-  const server = await startDevServer();
-  console.log('Dev server ready.');
+  let server = null;
+  const alreadyRunning = await checkServer(DEV_URL);
+  if (alreadyRunning) {
+    console.log(`Using existing dev server at ${DEV_URL}`);
+  } else {
+    console.log('Starting dev server...');
+    server = await startDevServer();
+    console.log('Dev server ready.');
+  }
 
   const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
   const page = await browser.newPage();
   await page.setViewport(VIEWPORT);
-  await page.goto('http://localhost:5199', { waitUntil: 'networkidle2', timeout: 30000 });
+  await page.goto(DEV_URL, { waitUntil: 'networkidle2', timeout: 30000 });
 
   // Force all sections visible (bypass scroll-reveal animations)
   await page.evaluate(() => {
@@ -130,7 +148,7 @@ async function captureSlides() {
   }
 
   await browser.close();
-  server.kill();
+  if (server) server.kill();
   return screenshots;
 }
 

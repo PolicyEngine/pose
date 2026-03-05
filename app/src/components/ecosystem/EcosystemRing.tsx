@@ -30,12 +30,13 @@ export function EcosystemRing({ cx, cy, radius, label, visible, delay = 0 }: Eco
         opacity={0.5}
       />
       <text
-        x={cx + radius + 8}
-        y={cy - radius + 18}
+        x={cx + radius * Math.cos(-Math.PI / 4)}
+        y={cy + radius * Math.sin(-Math.PI / 4) + 6}
         fill="#64748B"
         fontSize={14}
         fontFamily="Inter, sans-serif"
         fontWeight={500}
+        textAnchor="middle"
       >
         {label}
       </text>

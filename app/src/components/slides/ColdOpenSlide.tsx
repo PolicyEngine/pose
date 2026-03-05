@@ -63,7 +63,7 @@ export function ColdOpenSlide(_props: SlideProps) {
             <div className="flex items-start gap-3">
               {/* Layer label */}
               <div
-                className="w-28 shrink-0 py-3 px-3 rounded-lg text-center flex flex-col justify-center"
+                className="w-32 shrink-0 py-3 px-3 rounded-lg text-center flex flex-col justify-center"
                 style={{
                   color: layer.color,
                   backgroundColor: `${layer.color}10`,
@@ -108,14 +108,23 @@ export function ColdOpenSlide(_props: SlideProps) {
                   </div>
                 ))}
               </div>
+
             </div>
 
-            {/* Connector */}
+            {/* Connector — three arrows fanning to the items below */}
             {li < LAYERS.length - 1 && (
-              <div className="flex justify-center ml-28 my-1">
-                <svg width="20" height="16" viewBox="0 0 20 16">
-                  <path d="M10 0 L10 12 M5 8 L10 14 L15 8" stroke={colors.textTertiary} strokeWidth="1.5" fill="none" strokeLinecap="round" />
-                </svg>
+              <div className="flex ml-32 my-1 gap-2 pl-1" style={{ paddingRight: '0' }}>
+                {LAYERS[li + 1].items.map((_, idx) => (
+                  <div
+                    key={idx}
+                    className="flex justify-center"
+                    style={{ flex: LAYERS[li + 1].items[idx].highlight ? 2 : 1 }}
+                  >
+                    <svg width="20" height="16" viewBox="0 0 20 16">
+                      <path d="M10 0 L10 12 M5 8 L10 14 L15 8" stroke={colors.textTertiary} strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                    </svg>
+                  </div>
+                ))}
               </div>
             )}
           </div>
