@@ -2,9 +2,9 @@ import { colors } from '../../lib/colors';
 import type { SlideProps } from '../../lib/types';
 
 const ORGS = [
-  { name: 'Rules Foundation', tagline: 'Encode the law', color: colors.rulesBlue },
-  { name: 'Cosilico', tagline: 'Run the infrastructure', color: colors.cosilicoCyan },
-  { name: 'PolicyEngine', tagline: 'Tell the story', color: colors.peTeal },
+  { name: 'Rules Foundation', tagline: 'Encoding the world\u2019s rules', color: colors.rulesBlue, logo: '/assets/logos/rf-icon.svg' },
+  { name: 'Cosilico', tagline: 'Society in silico', color: colors.cosilicoCyan, logo: '/assets/logos/cosilico-icon.svg' },
+  { name: 'PolicyEngine', tagline: 'Policy meets evidence', color: colors.peTeal, logo: '/assets/logos/pe-icon.svg' },
 ];
 
 const CTA_ITEMS = [
@@ -24,7 +24,7 @@ export function TheCloseSlide(_props: SlideProps) {
     <div className="px-8 md:px-16 flex flex-col items-center justify-center min-h-[80vh] text-center">
       {/* HGP callback */}
       <p className="scroll-reveal text-base md:text-lg text-text-secondary italic leading-relaxed max-w-3xl">
-        The Human Genome Project didn't just map DNA. It created an ecosystem: sequencing companies, biotech startups, research institutions, clinical tools. No single organization could have done it all.
+        The Human Genome Project didn&apos;t just map DNA. It created an ecosystem&mdash;Schr&ouml;dinger built computational simulation on open molecular data, IHME built the Global Burden of Disease on open health data. Cosilico and PolicyEngine do the same for economic policy&mdash;simulation and research on Rules Foundation&apos;s open rules.
       </p>
 
       <p className="scroll-reveal text-base md:text-lg text-text-secondary italic leading-relaxed max-w-3xl mt-4" style={{ transitionDelay: '0.15s' }}>
@@ -37,20 +37,17 @@ export function TheCloseSlide(_props: SlideProps) {
       <div className="scroll-reveal mt-10 flex items-center justify-center gap-6 md:gap-10" style={{ transitionDelay: '0.3s' }}>
         {ORGS.map((org, i) => (
           <div key={org.name} className="flex flex-col items-center">
-            {/* Glowing circle */}
+            {/* Logo */}
             <div className="relative">
               <div
-                className="w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center"
+                className="w-20 h-20 md:w-24 md:h-24 rounded-2xl flex items-center justify-center"
                 style={{
                   backgroundColor: `${org.color}15`,
                   border: `2px solid ${org.color}`,
                   boxShadow: `0 0 24px ${org.color}30, 0 0 48px ${org.color}15`,
                 }}
               >
-                <div
-                  className="w-6 h-6 md:w-8 md:h-8 rounded-full"
-                  style={{ backgroundColor: org.color, boxShadow: `0 0 12px ${org.color}` }}
-                />
+                <img src={org.logo} alt={org.name} className="w-10 h-10 md:w-12 md:h-12 rounded" />
               </div>
               {/* Connection line to next org */}
               {i < ORGS.length - 1 && (

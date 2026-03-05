@@ -4,20 +4,11 @@ import { colors } from '../../lib/colors';
 export function ColdOpenSlide(_props: SlideProps) {
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] px-8 md:px-16 text-center">
-      {/* Three org circles */}
-      <div className="scroll-reveal flex gap-3 mb-12" style={{ transitionDelay: '0s' }}>
-        <div
-          className="w-3 h-3 rounded-full"
-          style={{ backgroundColor: colors.rulesBlue, boxShadow: `0 0 12px ${colors.glowRules}` }}
-        />
-        <div
-          className="w-3 h-3 rounded-full"
-          style={{ backgroundColor: colors.cosilicoCyan, boxShadow: `0 0 12px ${colors.glowCosilico}` }}
-        />
-        <div
-          className="w-3 h-3 rounded-full"
-          style={{ backgroundColor: colors.peTeal, boxShadow: `0 0 12px ${colors.glowPE}` }}
-        />
+      {/* Three org logos */}
+      <div className="scroll-reveal flex gap-4 mb-12 items-center" style={{ transitionDelay: '0s' }}>
+        <img src="/assets/logos/rf-icon.svg" alt="Rules Foundation" className="w-6 h-6 rounded" style={{ boxShadow: `0 0 12px ${colors.glowRules}` }} />
+        <img src="/assets/logos/cosilico-icon.svg" alt="Cosilico" className="w-6 h-6" style={{ boxShadow: `0 0 12px ${colors.glowCosilico}` }} />
+        <img src="/assets/logos/pe-icon.svg" alt="PolicyEngine" className="w-6 h-6" style={{ boxShadow: `0 0 12px ${colors.glowPE}` }} />
       </div>
 
       {/* The question */}
@@ -33,10 +24,11 @@ export function ColdOpenSlide(_props: SlideProps) {
         className="scroll-reveal text-base md:text-lg max-w-2xl mt-8 leading-relaxed"
         style={{ color: colors.textSecondary, transitionDelay: '0.35s' }}
       >
-        The Human Genome Project cost $3B and generated $800B+ in economic value.
-        Encoding and simulating the rules governing taxes, benefits, and
-        regulations is at least as complex&mdash;and the payoff could be even
-        larger.
+        The Human Genome Project cost $3B and generated $800B+ in economic value&mdash;not
+        just a reference genome, but an entire ecosystem: Celera, Illumina, 23andMe,
+        and an $800B biotech industry. We&apos;re building the intentional version
+        for policy: three orgs designed from day one to encode, simulate, and analyze
+        the rules governing American life.
       </p>
 
       {/* Animated counter line */}

@@ -6,6 +6,7 @@ import { Card } from '../../ui/Card';
 const governanceOrgs = [
   {
     name: 'Rules Foundation',
+    logo: '/assets/logos/rf-full.svg',
     color: colors.rulesBlue,
     entity: 'Multi-stakeholder 501(c)(3)',
     details: [
@@ -19,6 +20,7 @@ const governanceOrgs = [
   },
   {
     name: 'Cosilico',
+    logo: '/assets/logos/cosilico-full.svg',
     color: colors.cosilicoCyan,
     entity: 'Public Benefit Corp (mission-locked)',
     details: [
@@ -31,6 +33,7 @@ const governanceOrgs = [
   },
   {
     name: 'PolicyEngine',
+    logo: '/assets/logos/pe-full-white.svg',
     color: colors.peTeal,
     entity: '501(c)(3) / UK Charity (AGPL)',
     details: [
@@ -58,9 +61,7 @@ export function GovernanceDetailSlide(_props: SlideProps) {
           <Card key={org.name} borderColor={org.color} delay={i * 0.15}>
             <div className="h-1 rounded-t-lg" style={{ backgroundColor: org.color }} />
             <div className="p-5">
-              <h3 className="text-base font-bold" style={{ color: org.color }}>
-                {org.name}
-              </h3>
+              <img src={org.logo} alt={org.name} className="h-5" />
               <p className="text-xs font-medium mt-1" style={{ color: colors.textTertiary }}>
                 {org.entity}
               </p>

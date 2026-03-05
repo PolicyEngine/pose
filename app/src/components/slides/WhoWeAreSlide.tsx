@@ -7,6 +7,12 @@ import { trustedBy } from '../../data/impact';
 export function WhoWeAreSlide(_props: SlideProps) {
   return (
     <div className="px-8 md:px-16">
+      <img
+        src="/assets/logos/pe-full-white.svg"
+        alt="PolicyEngine"
+        className="scroll-reveal h-8 md:h-10 mb-6"
+        style={{ transitionDelay: '0s' }}
+      />
       <SlideHeader tag="NSF POSE TEAM 4373" tagColor={colors.primary} title="Who we are" />
 
       {/* Key numbers */}

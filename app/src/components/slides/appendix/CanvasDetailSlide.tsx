@@ -6,6 +6,7 @@ import { Card } from '../../ui/Card';
 const revenueModels = [
   {
     name: 'Rules Foundation',
+    logo: '/assets/logos/rf-full.svg',
     color: colors.rulesBlue,
     entity: '501(c)(3)',
     budget: '~$300K/year',
@@ -18,6 +19,7 @@ const revenueModels = [
   },
   {
     name: 'Cosilico',
+    logo: '/assets/logos/cosilico-full.svg',
     color: colors.cosilicoCyan,
     entity: 'Public Benefit Corp',
     budget: '$500K \u2192 $75M ARR over 5yr',
@@ -30,6 +32,7 @@ const revenueModels = [
   },
   {
     name: 'PolicyEngine',
+    logo: '/assets/logos/pe-full-white.svg',
     color: colors.peTeal,
     entity: '501(c)(3) / Charity',
     budget: '~$500K/year',
@@ -57,9 +60,7 @@ export function CanvasDetailSlide(_props: SlideProps) {
           <Card key={org.name} borderColor={org.color} delay={i * 0.15}>
             <div className="h-1 rounded-t-lg" style={{ backgroundColor: org.color }} />
             <div className="p-5">
-              <h3 className="text-base font-bold" style={{ color: org.color }}>
-                {org.name}
-              </h3>
+              <img src={org.logo} alt={org.name} className="h-5" />
               <p className="text-xs mt-1" style={{ color: colors.textTertiary }}>
                 {org.entity}
               </p>

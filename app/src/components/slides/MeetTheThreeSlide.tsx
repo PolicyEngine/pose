@@ -11,6 +11,7 @@ interface OrgPanel {
   analogy: string;
   color: string;
   glow: string;
+  logo: string;
   budget: string;
   revenueItems: string[];
   quote: string;
@@ -21,11 +22,12 @@ interface OrgPanel {
 const ORG_PANELS: OrgPanel[] = [
   {
     name: 'Rules Foundation',
-    tagline: 'Encode the law',
+    tagline: 'Encoding the world\u2019s rules',
     entity: '501(c)(3)',
-    analogy: 'Like OpenStreetMap for law',
+    analogy: 'The HGP for rules \u00b7 Open reference layer',
     color: colors.rulesBlue,
     glow: colors.glowRules,
+    logo: '/assets/logos/rf-icon.svg',
     budget: sustainability[0].budget,
     revenueItems: sustainability[0].items,
     quote: 'Programs and tax rules in silos create severe unintended consequences \u2014 cliffs, penalties. Modeling these is influencing legislators.',
@@ -34,11 +36,12 @@ const ORG_PANELS: OrgPanel[] = [
   },
   {
     name: 'Cosilico',
-    tagline: 'Run the infrastructure',
+    tagline: 'Society in silico',
     entity: 'Public Benefit Corp',
-    analogy: 'Society, in silico \u00b7 $250B+ TAM',
+    analogy: 'Society in silico \u00b7 Like Schr\u00f6dinger for policy',
     color: colors.cosilicoCyan,
     glow: colors.glowCosilico,
+    logo: '/assets/logos/cosilico-icon.svg',
     budget: sustainability[1].budget,
     revenueItems: sustainability[1].items,
     quote: 'Data and rules complexity create big gaps where better microsim tools and infrastructure are still missing.',
@@ -47,11 +50,12 @@ const ORG_PANELS: OrgPanel[] = [
   },
   {
     name: 'PolicyEngine',
-    tagline: 'Tell the story',
+    tagline: 'Policy meets evidence',
     entity: '501(c)(3) / UK Charity',
-    analogy: 'Like Urban/Mathematica but open source',
+    analogy: 'Like IHME for economic policy \u00b7 Open source',
     color: colors.peTeal,
     glow: colors.glowPE,
+    logo: '/assets/logos/pe-icon.svg',
     budget: sustainability[2].budget,
     revenueItems: sustainability[2].items,
     quote: 'Think tanks want auditable methodology they can cite in publications.',
@@ -75,10 +79,7 @@ export function MeetTheThreeSlide(_props: SlideProps) {
             <div className="p-5">
               {/* Header */}
               <div className="flex items-center gap-2 mb-1">
-                <div
-                  className="w-3 h-3 rounded-full"
-                  style={{ backgroundColor: org.color, boxShadow: `0 0 8px ${org.color}` }}
-                />
+                <img src={org.logo} alt={org.name} className="w-5 h-5 rounded-sm" />
                 <h3 className="text-lg font-bold text-text-primary">{org.name}</h3>
               </div>
               <p className="text-sm font-semibold italic" style={{ color: org.color }}>
