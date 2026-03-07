@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { colors as dsColors } from '@policyengine/design-system/tokens/colors'
 import {
   CheckCircle2,
   Circle,
@@ -350,7 +351,7 @@ export function Assignments() {
                   cy="32"
                   r="28"
                   fill="none"
-                  stroke="#e5e7eb"
+                  stroke={dsColors.gray[200]}
                   strokeWidth="6"
                 />
                 <circle
@@ -358,7 +359,7 @@ export function Assignments() {
                   cy="32"
                   r="28"
                   fill="none"
-                  stroke="#319795"
+                  stroke={dsColors.primary[500]}
                   strokeWidth="6"
                   strokeLinecap="round"
                   strokeDasharray={`${(completedCount / totalCount) * 176} 176`}

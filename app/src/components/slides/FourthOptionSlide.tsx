@@ -37,7 +37,7 @@ export function FourthOptionSlide(_props: SlideProps) {
             style={{
               transitionDelay: '0.15s',
               width: '380px',
-              backgroundColor: '#1a1a2e',
+              backgroundColor: colors.pageBg,
               border: `1px solid ${colors.borderMedium}`,
             }}
           >

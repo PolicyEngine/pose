@@ -1,4 +1,6 @@
 import type { EcosystemNode as NodeType } from '@/lib/types';
+import { colors } from '@/lib/colors';
+import { colors as dsColors } from '@policyengine/design-system/tokens/colors';
 
 interface EcosystemNodeProps {
   node: NodeType;
@@ -10,18 +12,18 @@ interface EcosystemNodeProps {
 
 // Dark theme org backgrounds (tinted versions)
 const ORG_BG: Record<string, string> = {
-  rules: '#1E293B',
-  cosilico: '#1E293B',
-  pe: '#1E293B',
-  all: '#1E293B',
+  rules: colors.cardBgAlt,
+  cosilico: colors.cardBgAlt,
+  pe: colors.cardBgAlt,
+  all: colors.cardBgAlt,
 };
 
 // Org-specific border colors
 const ORG_BORDER: Record<string, string> = {
-  rules: '#3B82F6',
-  cosilico: '#06B6D4',
-  pe: '#319795',
-  all: '#64748B',
+  rules: colors.rulesBlue,
+  cosilico: colors.cosilicoCyan,
+  pe: colors.primary,
+  all: colors.textTertiary,
 };
 
 // Core org nodes (ring 0) get solid colored backgrounds
@@ -43,7 +45,7 @@ export function EcosystemNodeComponent({ node, x, y, visible, highlighted }: Eco
 
   const bgColor = isCore ? node.color : (ORG_BG[node.org] || ORG_BG.all);
   const borderColor = isCore ? node.color : (ORG_BORDER[node.org] || ORG_BORDER.all);
-  const textColor = '#F1F5F9';
+  const textColor = colors.textPrimary;
 
   const coreLogo = CORE_LOGOS[node.id];
 
@@ -119,14 +121,14 @@ export function EcosystemNodeComponent({ node, x, y, visible, highlighted }: Eco
             cx={x + width / 2 - 4}
             cy={y - height / 2 + 4}
             r={14}
-            fill={isCore ? '#FFFFFF' : node.color}
+            fill={isCore ? dsColors.white : node.color}
           />
           <text
             x={x + width / 2 - 4}
             y={y - height / 2 + 4}
             textAnchor="middle"
             dominantBaseline="central"
-            fill={isCore ? node.color : '#FFFFFF'}
+            fill={isCore ? node.color : dsColors.white}
             fontSize={12}
             fontWeight={700}
           >

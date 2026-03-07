@@ -66,8 +66,10 @@ export const POSE_MILESTONES: Milestone[] = [
   { id: '7', name: 'Finale', target_count: 100, deadline: '2026-03-04', description: 'Final presentations' },
 ]
 
+import { colors as dsColors } from '@policyengine/design-system/tokens/colors'
+
 export const SEGMENTS: { value: Segment; label: string; color: string; description: string }[] = [
-  { value: 'user', label: 'Users', color: '#319795', description: 'People who use PolicyEngine directly' },
+  { value: 'user', label: 'Users', color: dsColors.primary[500], description: 'People who use PolicyEngine directly' },
   { value: 'supporter', label: 'Supporters', color: '#2563eb', description: 'Funders, advocates, policy champions' },
   { value: 'contributor', label: 'Contributors', color: '#7c3aed', description: 'Developers, data contributors' },
   { value: 'competitor', label: 'Competitors', color: '#dc2626', description: 'Alternative tools and approaches' },

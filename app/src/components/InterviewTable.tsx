@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { format } from 'date-fns'
+import { colors as dsColors } from '@policyengine/design-system/tokens/colors'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   ChevronDown,
@@ -63,7 +64,7 @@ export function InterviewTable({ interviews, onEdit, onDelete, onStatusChange }:
   }
 
   const getSegmentColor = (segment: Segment) => {
-    return SEGMENTS.find(s => s.value === segment)?.color || '#6b7280'
+    return SEGMENTS.find(s => s.value === segment)?.color || dsColors.gray[500]
   }
 
   if (interviews.length === 0) {

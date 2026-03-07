@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { colors as dsColors } from '@policyengine/design-system/tokens/colors'
 
 interface ProgressRingProps {
   current: number
@@ -29,7 +30,7 @@ export function ProgressRing({
           cy={size / 2}
           r={radius}
           fill="none"
-          stroke="#e5e7eb"
+          stroke={dsColors.gray[200]}
           strokeWidth={strokeWidth}
         />
         {/* Progress ring */}
@@ -38,7 +39,7 @@ export function ProgressRing({
           cy={size / 2}
           r={radius}
           fill="none"
-          stroke="#319795"
+          stroke={dsColors.primary[500]}
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeDasharray={circumference}

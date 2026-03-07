@@ -1,3 +1,5 @@
+import { colors } from '@/lib/colors';
+
 interface EcosystemRingProps {
   cx: number;
   cy: number;
@@ -24,7 +26,7 @@ export function EcosystemRing({ cx, cy, radius, label, visible, delay = 0 }: Eco
         cy={cy}
         r={radius}
         fill="none"
-        stroke="#334155"
+        stroke={colors.borderMedium}
         strokeWidth={1}
         strokeDasharray="6 4"
         opacity={0.5}
@@ -32,7 +34,7 @@ export function EcosystemRing({ cx, cy, radius, label, visible, delay = 0 }: Eco
       <text
         x={cx + radius * Math.cos(-Math.PI / 4)}
         y={cy + radius * Math.sin(-Math.PI / 4) + 6}
-        fill="#64748B"
+        fill={colors.textTertiary}
         fontSize={14}
         fontFamily="Inter, sans-serif"
         fontWeight={500}

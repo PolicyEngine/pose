@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { ProgressRing } from '@/components/ProgressRing'
+import { colors as dsColors } from '@policyengine/design-system/tokens/colors'
 
 describe('ProgressRing', () => {
   it('renders the current count', () => {
@@ -70,8 +71,8 @@ describe('ProgressRing', () => {
     const { container } = render(<ProgressRing current={50} target={100} />)
     const circles = container.querySelectorAll('circle')
     // First circle is background (gray), second is progress (teal)
-    expect(circles[0]).toHaveAttribute('stroke', '#e5e7eb')
-    expect(circles[1]).toHaveAttribute('stroke', '#319795')
+    expect(circles[0]).toHaveAttribute('stroke', dsColors.gray[200])
+    expect(circles[1]).toHaveAttribute('stroke', dsColors.primary[500])
   })
 
   it('sets strokeLinecap to round on progress ring', () => {
