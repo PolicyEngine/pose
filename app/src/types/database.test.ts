@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { SEGMENTS, POSE_MILESTONES, type Segment } from '@/types/database'
+import { colors as dsColors } from '@policyengine/design-system/tokens/colors'
 
 describe('SEGMENTS', () => {
   it('has exactly 6 segments', () => {
@@ -38,7 +39,7 @@ describe('SEGMENTS', () => {
 
   it('user segment has teal color', () => {
     const userSegment = SEGMENTS.find((s) => s.value === 'user')
-    expect(userSegment?.color).toBe('#319795')
+    expect(userSegment?.color).toBe(dsColors.primary[500])
   })
 })
 

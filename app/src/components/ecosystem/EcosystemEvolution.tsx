@@ -11,7 +11,7 @@ const LEGEND: { label: string; org: 'rules' | 'cosilico' | 'pe' | 'all'; color: 
   { label: 'Cosilico', org: 'cosilico', color: colors.cosilicoCyan, bg: 'rgba(6, 182, 212, 0.1)', logo: '/assets/logos/cosilico-full.svg' },
 
   { label: 'PolicyEngine', org: 'pe', color: colors.peTeal, bg: 'rgba(49, 151, 149, 0.1)', logo: '/assets/logos/pe-full-white.svg' },
-  { label: 'Shared', org: 'all', color: '#64748B', bg: 'rgba(100, 116, 139, 0.1)' },
+  { label: 'Shared', org: 'all', color: colors.textTertiary, bg: 'rgba(100, 116, 139, 0.1)' },
 ];
 
 const STEP_NARRATIVES = [
@@ -70,7 +70,7 @@ export function EcosystemEvolutionSlide(_props: SlideProps) {
                   {item.logo ? (
                     <img src={item.logo} alt={item.label} className="h-3.5" style={{ opacity: isActive ? 1 : 0.6 }} />
                   ) : (
-                    <span className="text-[11px] font-medium" style={{ color: isActive ? item.color : '#94A3B8' }}>
+                    <span className="text-[11px] font-medium" style={{ color: isActive ? item.color : colors.textSecondary }}>
                       {item.label}
                     </span>
                   )}

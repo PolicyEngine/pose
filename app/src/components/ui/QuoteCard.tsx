@@ -1,3 +1,5 @@
+import { colors } from '@/lib/colors';
+
 interface QuoteCardProps {
   quote: string;
   name: string;
@@ -12,9 +14,9 @@ export function QuoteCard({ quote, name, title, color, delay = 0 }: QuoteCardPro
       className="scroll-reveal bg-card-bg rounded-lg border-l-4 p-5 card-hover"
       style={{
         borderLeftColor: color,
-        borderTopColor: '#1E293B',
-        borderRightColor: '#1E293B',
-        borderBottomColor: '#1E293B',
+        borderTopColor: colors.borderLight,
+        borderRightColor: colors.borderLight,
+        borderBottomColor: colors.borderLight,
         boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.3), 0px 1px 2px rgba(0, 0, 0, 0.2)',
         transitionDelay: `${delay}s`,
       }}
